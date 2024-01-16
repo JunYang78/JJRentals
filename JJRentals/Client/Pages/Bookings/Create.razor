@@ -13,12 +13,12 @@
 @code {
     Booking booking = new Booking();
 
-    private IList<Vehicle>? Vehicles;
+    private IList<Car>? Cars;
     private IList<Customer>? Customers;
 
     protected async override Task OnInitializedAsync()
     {
-        Vehicles = await _client.GetFromJsonAsync<List<Vehicle>>($"{Endpoints.VehiclesEndpoint}");
+        Cars = await _client.GetFromJsonAsync<List<Car>>($"{Endpoints.carsEndpoint}");
         Customers = await _client.GetFromJsonAsync<List<Customer>>($"{Endpoints.CustomersEndpoint}");
     }
 

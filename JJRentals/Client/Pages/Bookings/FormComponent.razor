@@ -6,19 +6,19 @@
 
     <fieldset disabled = "@Disabled">
         <div class="form-group">
-            <label>Vehicle: </label>
+            <label>Car: </label>
             <div>
-                <InputSelect @bind-Value="booking.VehicleId" class="form-control">
-                    <option value="">-- Select Vehicle --</option>
-                    @if (Vehicles != null)
+                <InputSelect @bind-Value="booking.CarId" class="form-control">
+                    <option value="">-- Select Car --</option>
+                    @if (Cars != null)
                     {
-                        foreach (var vehicle in Vehicles)
+                        foreach (var Car in Cars)
                         {
-                            <option value="@vehicle.Id">@vehicle.LicensePlateNumber</option>
+                            <option value="@Car.Id">@Car.LicensePlateNumber</option>
                         }
                     }
                 </InputSelect>
-                <ValidationMessage For="@(() => booking.VehicleId)" />
+                <ValidationMessage For="@(() => booking.CarId)" />
             </div>
         </div>
 
@@ -79,12 +79,12 @@
     [Parameter] public string ButtonText { get; set; } = "Save";
     [Parameter] public EventCallback OnValidSubmit { get; set; }
 
-    private IList<Vehicle>? Vehicles;
+    private IList<Car>? Cars;
     private IList<Customer>? Customers;
 
     protected async override Task OnInitializedAsync()
     {
-        Vehicles = await _client.GetFromJsonAsync<List<Vehicle>>($"{Endpoints.VehiclesEndpoint}");
+        Cars = await _client.GetFromJsonAsync<List<Car>>($"{Endpoints.carsEndpoint}");
         Customers = await _client.GetFromJsonAsync<List<Customer>>($"{Endpoints.CustomersEndpoint}");
     }
 }

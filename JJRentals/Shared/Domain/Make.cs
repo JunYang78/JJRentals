@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace JJRentals.Shared.Domain
 {
-	public class Make : BaseDomainModel
+	public class Manufacturer : BaseDomainModel
 	{
 		[Required]
 		public string? Name { get; set; }

@@ -143,7 +143,7 @@ namespace JJRentals.Server.Migrations
                     b.Property<string>("UpdatedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("VehicleId")
+                    b.Property<int?>("CarId")
                         .IsRequired()
                         .HasColumnType("int");
 
@@ -151,7 +151,7 @@ namespace JJRentals.Server.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.HasIndex("VehicleId");
+                    b.HasIndex("CarId");
 
                     b.ToTable("Bookings");
                 });
@@ -255,7 +255,7 @@ namespace JJRentals.Server.Migrations
                     b.ToTable("Customers");
                 });
 
-            modelBuilder.Entity("JJRentals.Shared.Domain.Make", b =>
+            modelBuilder.Entity("JJRentals.Shared.Domain.Manufacturer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -281,7 +281,7 @@ namespace JJRentals.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Makes");
+                    b.ToTable("Manufacturers");
 
                     b.HasData(
                         new
@@ -371,7 +371,7 @@ namespace JJRentals.Server.Migrations
                         });
                 });
 
-            modelBuilder.Entity("JJRentals.Shared.Domain.Vehicle", b =>
+            modelBuilder.Entity("JJRentals.Shared.Domain.Car", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -421,7 +421,7 @@ namespace JJRentals.Server.Migrations
 
                     b.HasIndex("ModelId");
 
-                    b.ToTable("Vehicles");
+                    b.ToTable("Cars");
                 });
 
             modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.DeviceFlowCodes", b =>
@@ -731,18 +731,18 @@ namespace JJRentals.Server.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("JJRentals.Shared.Domain.Vehicle", "Vehicle")
+                    b.HasOne("JJRentals.Shared.Domain.Car", "Car")
                         .WithMany("Bookings")
-                        .HasForeignKey("VehicleId")
+                        .HasForeignKey("CarId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Customer");
 
-                    b.Navigation("Vehicle");
+                    b.Navigation("Car");
                 });
 
-            modelBuilder.Entity("JJRentals.Shared.Domain.Vehicle", b =>
+            modelBuilder.Entity("JJRentals.Shared.Domain.Car", b =>
                 {
                     b.HasOne("JJRentals.Shared.Domain.Colour", "Colour")
                         .WithMany()
@@ -750,7 +750,7 @@ namespace JJRentals.Server.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("JJRentals.Shared.Domain.Make", "Make")
+                    b.HasOne("JJRentals.Shared.Domain.Manufacturer", "Manufacturer")
                         .WithMany()
                         .HasForeignKey("MakeId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -764,7 +764,7 @@ namespace JJRentals.Server.Migrations
 
                     b.Navigation("Colour");
 
-                    b.Navigation("Make");
+                    b.Navigation("Manufacturer");
 
                     b.Navigation("Model");
                 });
@@ -825,7 +825,7 @@ namespace JJRentals.Server.Migrations
                     b.Navigation("Bookings");
                 });
 
-            modelBuilder.Entity("JJRentals.Shared.Domain.Vehicle", b =>
+            modelBuilder.Entity("JJRentals.Shared.Domain.Car", b =>
                 {
                     b.Navigation("Bookings");
                 });

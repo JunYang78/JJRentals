@@ -4,12 +4,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace JJRentals.Server.Configurations.Entities
 {
-	public class MakeSeedConfiguration : IEntityTypeConfiguration<Make>
+	public class MakeSeedConfiguration : IEntityTypeConfiguration<Manufacturer>
 	{
-		public void Configure(EntityTypeBuilder<Make> builder)
+		public void Configure(EntityTypeBuilder<Manufacturer> builder)
 		{
 			builder.HasData(
-			 new Make
+			 new Manufacturer
 			 {
 				 Id = 1,
 				 Name = "BMW",
@@ -19,7 +19,7 @@ namespace JJRentals.Server.Configurations.Entities
 				 UpdatedBy = "System"
 			 },
 
-			 new Make
+			 new Manufacturer
 			 {
 				 Id = 2,
 				 Name = "Toyota",

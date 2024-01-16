@@ -1,21 +1,21 @@
-﻿@page "/makes/create/"
+﻿@page "/manus/create/"
 @inject HttpClient _client
 @inject NavigationManager _navManager
 
-<h3 class="card-title">Create New Make</h3>
+<h3 class="card-title">Create New Manufacturer</h3>
 <hr />
 <br />
 
-<FormComponent ButtonText="Create Make" OnValidSubmit="CreateMake" make="make" />
+<FormComponent ButtonText="Create Manufacturer" OnValidSubmit="CreateMake" manu="manu" />
 
 
 @code {
-    Make make = new Make();
+    Manufacturer manu = new Manufacturer();
 
     private async Task CreateMake()
     {
-        await _client.PostAsJsonAsync(Endpoints.MakesEndpoint, make);
-        _navManager.NavigateTo("/makes/");
+        await _client.PostAsJsonAsync(Endpoints.MakesEndpoint, manu);
+        _navManager.NavigateTo("/manus/");
     }
 
 }

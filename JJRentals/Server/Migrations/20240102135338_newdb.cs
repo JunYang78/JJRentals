@@ -129,7 +129,7 @@ namespace JJRentals.Server.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Makes",
+                name: "Manufacturers",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -289,7 +289,7 @@ namespace JJRentals.Server.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Vehicles",
+                name: "Cars",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -307,21 +307,21 @@ namespace JJRentals.Server.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Vehicles", x => x.Id);
+                    table.PrimaryKey("PK_cars", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Vehicles_Colours_ColourId",
+                        name: "FK_cars_Colours_ColourId",
                         column: x => x.ColourId,
                         principalTable: "Colours",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Vehicles_Makes_MakeId",
+                        name: "FK_cars_Makes_MakeId",
                         column: x => x.MakeId,
-                        principalTable: "Makes",
+                        principalTable: "Manufacturers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Vehicles_Models_ModelId",
+                        name: "FK_cars_Models_ModelId",
                         column: x => x.ModelId,
                         principalTable: "Models",
                         principalColumn: "Id",
@@ -336,7 +336,7 @@ namespace JJRentals.Server.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DateOut = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateIn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    VehicleId = table.Column<int>(type: "int", nullable: false),
+                    CarId = table.Column<int>(type: "int", nullable: false),
                     CustomerId = table.Column<int>(type: "int", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -353,9 +353,9 @@ namespace JJRentals.Server.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Bookings_Vehicles_VehicleId",
-                        column: x => x.VehicleId,
-                        principalTable: "Vehicles",
+                        name: "FK_Bookings_cars_CarId",
+                        column: x => x.CarId,
+                        principalTable: "Cars",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -384,7 +384,7 @@ namespace JJRentals.Server.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Makes",
+                table: "Manufacturers",
                 columns: new[] { "Id", "CreatedBy", "DateCreated", "DateUpdated", "Name", "UpdatedBy" },
                 values: new object[,]
                 {
@@ -453,9 +453,9 @@ namespace JJRentals.Server.Migrations
                 column: "CustomerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Bookings_VehicleId",
+                name: "IX_Bookings_CarId",
                 table: "Bookings",
-                column: "VehicleId");
+                column: "CarId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_DeviceCodes_DeviceCode",
@@ -494,18 +494,18 @@ namespace JJRentals.Server.Migrations
                 columns: new[] { "SubjectId", "SessionId", "Type" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Vehicles_ColourId",
-                table: "Vehicles",
+                name: "IX_cars_ColourId",
+                table: "Cars",
                 column: "ColourId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Vehicles_MakeId",
-                table: "Vehicles",
+                name: "IX_cars_MakeId",
+                table: "Cars",
                 column: "MakeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Vehicles_ModelId",
-                table: "Vehicles",
+                name: "IX_cars_ModelId",
+                table: "Cars",
                 column: "ModelId");
         }
 
@@ -549,13 +549,13 @@ namespace JJRentals.Server.Migrations
                 name: "Customers");
 
             migrationBuilder.DropTable(
-                name: "Vehicles");
+                name: "Cars");
 
             migrationBuilder.DropTable(
                 name: "Colours");
 
             migrationBuilder.DropTable(
-                name: "Makes");
+                name: "Manufacturers");
 
             migrationBuilder.DropTable(
                 name: "Models");

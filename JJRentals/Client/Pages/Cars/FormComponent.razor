@@ -1,31 +1,31 @@
 ﻿@inject HttpClient _client
 
-<EditForm Model="@vehicle" OnValidSubmit="@OnValidSubmit">
+<EditForm Model="@Car" OnValidSubmit="@OnValidSubmit">
     <DataAnnotationsValidator />
     <ValidationSummary />
 
     <fieldset disabled = "@Disabled">
         <div class="form-group">
-            <label>Make: </label>
+            <label>Manufacturer: </label>
             <div>
-                <InputSelect @bind-Value="vehicle.MakeId" class="form-control">
-                    <option value="">-- Select Make --</option>
-                    @if (Makes != null)
+                <InputSelect @bind-Value="Car.MakeId" class="form-control">
+                    <option value="">-- Select Manufacturer --</option>
+                    @if (Manufacturers != null)
                     {
-                        foreach (var make in Makes)
+                        foreach (var manu in Manufacturers)
                         {
-                            <option value="@make.Id">@make.Name</option>
+                            <option value="@manu.Id">@manu.Name</option>
                         }
                     }
                 </InputSelect>
-                <ValidationMessage For="@(() => vehicle.MakeId)" />
+                <ValidationMessage For="@(() => Car.MakeId)" />
             </div>
         </div>
 
         <div class="form-group">
             <label>Model: </label>
             <div>
-                <InputSelect @bind-Value="vehicle.ModelId" class="form-control">
+                <InputSelect @bind-Value="Car.ModelId" class="form-control">
                     <option value="">-- Select Model --</option>
                     @if (Models != null)
                     {
@@ -35,14 +35,14 @@
                         }
                     }
                 </InputSelect>
-                <ValidationMessage For="@(() => vehicle.ModelId)" />
+                <ValidationMessage For="@(() => Car.ModelId)" />
             </div>
         </div>
 
         <div class="form-group">
             <label>Colour: </label>
             <div>
-                <InputSelect @bind-Value="vehicle.ColourId" class="form-control">
+                <InputSelect @bind-Value="Car.ColourId" class="form-control">
                     <option value="">-- Select Colour --</option>
                     @if (Colours != null)
                     {
@@ -52,31 +52,31 @@
                         }
                     }
                 </InputSelect>
-                <ValidationMessage For="@(() => vehicle.ColourId)" />
+                <ValidationMessage For="@(() => Car.ColourId)" />
             </div>
         </div>
 
         <div class="form-group">
             <label>Year: </label>
             <div>
-                <InputNumber @bind-Value="@vehicle.Year" class="form-control" />
-                <ValidationMessage For="@(() => vehicle.Year)" />
+                <InputNumber @bind-Value="@Car.Year" class="form-control" />
+                <ValidationMessage For="@(() => Car.Year)" />
             </div>
         </div>
 
         <div class="form-group">
             <label>License Plate Number: </label>
             <div>
-                <InputText @bind-Value="@vehicle.LicensePlateNumber" class="form-control" />
-                <ValidationMessage For="@(() => vehicle.LicensePlateNumber)" />
+                <InputText @bind-Value="@Car.LicensePlateNumber" class="form-control" />
+                <ValidationMessage For="@(() => Car.LicensePlateNumber)" />
             </div>
         </div>
 
         <div class="form-group">
             <label>Daily Rate: </label>
             <div>
-                <InputNumber @bind-Value="@vehicle.RentalRate" class="form-control" />
-                <ValidationMessage For="@(() => vehicle.RentalRate)" />
+                <InputNumber @bind-Value="@Car.RentalRate" class="form-control" />
+                <ValidationMessage For="@(() => Car.RentalRate)" />
             </div>
         </div>
 
@@ -90,24 +90,24 @@
             @ButtonText
         </button>
     }
-    <BackToList Target="vehicles" />
+    <BackToList Target="cars" />
 
 </EditForm>
 
 
 @code {
     [Parameter] public bool Disabled { get; set; } = false;
-    [Parameter] public Vehicle vehicle { get; set; }
+    [Parameter] public Car Car { get; set; }
     [Parameter] public string ButtonText { get; set; } = "Save";
     [Parameter] public EventCallback OnValidSubmit { get; set; }
 
-    private IList<Make>? Makes;
+    private IList<Manufacturer>? Manufacturers;
     private IList<Model>? Models;
     private IList<Colour>? Colours;
 
     protected async override Task OnInitializedAsync()
     {
-        Makes = await _client.GetFromJsonAsync<List<Make>>($"{Endpoints.MakesEndpoint}");
+        Manufacturers = await _client.GetFromJsonAsync<List<Manufacturer>>($"{Endpoints.MakesEndpoint}");
         Models = await _client.GetFromJsonAsync<List<Model>>($"{Endpoints.ModelsEndpoint}");
         Colours = await _client.GetFromJsonAsync<List<Colour>>($"{Endpoints.ColoursEndpoint}");
     }

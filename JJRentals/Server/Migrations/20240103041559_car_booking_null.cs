@@ -6,14 +6,14 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace JJRentals.Server.Migrations
 {
     /// <inheritdoc />
-    public partial class vehicle_booking_null : Migration
+    public partial class Car_booking_null : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterColumn<string>(
                 name: "LicensePlateNumber",
-                table: "Vehicles",
+                table: "Cars",
                 type: "nvarchar(max)",
                 nullable: false,
                 defaultValue: "",
@@ -33,7 +33,7 @@ namespace JJRentals.Server.Migrations
 
             migrationBuilder.AlterColumn<string>(
                 name: "Name",
-                table: "Makes",
+                table: "Manufacturers",
                 type: "nvarchar(max)",
                 nullable: false,
                 defaultValue: "",
@@ -73,14 +73,14 @@ namespace JJRentals.Server.Migrations
                 values: new object[] { new DateTime(2024, 1, 3, 12, 15, 58, 661, DateTimeKind.Local).AddTicks(8541), new DateTime(2024, 1, 3, 12, 15, 58, 661, DateTimeKind.Local).AddTicks(8541) });
 
             migrationBuilder.UpdateData(
-                table: "Makes",
+                table: "Manufacturers",
                 keyColumn: "Id",
                 keyValue: 1,
                 columns: new[] { "DateCreated", "DateUpdated" },
                 values: new object[] { new DateTime(2024, 1, 3, 12, 15, 58, 661, DateTimeKind.Local).AddTicks(8947), new DateTime(2024, 1, 3, 12, 15, 58, 661, DateTimeKind.Local).AddTicks(8949) });
 
             migrationBuilder.UpdateData(
-                table: "Makes",
+                table: "Manufacturers",
                 keyColumn: "Id",
                 keyValue: 2,
                 columns: new[] { "DateCreated", "DateUpdated" },
@@ -120,7 +120,7 @@ namespace JJRentals.Server.Migrations
         {
             migrationBuilder.AlterColumn<string>(
                 name: "LicensePlateNumber",
-                table: "Vehicles",
+                table: "Cars",
                 type: "nvarchar(max)",
                 nullable: true,
                 oldClrType: typeof(string),
@@ -136,7 +136,7 @@ namespace JJRentals.Server.Migrations
 
             migrationBuilder.AlterColumn<string>(
                 name: "Name",
-                table: "Makes",
+                table: "Manufacturers",
                 type: "nvarchar(max)",
                 nullable: true,
                 oldClrType: typeof(string),
@@ -172,14 +172,14 @@ namespace JJRentals.Server.Migrations
                 values: new object[] { new DateTime(2024, 1, 3, 12, 3, 17, 102, DateTimeKind.Local).AddTicks(1280), new DateTime(2024, 1, 3, 12, 3, 17, 102, DateTimeKind.Local).AddTicks(1281) });
 
             migrationBuilder.UpdateData(
-                table: "Makes",
+                table: "Manufacturers",
                 keyColumn: "Id",
                 keyValue: 1,
                 columns: new[] { "DateCreated", "DateUpdated" },
                 values: new object[] { new DateTime(2024, 1, 3, 12, 3, 17, 102, DateTimeKind.Local).AddTicks(1704), new DateTime(2024, 1, 3, 12, 3, 17, 102, DateTimeKind.Local).AddTicks(1706) });
 
             migrationBuilder.UpdateData(
-                table: "Makes",
+                table: "Manufacturers",
                 keyColumn: "Id",
                 keyValue: 2,
                 columns: new[] { "DateCreated", "DateUpdated" },

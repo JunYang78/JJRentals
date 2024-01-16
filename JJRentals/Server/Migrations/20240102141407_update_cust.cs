@@ -45,14 +45,14 @@ namespace JJRentals.Server.Migrations
                 values: new object[] { new DateTime(2024, 1, 2, 22, 14, 7, 798, DateTimeKind.Local).AddTicks(5936), new DateTime(2024, 1, 2, 22, 14, 7, 798, DateTimeKind.Local).AddTicks(5937) });
 
             migrationBuilder.UpdateData(
-                table: "Makes",
+                table: "Manufacturers",
                 keyColumn: "Id",
                 keyValue: 1,
                 columns: new[] { "DateCreated", "DateUpdated" },
                 values: new object[] { new DateTime(2024, 1, 2, 22, 14, 7, 798, DateTimeKind.Local).AddTicks(6198), new DateTime(2024, 1, 2, 22, 14, 7, 798, DateTimeKind.Local).AddTicks(6198) });
 
             migrationBuilder.UpdateData(
-                table: "Makes",
+                table: "Manufacturers",
                 keyColumn: "Id",
                 keyValue: 2,
                 columns: new[] { "DateCreated", "DateUpdated" },
@@ -120,14 +120,14 @@ namespace JJRentals.Server.Migrations
                 values: new object[] { new DateTime(2024, 1, 2, 21, 53, 38, 613, DateTimeKind.Local).AddTicks(7800), new DateTime(2024, 1, 2, 21, 53, 38, 613, DateTimeKind.Local).AddTicks(7801) });
 
             migrationBuilder.UpdateData(
-                table: "Makes",
+                table: "Manufacturers",
                 keyColumn: "Id",
                 keyValue: 1,
                 columns: new[] { "DateCreated", "DateUpdated" },
                 values: new object[] { new DateTime(2024, 1, 2, 21, 53, 38, 613, DateTimeKind.Local).AddTicks(8140), new DateTime(2024, 1, 2, 21, 53, 38, 613, DateTimeKind.Local).AddTicks(8141) });
 
             migrationBuilder.UpdateData(
-                table: "Makes",
+                table: "Manufacturers",
                 keyColumn: "Id",
                 keyValue: 2,
                 columns: new[] { "DateCreated", "DateUpdated" },

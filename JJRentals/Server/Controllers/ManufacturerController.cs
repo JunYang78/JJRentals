@@ -7,7 +7,7 @@ namespace JJRentals.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class MakesController : ControllerBase
+    public class ManufacturerController : ControllerBase
     {
         //Refactored
         //private readonly ApplicationDbContext _context;
@@ -15,62 +15,62 @@ namespace JJRentals.Server.Controllers
 
         //Refactored
         //public MakesController(ApplicationDbContext context)
-        public MakesController(IUnitOfWork unitOfWork)
+        public ManufacturerController(IUnitOfWork unitOfWork)
         {
             //Refactored
             //_context = context;
             _unitOfWork = unitOfWork;
         }
 
-        // GET: api/Makes
+        // GET: api/Manufacturers
         [HttpGet]
-        //public async Task<ActionResult<IEnumerable<Make>>> GetMakes()
+        //public async Task<ActionResult<IEnumerable<Manufacturer>>> GetMakes()
         public async Task<IActionResult> GetMakes()
         {
             //Refactored
-            if (_unitOfWork.Makes == null)
+            if (_unitOfWork.Manufacturers == null)
             {
                 return NotFound();
             }
 
-            //return await _context.Makes.ToListAsync();
-            var makes = await _unitOfWork.Makes.GetAll();
-            return Ok(makes);
+            //return await _context.Manufacturers.ToListAsync();
+            var manus = await _unitOfWork.Manufacturers.GetAll();
+            return Ok(manus);
         }
 
-        // GET: api/Makes/5
+        // GET: api/Manufacturers/5
         [HttpGet("{id}")]
-        //public async Task<ActionResult<Make>> GetMake(int id)
+        //public async Task<ActionResult<Manufacturer>> GetMake(int id)
         public async Task<IActionResult> GetMakes(int id)
         {
-            if (_unitOfWork.Makes == null)
+            if (_unitOfWork.Manufacturers == null)
             {
                 return NotFound();
             }
-            //var make = await _context.Makes.FindAsync(id);
-            var make = await _unitOfWork.Makes.Get(q => q.Id == id); /* lamda expression: find instance of q, where q is of "Makes" type, so finding a instance of q with a specific Id that is equals to the id parsed*/
+            //var manu = await _context.Manufacturers.FindAsync(id);
+            var manu = await _unitOfWork.Manufacturers.Get(q => q.Id == id); /* lamda expression: find instance of q, where q is of "Manufacturers" type, so finding a instance of q with a specific Id that is equals to the id parsed*/
 
-            if (make == null)
+            if (manu == null)
             {
                 return NotFound();
             }
 
-            return Ok(make);
+            return Ok(manu);
         }
 
-        // PUT: api/Makes/5
+        // PUT: api/Manufacturers/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutMake(int id, Make make)
+        public async Task<IActionResult> PutMake(int id, Manufacturer manu)
         {
-            if (id != make.Id)
+            if (id != manu.Id)
             {
                 return BadRequest();
             }
 
             //Refactored
-            //_context.Entry(make).State = EntityState.Modified;
-            _unitOfWork.Makes.Update(make);
+            //_context.Entry(manu).State = EntityState.Modified;
+            _unitOfWork.Manufacturers.Update(manu);
 
             try
             {
@@ -95,42 +95,42 @@ namespace JJRentals.Server.Controllers
             return NoContent();
         }
 
-        // POST: api/Makes
+        // POST: api/Manufacturers
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Make>> PostMake(Make make)
+        public async Task<ActionResult<Manufacturer>> PostMake(Manufacturer manu)
         {
-            if (_unitOfWork.Makes == null)
+            if (_unitOfWork.Manufacturers == null)
             {
-                return Problem("Entity set 'ApplicationDbContext.Makes'  is null.");
+                return Problem("Entity set 'ApplicationDbContext.Manufacturers'  is null.");
             }
-            await _unitOfWork.Makes.Insert(make);
+            await _unitOfWork.Manufacturers.Insert(manu);
             await _unitOfWork.Save(HttpContext);
-            //_context.Makes.Add(make);
+            //_context.Manufacturers.Add(manu);
             //await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetMake", new { id = make.Id }, make);
+            return CreatedAtAction("GetMake", new { id = manu.Id }, manu);
         }
 
-        // DELETE: api/Makes/5
+        // DELETE: api/Manufacturers/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteMake(int id)
         {
-            //if (_context.Makes == null)
+            //if (_context.Manufacturers == null)
             //{
             // return NotFound();
             // }
 
-            var make = await _unitOfWork.Makes.Get(q => q.Id == id);
-            //var make = await _context.Makes.FindAsync(id);
-            if (make == null)
+            var manu = await _unitOfWork.Manufacturers.Get(q => q.Id == id);
+            //var manu = await _context.Manufacturers.FindAsync(id);
+            if (manu == null)
             {
                 return NotFound();
             }
 
-            ///_context.Makes.Remove(make);
+            ///_context.Manufacturers.Remove(manu);
             //await _context.SaveChangesAsync();
-            await _unitOfWork.Makes.Delete(id);
+            await _unitOfWork.Manufacturers.Delete(id);
             await _unitOfWork.Save(HttpContext);
 
             return NoContent();
@@ -138,9 +138,9 @@ namespace JJRentals.Server.Controllers
 
         private async Task<bool> MakeExists(int id)
         {
-            //return (_context.Makes?.Any(e => e.Id == id)).GetValueOrDefault();
-            var make = await _unitOfWork.Makes.Get(q => q.Id == id);
-            return make != null;
+            //return (_context.Manufacturers?.Any(e => e.Id == id)).GetValueOrDefault();
+            var manu = await _unitOfWork.Manufacturers.Get(q => q.Id == id);
+            return manu != null;
         }
     }
 }

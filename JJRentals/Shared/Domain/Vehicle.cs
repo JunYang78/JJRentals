@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace JJRentals.Shared.Domain
 {
-	public class Vehicle : BaseDomainModel
+	public class Car : BaseDomainModel
 	{
 		[Required]
 		public int Year { get; set; }
@@ -16,7 +16,7 @@ namespace JJRentals.Shared.Domain
         public string? LicensePlateNumber { get; set; }
         [Required]
         public int? MakeId { get; set; }
-		public virtual Make? Make { get; set; }
+		public virtual Manufacturer? Manufacturer { get; set; }
         [Required]
         public int? ModelId { get; set; }
 		public virtual Model? Model { get; set; }

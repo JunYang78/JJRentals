@@ -11,12 +11,12 @@ namespace JJRentals.Server.Repository
 	public class UnitOfWork : IUnitOfWork
 	{
 		private readonly ApplicationDbContext _context;
-		private IGenericRepository<Make> _makes;
+		private IGenericRepository<Manufacturer> _makes;
 		private IGenericRepository<Model> _models;
 		private IGenericRepository<Colour> _colours;
 		private IGenericRepository<Booking> _bookings;
 		private IGenericRepository<Customer> _customers;
-		private IGenericRepository<Vehicle> _vehicles;
+		private IGenericRepository<Car> _cars;
 
 		private UserManager<ApplicationUser> _userManager;
 
@@ -26,14 +26,14 @@ namespace JJRentals.Server.Repository
 			_userManager = userManager;
 		}
 
-		public IGenericRepository<Make> Makes
-			=> _makes ??= new GenericRepository<Make>(_context);
+		public IGenericRepository<Manufacturer> Manufacturers
+			=> _makes ??= new GenericRepository<Manufacturer>(_context);
 		public IGenericRepository<Model> Models
 			=> _models ??= new GenericRepository<Model>(_context);
 		public IGenericRepository<Colour> Colours
 			=> _colours ??= new GenericRepository<Colour>(_context);
-		public IGenericRepository<Vehicle> Vehicles
-			=> _vehicles ??= new GenericRepository<Vehicle>(_context);
+		public IGenericRepository<Car> Cars
+			=> _cars ??= new GenericRepository<Car>(_context);
 		public IGenericRepository<Booking> Bookings
 			=> _bookings ??= new GenericRepository<Booking>(_context);
 		public IGenericRepository<Customer> Customers

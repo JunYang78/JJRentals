@@ -15,8 +15,8 @@ namespace JJRentals.Shared.Domain
         public DateTime DateOut { get; set; }
 		public DateTime? DateIn { get; set; }
         [Required]
-        public int? VehicleId { get; set; }
-		public virtual Vehicle? Vehicle { get; set; }
+        public int? CarId { get; set; }
+		public virtual Car? Car { get; set; }
         [Required]
         public int? CustomerId { get; set; }
 		public virtual Customer? Customer { get; set; }

@@ -1,0 +1,82 @@
+﻿@page "/cars/"
+@inject HttpClient _client
+@inject IJSRuntime js
+@attribute [Authorize]
+
+<h3 class="card-title">Car Cars</h3>
+<br />
+
+<a href="/cars/create" class="btn btn-secondary">
+    <span class="oi oi-plus"></span>
+    Create New Car
+</a>
+<br />
+<br />
+
+
+@if (Cars == null)
+{
+    <div class="alert alert-info">Loading Cars...</div>
+}
+else
+{
+    <table class="table table-responsive">
+        <thead>
+            <tr>
+                <th>Manufacturer</th>
+                <th>Model</th>
+                <th>Year</th>
+                <th>License Plate Number</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var Car in Cars)
+            {
+                <tr>
+                    <td>@Car.Manufacturer.Name</td>
+                    <td>@Car.Model.Name</td>
+                    <td>@Car.Year</td>
+                    <td>@Car.LicensePlateNumber</td>
+
+
+                    <td>
+                        <a href="/cars/view/@Car.Id" class="btn btn-primary">
+                            <span class="oi oi-book"></span>
+                        </a>
+                        <a href="/cars/edit/@Car.Id" class="btn btn-warning">
+                            <span class="oi oi-pencil"></span>
+                        </a>
+                        <button class="btn btn-danger" @onclick="@(()=>Delete(Car.Id))">
+                            <span class="oi oi-delete"></span>
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<Car>? Cars;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Cars = await _client.GetFromJsonAsync<List<Car>>($"{Endpoints.carsEndpoint}");
+    }
+
+    async Task Delete(int CarId)
+    {
+        if (Cars != null)
+        {
+            var Car = Cars.First(q => q.Id == CarId);
+            var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete {Car.LicensePlateNumber}?");
+            if (confirm)
+            {
+                await _client.DeleteAsync($"{Endpoints.carsEndpoint}/{CarId}");
+                await OnInitializedAsync();
+            }
+        }
+    }
+
+}
