@@ -72,24 +72,25 @@ namespace JJRentals.Server.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Customers",
+                name: "Customer",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    CustomerID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    DrivingLicense = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ContactNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    EmailAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Name = table.Column<string>(nullable: true),
+                    Password = table.Column<string>(nullable: true),
+                    Address = table.Column<string>(nullable: true),
+                    DateOfBirth = table.Column<DateTime>(nullable: false),
+                    Email = table.Column<string>(nullable: true),
+                    ContactNo = table.Column<string>(nullable: true),
+                    DriverLicenseNo = table.Column<string>(nullable: true),
+                    LicenseIssueDate = table.Column<DateTime>(nullable: true),
+                    LicenseExpDate = table.Column<DateTime>(nullable: true)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Customers", x => x.Id);
-                });
+            constraints: table =>
+            {
+                table.PrimaryKey("PK_Customers", x => x.CustomerID);
+            });
 
             migrationBuilder.CreateTable(
                 name: "DeviceCodes",
@@ -129,38 +130,44 @@ namespace JJRentals.Server.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Manufacturers",
+                name: "Manufacturer",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    ManufacturerID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Name = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
+                    ContactNo = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Makes", x => x.Id);
+                    table.PrimaryKey("PK_Manufacturer", x => x.ManufacturerID);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Models",
+                name: "Model",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    ModelID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Name = table.Column<string>(nullable: true),
+                    DateCreated = table.Column<DateTime>(nullable: false),
+                    SeatCapacity = table.Column<int>(nullable: false),
+                    FuelType = table.Column<string>(nullable: true),
+                    TransmissionType = table.Column<string>(nullable: true),
+                    ManufacturerID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Models", x => x.Id);
+                    table.PrimaryKey("PK_Model", x => x.ModelID);
+                    table.ForeignKey(
+                        name: "FK_Model_Manufacturer_ManufacturerID",
+                        column: x => x.ManufacturerID,
+                        principalTable: "Manufacturer",
+                        principalColumn: "ManufacturerID",
+                        onDelete: ReferentialAction.Cascade);
                 });
+
 
             migrationBuilder.CreateTable(
                 name: "PersistedGrants",
@@ -315,49 +322,79 @@ namespace JJRentals.Server.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_cars_Makes_MakeId",
+                        name: "FK_cars_Manufacturer_ManufacturerId",
                         column: x => x.MakeId,
-                        principalTable: "Manufacturers",
-                        principalColumn: "Id",
+                        principalTable: "Manufacturer",
+                        principalColumn: "ManufacturerId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_cars_Models_ModelId",
+                        name: "FK_cars_Model_ModelId",
                         column: x => x.ModelId,
-                        principalTable: "Models",
-                        principalColumn: "Id",
+                        principalTable: "Model",
+                        principalColumn: "ModelId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Bookings",
+                name: "Booking",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    DateOut = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DateIn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CarId = table.Column<int>(type: "int", nullable: false),
-                    CustomerId = table.Column<int>(type: "int", nullable: false),
-                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    BookingID = table.Column<int>(nullable: false)
+                .Annotation("SqlServer:Identity", "1, 1"),
+                    DateTime = table.Column<DateTime>(nullable: false),
+                    RentalStartDate = table.Column<DateTime>(nullable: false),
+                    RentalEndDate = table.Column<DateTime>(nullable: false),
+                    Location = table.Column<string>(nullable: true),
+                    PickUpOption = table.Column<string>(nullable: true),
+                    StaffID = table.Column<int>(nullable: false),
+                    CustomerID = table.Column<int>(nullable: false),
+                    CarID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Bookings", x => x.Id);
+                    table.PrimaryKey("PK_Booking", x => x.BookingID);
                     table.ForeignKey(
-                        name: "FK_Bookings_Customers_CustomerId",
-                        column: x => x.CustomerId,
-                        principalTable: "Customers",
-                        principalColumn: "Id",
+                        name: "FK_Booking_Customer",
+                        column: x => x.CustomerID,
+                        principalTable: "Customer",
+                        principalColumn: "CustomerID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Bookings_cars_CarId",
-                        column: x => x.CarId,
-                        principalTable: "Cars",
-                        principalColumn: "Id",
+                        name: "FK_Booking_Staff",
+                        column: x => x.StaffID,
+                        principalTable: "Staff",
+                        principalColumn: "StaffID",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Booking_Car",
+                        column: x => x.CarID,
+                        principalTable: "Car",
+                        principalColumn: "CarID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Payment",
+                columns: table => new
+                {
+                    PaymentID = table.Column<int>(nullable: false)
+                .Annotation("SqlServer:Identity", "1, 1"),
+                    Amount = table.Column<decimal>(type: "money", nullable: false),
+                    Deposit = table.Column<decimal>(type: "money", nullable: true),
+                    PaymentDate = table.Column<DateTime>(nullable: false),
+                    PaymentMethod = table.Column<string>(nullable: true),
+                    PaymentStatus = table.Column<string>(nullable: true),
+                    BookingID = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Payment", x => x.PaymentID);
+                    table.ForeignKey(
+                    name: "FK_Payment_Booking",
+                    column: x => x.BookingID,
+                    principalTable: "Booking",
+                    principalColumn: "BookingID",
+                    onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
@@ -384,7 +421,7 @@ namespace JJRentals.Server.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Manufacturers",
+                table: "Manufacturer",
                 columns: new[] { "Id", "CreatedBy", "DateCreated", "DateUpdated", "Name", "UpdatedBy" },
                 values: new object[,]
                 {
@@ -393,7 +430,7 @@ namespace JJRentals.Server.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Models",
+                table: "Model",
                 columns: new[] { "Id", "CreatedBy", "DateCreated", "DateUpdated", "Name", "UpdatedBy" },
                 values: new object[,]
                 {
@@ -448,14 +485,30 @@ namespace JJRentals.Server.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Bookings_CustomerId",
-                table: "Bookings",
+               name: "IX_Model_ManufacturerId",
+               table: "Model",
+               column: "ManufacturerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Booking_CustomerId",
+                table: "Booking",
                 column: "CustomerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Bookings_CarId",
-                table: "Bookings",
+                name: "IX_Booking_CarId",
+                table: "Booking",
                 column: "CarId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Booking_StaffId",
+                table: "Booking",
+                column: "StaffId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Payment_BookingId",
+                table: "Payment",
+                column: "BookingId");
+
 
             migrationBuilder.CreateIndex(
                 name: "IX_DeviceCodes_DeviceCode",
@@ -528,7 +581,7 @@ namespace JJRentals.Server.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Bookings");
+                name: "Booking");
 
             migrationBuilder.DropTable(
                 name: "DeviceCodes");
@@ -555,10 +608,13 @@ namespace JJRentals.Server.Migrations
                 name: "Colours");
 
             migrationBuilder.DropTable(
-                name: "Manufacturers");
+                name: "Manufacturer");
 
             migrationBuilder.DropTable(
-                name: "Models");
+                name: "Model");
+
+            migrationBuilder.DropTable(
+                name: "Payment");
         }
     }
 }

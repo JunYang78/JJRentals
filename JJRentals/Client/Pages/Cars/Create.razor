@@ -12,13 +12,13 @@
 @code {
     Car Car = new Car();
 
-    private IList<Manufacturer>? Manufacturers;
+    private IList<Manufacturer>? Manufacturer;
     private IList<Model>? Models;
     private IList<Colour>? Colours;
 
     protected async override Task OnInitializedAsync()
     {
-        Manufacturers = await _client.GetFromJsonAsync<List<Manufacturer>>($"{Endpoints.MakesEndpoint}");
+        Manufacturer = await _client.GetFromJsonAsync<List<Manufacturer>>($"{Endpoints.MakesEndpoint}");
         Models = await _client.GetFromJsonAsync<List<Model>>($"{Endpoints.ModelsEndpoint}");
         Colours = await _client.GetFromJsonAsync<List<Colour>>($"{Endpoints.ColoursEndpoint}");
     }

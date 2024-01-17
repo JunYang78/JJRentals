@@ -1,0 +1,90 @@
+﻿@inject HttpClient _client
+
+<EditForm Model="@booking" OnValidSubmit="@OnValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <fieldset disabled = "@Disabled">
+        <div class="form-group">
+            <label>Car: </label>
+            <div>
+                <InputSelect @bind-Value="booking.CarId" class="form-control">
+                    <option value="">-- Select Car --</option>
+                    @if (Cars != null)
+                    {
+                        foreach (var Car in Cars)
+                        {
+                            <option value="@Car.Id">@Car.LicensePlateNumber</option>
+                        }
+                    }
+                </InputSelect>
+                <ValidationMessage For="@(() => booking.CarId)" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Customer: </label>
+            <div>
+                <InputSelect @bind-Value="booking.CustomerId" class="form-control">
+                    <option value="">-- Select Customer --</option>
+                    @if (Customers != null)
+                    {
+                        foreach (var customer in Customers)
+                        {
+                            <option value="@customer.Id">@customer.FirstName @customer.LastName</option>
+                        }
+                    }
+                </InputSelect>
+                <ValidationMessage For="@(() => booking.CustomerId)" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Date Out: </label>
+            <div>
+                <InputDate @bind-Value="@booking.DateOut" class="form-control" />
+                <ValidationMessage For="@(() => booking.DateOut)" />
+            </div>
+        </div>
+
+        @if (booking.Id > 0)
+        {
+            <div class="form-group">
+                <label>Date In: </label>
+                <div>
+                    <InputDate @bind-Value="@booking.DateIn" class="form-control" />
+                    <ValidationMessage For="@(() => booking.DateIn)" />
+                </div>
+            </div>
+        }
+
+        <br />
+        <br />
+    </fieldset>
+
+    @if (!Disabled)
+    {
+        <button type="submit" class="btn btn-success btn-block">
+            @ButtonText
+        </button>
+    }
+    <BackToList Target="bookings" />
+
+</EditForm>
+
+
+@code {
+    [Parameter] public bool Disabled { get; set; } = false;
+    [Parameter] public Booking booking { get; set; }
+    [Parameter] public string ButtonText { get; set; } = "Save";
+    [Parameter] public EventCallback OnValidSubmit { get; set; }
+
+    private IList<Car>? Cars;
+    private IList<Customer>? Customers;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Cars = await _client.GetFromJsonAsync<List<Car>>($"{Endpoints.carsEndpoint}");
+        Customers = await _client.GetFromJsonAsync<List<Customer>>($"{Endpoints.CustomersEndpoint}");
+    }
+}

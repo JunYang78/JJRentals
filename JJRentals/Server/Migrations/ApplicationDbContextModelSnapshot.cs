@@ -153,7 +153,7 @@ namespace JJRentals.Server.Migrations
 
                     b.HasIndex("CarId");
 
-                    b.ToTable("Bookings");
+                    b.ToTable("Booking");
                 });
 
             modelBuilder.Entity("JJRentals.Shared.Domain.Colour", b =>
@@ -252,7 +252,7 @@ namespace JJRentals.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Customers");
+                    b.ToTable("Customer");
                 });
 
             modelBuilder.Entity("JJRentals.Shared.Domain.Manufacturer", b =>
@@ -281,7 +281,7 @@ namespace JJRentals.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Manufacturers");
+                    b.ToTable("Manufacturer");
 
                     b.HasData(
                         new
@@ -330,7 +330,7 @@ namespace JJRentals.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Models");
+                    b.ToTable("Model");
 
                     b.HasData(
                         new

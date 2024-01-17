@@ -11,5 +11,6 @@ namespace JJRentals.Server.IRepository
 		IGenericRepository<Colour> Colours { get; }
 		IGenericRepository<Booking> Bookings { get; }
 		IGenericRepository<Customer> Customers { get; }
+		IGenericRepository<Payment> Payments { get; }
 	}
 }

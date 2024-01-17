@@ -11,6 +11,7 @@
         public static readonly string carsEndpoint = $"{Prefix}/cars";
         public static readonly string CustomersEndpoint = $"{Prefix}/customers";
         public static readonly string BookingsEndpoint = $"{Prefix}/bookings";
+        public static readonly string PaymentsEndpoint = $"{Prefix}/payments";
     }
 
 

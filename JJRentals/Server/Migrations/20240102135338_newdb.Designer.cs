@@ -267,7 +267,7 @@ namespace JJRentals.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Manufacturers");
+                    b.ToTable("Manufacturer");
 
                     b.HasData(
                         new
@@ -315,7 +315,7 @@ namespace JJRentals.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Models");
+                    b.ToTable("Model");
 
                     b.HasData(
                         new

@@ -17,6 +17,7 @@ namespace JJRentals.Server.Repository
 		private IGenericRepository<Booking> _bookings;
 		private IGenericRepository<Customer> _customers;
 		private IGenericRepository<Car> _cars;
+		private IGenericRepository<Payment> _payments;
 
 		private UserManager<ApplicationUser> _userManager;
 
@@ -38,6 +39,8 @@ namespace JJRentals.Server.Repository
 			=> _bookings ??= new GenericRepository<Booking>(_context);
 		public IGenericRepository<Customer> Customers
 			=> _customers ??= new GenericRepository<Customer>(_context);
+		public IGenericRepository<Payment> Payments
+			=> _payments ??= new GenericRepository<Payment>(_context);
 
 		public void Dispose()
 		{
