@@ -396,6 +396,106 @@ namespace JJRentals.Server.Migrations
                     principalColumn: "BookingID",
                     onDelete: ReferentialAction.Cascade);
                 });
+           
+            //Outlet
+            migrationBuilder.CreateTable(
+                name: "Outlet",
+                columns: table => new
+                {
+                    OutletID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: true),
+                    Location = table.Column<string>(nullable: true),
+                    ContactNo = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Outlet", x => x.OutletID);
+                });
+            //Staff
+            migrationBuilder.CreateTable(
+                name: "Staff",
+                columns: table => new
+                {
+                    StaffID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: true),
+                    Password = table.Column<string>(nullable: true),
+                    DateOfBirth = table.Column<DateTime>(nullable: false),
+                    ContactNo = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
+                    Address = table.Column<string>(nullable: true),
+                    HireDate = table.Column<DateTime>(nullable: false),
+                    Position = table.Column<string>(nullable: true),
+                    OutletID = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Staff", x => x.StaffID);
+                    table.ForeignKey(
+                        name: "FK_Staff_Outlet_OutletID",
+                        column: x => x.OutletID,
+                        principalTable: "Outlet",
+                        principalColumn: "OutletID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+            
+           //Maintenance
+            migrationBuilder.CreateTable(
+                name: "Maintenance",
+                columns: table => new
+                {
+                    MaintenanceID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SentDate = table.Column<DateTime>(nullable: false),
+                    ReturnDate = table.Column<DateTime>(nullable: false),
+                    ServiceProvider = table.Column<string>(nullable: true),
+                    PartsAffected = table.Column<string>(nullable: true),
+                    Cost = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
+                    StaffID = table.Column<int>(nullable: false),
+                    CarID = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Maintenance", x => x.MaintenanceID);
+                    table.ForeignKey(
+                        name: "FK_Maintenance_Staff_StaffID",
+                        column: x => x.StaffID,
+                        principalTable: "Staff",
+                        principalColumn: "StaffID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Maintenance_Cars_CarID",
+                        column: x => x.CarID,
+                        principalTable: "Cars",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+            //Image
+            migrationBuilder.CreateTable(
+                name: "Image",
+                columns: table => new
+                {
+                    ImageID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ImgFileURL = table.Column<string>(nullable: true),
+                    CarID = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Image", x => x.ImageID);
+                    table.ForeignKey(
+                        name: "FK_Image_Cars_CarID",
+                        column: x => x.CarID,
+                        principalTable: "Cars",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+
+
+
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
@@ -560,6 +660,29 @@ namespace JJRentals.Server.Migrations
                 name: "IX_cars_ModelId",
                 table: "Cars",
                 column: "ModelId");
+            
+            migrationBuilder.CreateIndex(
+                name: "IX_Staff_OutletID",
+                table: "Staff",
+                column: "OutletID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Maintenance_StaffID",
+                table: "Maintenance",
+                column: "StaffID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Maintenance_CarID",
+                table: "Maintenance",
+                column: "CarID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Image_CarID",
+                table: "Image",
+                column: "CarID");
+
+
+
         }
 
         /// <inheritdoc />
@@ -615,6 +738,18 @@ namespace JJRentals.Server.Migrations
 
             migrationBuilder.DropTable(
                 name: "Payment");
+
+            migrationBuilder.DropTable(
+                name: "Staff");
+
+            migrationBuilder.DropTable(
+                name: "Outlet");
+
+            migrationBuilder.DropTable(
+                name: "Maintenance");
+
+            migrationBuilder.DropTable(
+                name: "Image");
         }
     }
 }
