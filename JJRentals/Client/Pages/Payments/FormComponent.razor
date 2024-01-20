@@ -14,7 +14,7 @@
                     {
                         foreach (var Car in Cars)
                         {
-                            <option value="@Car.Id">@Car.LicensePlateNumber</option>
+                            <option value="@Car.Id">@Car.CarPlate</option>
                         }
                     }
                 </InputSelect>
@@ -31,7 +31,7 @@
                     {
                         foreach (var customer in Customers)
                         {
-                            <option value="@customer.Id">@customer.FirstName @customer.LastName</option>
+                            <option value="@customer.Id">@customer.Name</option>
                         }
                     }
                 </InputSelect>
@@ -42,8 +42,8 @@
         <div class="form-group">
             <label>Date Out: </label>
             <div>
-                <InputDate @bind-Value="@booking.DateOut" class="form-control" />
-                <ValidationMessage For="@(() => booking.DateOut)" />
+                <InputDate @bind-Value="@booking.RentalEndDate" class="form-control" />
+                <ValidationMessage For="@(() => booking.RentalEndDate)" />
             </div>
         </div>
 
@@ -52,8 +52,8 @@
             <div class="form-group">
                 <label>Date In: </label>
                 <div>
-                    <InputDate @bind-Value="@booking.DateIn" class="form-control" />
-                    <ValidationMessage For="@(() => booking.DateIn)" />
+                    <InputDate @bind-Value="@booking.RentalStartDate" class="form-control" />
+                    <ValidationMessage For="@(() => booking.RentalStartDate)" />
                 </div>
             </div>
         }

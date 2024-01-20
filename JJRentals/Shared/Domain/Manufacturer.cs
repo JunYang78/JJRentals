@@ -7,9 +7,13 @@ using System.Threading.Tasks;
 
 namespace JJRentals.Shared.Domain
 {
-	public class Colour : BaseDomainModel
+	public class Manufacturer : BaseDomainModel
 	{
 		[Required]
-		public string? Name { get; set; }
-	}
+        public string Name { get; set; }
+        [Required]
+        public string Email { get; set; }
+        [Required]
+        public string ContactNo { get; set; }
+    }
 }

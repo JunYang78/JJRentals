@@ -4,24 +4,23 @@ namespace JJRentals.Shared.Domain
 {
 	public class Customer : BaseDomainModel
 	{
-		[Required]
-		[StringLength(100, MinimumLength = 2, ErrorMessage = "First Name does not meet length requirements")]
-		public string? FirstName { get; set; }
         [Required]
-        [StringLength(100, MinimumLength = 2, ErrorMessage = "Last Name does not meet length requirements")]
-        public string? LastName { get; set; }
+        public string Name { get; set; }
         [Required]
-        [RegularExpression(@"^[STFGstfg]\d{7}[A-Za-z]", ErrorMessage = "Driving License does not meet NRIC requirements")]
-        public string? DrivingLicense { get; set; }
-        public string? Address { get; set; }
+        public string Password { get; set; } 
+        public string Address { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime DateOfBirth { get; set; }
         [Required]
-        [DataType(DataType.PhoneNumber)]
-        [RegularExpression(@"(6|8|9)\d{7}",ErrorMessage = "Contact Number is not a valid phone number")]
-        public string? ContactNumber { get; set; }
+        public string Email { get; set; }
         [Required]
-        [DataType(DataType.EmailAddress, ErrorMessage = "Email Address is not a valid email")]
-        [EmailAddress]
-        public string? EmailAddress { get; set; }
-		public virtual List<Booking>? Bookings { get; set; }
-	}
+        public string ContactNo { get; set; }
+        [Required]
+        public string DriverLicenseNo { get; set; }
+        [Required]
+        [DataType(DataType.Date)]
+        public DateTime LicenseIssueDate { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime LicenseExpDate { get; set; }
+    }
 }

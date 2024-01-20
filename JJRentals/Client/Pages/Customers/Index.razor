@@ -32,9 +32,9 @@ else
             @foreach (var customer in Customers)
             {
                 <tr>
-                    <td>@customer.DrivingLicense</td>
-                    <td>@customer.ContactNumber</td>
-                    <td>@customer.EmailAddress</td>
+                    <td>@customer.DriverLicenseNo</td>
+                    <td>@customer.ContactNo</td>
+                    <td>@customer.Email</td>
 
                     <td>
                         <a href="/customers/view/@customer.Id" class="btn btn-primary">
@@ -66,7 +66,7 @@ else
         if (Customers != null)
         {
             var customer = Customers.First(q => q.Id == customerId);
-            var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete {customer.DrivingLicense}?");
+            var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete {customer.DriverLicenseNo}?");
             if (confirm)
             {
                 await _client.DeleteAsync($"{Endpoints.CustomersEndpoint}/{customerId}");

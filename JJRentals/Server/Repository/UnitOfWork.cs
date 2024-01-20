@@ -13,7 +13,6 @@ namespace JJRentals.Server.Repository
 		private readonly ApplicationDbContext _context;
 		private IGenericRepository<Manufacturer> _makes;
 		private IGenericRepository<Model> _models;
-		private IGenericRepository<Colour> _colours;
 		private IGenericRepository<Booking> _bookings;
 		private IGenericRepository<Customer> _customers;
 		private IGenericRepository<Car> _cars;
@@ -31,8 +30,6 @@ namespace JJRentals.Server.Repository
 			=> _makes ??= new GenericRepository<Manufacturer>(_context);
 		public IGenericRepository<Model> Models
 			=> _models ??= new GenericRepository<Model>(_context);
-		public IGenericRepository<Colour> Colours
-			=> _colours ??= new GenericRepository<Colour>(_context);
 		public IGenericRepository<Car> Cars
 			=> _cars ??= new GenericRepository<Car>(_context);
 		public IGenericRepository<Booking> Bookings

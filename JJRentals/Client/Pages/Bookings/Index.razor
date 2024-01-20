@@ -36,10 +36,10 @@ else
             {
                 <tr>
                     <td>@booking.Id</td>
-                    <td>@booking.Customer.DrivingLicense</td>
+                    <td>@booking.Customer.DriverLicenseNo</td>
                     <td>@booking.DateCreated.Date.ToString("dd MMMM yyyy")</td>
-                    <td>@(booking.DateIn != null ? (booking.DateIn.Value - booking.DateOut).TotalDays.ToString() : "To Be Determined")</td>
-                    <td>@booking.Car.LicensePlateNumber</td>
+                    <td>@(booking.RentalStartDate != null ? (booking.RentalStartDate - booking.RentalEndDate).TotalDays.ToString() : "To Be Determined")</td>
+                    <td>@booking.Car.CarPlate</td>
 
                     <td>
                         <a href="/bookings/view/@booking.Id" class="btn btn-primary">

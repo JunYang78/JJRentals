@@ -26,7 +26,7 @@ namespace JJRentals.Server.Controllers
 		[HttpGet]
 		public async Task<IActionResult> Getcars()
 		{
-			var cars = await _unitOfWork.Cars.GetAll(includes:q=>q.Include(x=>x.Manufacturer).Include(x=>x.Model).Include(x=>x.Colour));
+			var cars = await _unitOfWork.Cars.GetAll(includes:q=>q.Include(x=>x.Model));
 			return Ok(cars);
 		}
 

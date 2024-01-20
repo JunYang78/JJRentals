@@ -8,7 +8,7 @@
         <div class="form-group">
             <label>Manufacturer: </label>
             <div>
-                <InputSelect @bind-Value="Car.MakeId" class="form-control">
+                <InputSelect @bind-Value="Car.ModelId" class="form-control">
                     <option value="">-- Select Manufacturer --</option>
                     @if (Manufacturers != null)
                     {
@@ -18,7 +18,7 @@
                         }
                     }
                 </InputSelect>
-                <ValidationMessage For="@(() => Car.MakeId)" />
+                <ValidationMessage For="@(() => Car.ModelId)" />
             </div>
         </div>
 
@@ -40,23 +40,6 @@
         </div>
 
         <div class="form-group">
-            <label>Colour: </label>
-            <div>
-                <InputSelect @bind-Value="Car.ColourId" class="form-control">
-                    <option value="">-- Select Colour --</option>
-                    @if (Colours != null)
-                    {
-                        foreach (var colour in Colours)
-                        {
-                            <option value="@colour.Id">@colour.Name</option>
-                        }
-                    }
-                </InputSelect>
-                <ValidationMessage For="@(() => Car.ColourId)" />
-            </div>
-        </div>
-
-        <div class="form-group">
             <label>Year: </label>
             <div>
                 <InputNumber @bind-Value="@Car.Year" class="form-control" />
@@ -67,16 +50,16 @@
         <div class="form-group">
             <label>License Plate Number: </label>
             <div>
-                <InputText @bind-Value="@Car.LicensePlateNumber" class="form-control" />
-                <ValidationMessage For="@(() => Car.LicensePlateNumber)" />
+                <InputText @bind-Value="@Car.CarPlate" class="form-control" />
+                <ValidationMessage For="@(() => Car.CarPlate)" />
             </div>
         </div>
 
         <div class="form-group">
             <label>Daily Rate: </label>
             <div>
-                <InputNumber @bind-Value="@Car.RentalRate" class="form-control" />
-                <ValidationMessage For="@(() => Car.RentalRate)" />
+                <InputNumber @bind-Value="@Car.CarRentPerDay" class="form-control" />
+                <ValidationMessage For="@(() => Car.CarRentPerDay)" />
             </div>
         </div>
 
@@ -103,12 +86,10 @@
 
     private IList<Manufacturer>? Manufacturers;
     private IList<Model>? Models;
-    private IList<Colour>? Colours;
 
     protected async override Task OnInitializedAsync()
     {
         Manufacturers = await _client.GetFromJsonAsync<List<Manufacturer>>($"{Endpoints.MakesEndpoint}");
         Models = await _client.GetFromJsonAsync<List<Model>>($"{Endpoints.ModelsEndpoint}");
-        Colours = await _client.GetFromJsonAsync<List<Colour>>($"{Endpoints.ColoursEndpoint}");
     }
 }
