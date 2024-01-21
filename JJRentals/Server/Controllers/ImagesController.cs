@@ -13,49 +13,48 @@ namespace JJRentals.Server.Controllers
 {
 	[Route("api/[controller]")]
 	[ApiController]
-	public class CarsController : ControllerBase
+	public class ImagesController : ControllerBase
 	{
 		private readonly IUnitOfWork _unitOfWork;
 
-		public CarsController(IUnitOfWork unitOfWork)
+		public ImagesController(IUnitOfWork unitOfWork)
 		{
 			_unitOfWork = unitOfWork;
 		}
 
-		// GET: api/Cars
+		// GET: api/Images
 		[HttpGet]
-		public async Task<IActionResult> GetCars()
+		public async Task<IActionResult> GetImages()
 		{
-            
-            var cars = await _unitOfWork.Cars.GetAll(includes:q=>q.Include(x=>x.Model).Include(x=>x.Outlet));
-			return Ok(cars);
+            var images = await _unitOfWork.Images.GetAll(includes: q => q.Include(x => x.Car));
+			return Ok(images);
 		}
 
-		// GET: api/Cars/5
+		// GET: api/Images/5
 		[HttpGet("{id}")]
-		public async Task<IActionResult> GetCar(int id)
+		public async Task<IActionResult> Getimage(int id)
 		{
-			var car = await _unitOfWork.Cars.Get(q => q.Id == id);
+			var image = await _unitOfWork.Images.Get(q => q.Id == id);
 
-			if (car == null)
+			if (image == null)
 			{
 				return NotFound();
 			}
 
-			return Ok(car);
+			return Ok(image);
 		}
 
-		// PUT: api/Cars/5
+		// PUT: api/Images/5
 		// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
 		[HttpPut("{id}")]
-		public async Task<IActionResult> PutCar(int id, Car car)
+		public async Task<IActionResult> Putimage(int id, Image image)
 		{
-			if (id != car.Id)
+			if (id != image.Id)
 			{
 				return BadRequest();
 			}
 
-			_unitOfWork.Cars.Update(car);
+			_unitOfWork.Images.Update(image);
 
 			try
 			{
@@ -63,7 +62,7 @@ namespace JJRentals.Server.Controllers
 			}
 			catch (DbUpdateConcurrencyException)
 			{
-				if (!await CarExists(id))
+				if (!await imageExists(id))
 				{
 					return NotFound();
 				}
@@ -76,38 +75,39 @@ namespace JJRentals.Server.Controllers
 			return NoContent();
 		}
 
-		// POST: api/Cars
+		// POST: api/Images
 		// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
 		[HttpPost]
-		public async Task<ActionResult<Car>> PostCar(Car car)
+		public async Task<ActionResult<Image>> Postimage(Image image)
 		{
-			await _unitOfWork.Cars.Insert(car);
+			await _unitOfWork.Images.Insert(image);
 			await _unitOfWork.Save(HttpContext);
 
 
-			return CreatedAtAction("GetCar", new { id = car.Id }, car);
+			return CreatedAtAction("Getimage", new { id = image.Id }, image);
 		}
 
-		// DELETE: api/Cars/5
+		// DELETE: api/Images/5
 		[HttpDelete("{id}")]
-		public async Task<IActionResult> DeleteCar(int id)
+		public async Task<IActionResult> Deleteimage(int id)
 		{
-			var car = await _unitOfWork.Cars.Get(q => q.Id == id);
-			if (car == null)
+			var image = await _unitOfWork.Images.Get(q => q.Id == id);
+			if (image == null)
 			{
 				return NotFound();
 			}
 
-			await _unitOfWork.Cars.Delete(id);
+			await _unitOfWork.Images.Delete(id);
 			await _unitOfWork.Save(HttpContext);
 
 			return NoContent();
 		}
 
-		private async Task<bool> CarExists(int id)
+		private async Task<bool> imageExists(int id)
 		{
-			var car = await _unitOfWork.Cars.Get(q => q.Id == id);
-			return car != null;
+			var image = await _unitOfWork.Images.Get(q => q.Id == id);
+			return image != null;
 		}
 	}
 }
+

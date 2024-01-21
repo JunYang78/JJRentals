@@ -20,7 +20,7 @@ namespace JJRentals.Server.Data
         public DbSet<Booking> Bookings { get; set; }
         public DbSet<Car> Cars { get; set; }
         public DbSet<Customer> Customers { get; set; }
-        public DbSet<Image> Images { get; set; }
+        public DbSet<Shared.Domain.Image> Images { get; set; }
         public DbSet<Maintenance > Maintenance { get; set; }
         public DbSet<Manufacturer> Manufacturer { get; set; }
         public DbSet<Model> Models { get; set; }

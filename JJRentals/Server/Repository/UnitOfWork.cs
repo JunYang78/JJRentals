@@ -17,8 +17,12 @@ namespace JJRentals.Server.Repository
 		private IGenericRepository<Customer> _customers;
 		private IGenericRepository<Car> _cars;
 		private IGenericRepository<Payment> _payments;
+        private IGenericRepository<Staff> _staffs;
+        private IGenericRepository<Outlet> _outlets;
+        private IGenericRepository<Maintenance> _maintenances;
+        private IGenericRepository<Image> _images;
 
-		private UserManager<ApplicationUser> _userManager;
+        private UserManager<ApplicationUser> _userManager;
 
 		public UnitOfWork(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
 		{
@@ -38,8 +42,16 @@ namespace JJRentals.Server.Repository
 			=> _customers ??= new GenericRepository<Customer>(_context);
 		public IGenericRepository<Payment> Payments
 			=> _payments ??= new GenericRepository<Payment>(_context);
+        public IGenericRepository<Staff> Staffs
+            => _staffs ??= new GenericRepository<Staff>(_context);
+        public IGenericRepository<Outlet> Outlets
+            => _outlets ??= new GenericRepository<Outlet>(_context);
+        public IGenericRepository<Maintenance> Maintenances
+            => _maintenances ??= new GenericRepository<Maintenance>(_context);
+        public IGenericRepository<Image> Images
+            => _images ??= new GenericRepository<Image>(_context);
 
-		public void Dispose()
+        public void Dispose()
 		{
 			_context.Dispose();
 			GC.SuppressFinalize(this);

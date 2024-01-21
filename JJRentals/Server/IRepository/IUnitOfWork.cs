@@ -11,5 +11,9 @@ namespace JJRentals.Server.IRepository
 		IGenericRepository<Booking> Bookings { get; }
 		IGenericRepository<Customer> Customers { get; }
 		IGenericRepository<Payment> Payments { get; }
-	}
+        IGenericRepository<Staff> Staffs { get; }
+        IGenericRepository<Maintenance> Maintenances { get; }
+        IGenericRepository<Outlet> Outlets { get; }
+        IGenericRepository<Image> Images { get; }
+    }
 }
