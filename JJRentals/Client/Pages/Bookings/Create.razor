@@ -1,29 +1,31 @@
-﻿@page "/payments/create/"
+﻿@page "/bookings/create/"
 @inject HttpClient _client
 @inject NavigationManager _navManager
 
-<h3 class="card-title">Create New Payment</h3>
+<h3 class="card-title">Create New Booking</h3>
 <hr />
 <br />
 
 
-<FormComponent ButtonText="Create Payment" OnValidSubmit="CreatePayment" payment="payment" />
+<FormComponent ButtonText="Create Booking" OnValidSubmit="CreateBooking" booking="booking" />
 
 
 @code {
-    Payment payment = new Payment();
+    Booking booking = new Booking();
 
-    private IList<Booking>? Bookings;
+    private IList<Car>? Cars;
+    private IList<Customer>? Customers;
 
     protected async override Task OnInitializedAsync()
     {
-        Bookings = await _client.GetFromJsonAsync<List<Booking>>($"{Endpoints.BookingsEndpoint}");
+        Cars = await _client.GetFromJsonAsync<List<Car>>($"{Endpoints.CarsEndpoint}");
+        Customers = await _client.GetFromJsonAsync<List<Customer>>($"{Endpoints.CustomersEndpoint}");
     }
 
-    private async Task CreatePayment()
+    private async Task CreateBooking()
     {
-        await _client.PostAsJsonAsync(Endpoints.PaymentsEndpoint, payment);
-        _navManager.NavigateTo("/payments/");
+        await _client.PostAsJsonAsync(Endpoints.BookingsEndpoint, booking);
+        _navManager.NavigateTo("/bookings/");
     }
 
 }

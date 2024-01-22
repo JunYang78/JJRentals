@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34408.163
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JJRentals.Server", "JJRentals\Server\JJRentals.Server.csproj", "{BD66738A-0BDB-47DE-89DD-DA9DB3D78F30}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JJRentals.Server", "JJRentals\Server\JJRentals.Server.csproj", "{BD66738A-0BDB-47DE-89DD-DA9DB3D78F30}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JJRentals.Client", "JJRentals\Client\JJRentals.Client.csproj", "{B1197AAD-3D1A-4569-8F40-F1E81B2BE84D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JJRentals.Client", "JJRentals\Client\JJRentals.Client.csproj", "{B1197AAD-3D1A-4569-8F40-F1E81B2BE84D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JJRentals.Shared", "JJRentals\Shared\JJRentals.Shared.csproj", "{CBB1EF7D-C895-4B69-B847-4C4008B57497}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JJRentals.Shared", "JJRentals\Shared\JJRentals.Shared.csproj", "{CBB1EF7D-C895-4B69-B847-4C4008B57497}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,0 +1,112 @@
+﻿@page "/maintenances/"
+@inject HttpClient _client
+@inject IJSRuntime js
+@attribute [Authorize]
+@implements IDisposable
+
+<h3 class="card-title">Car maintenances</h3>
+<br />
+
+<a href="/maintenances/create" class="btn btn-secondary">
+    <span class="oi oi-plus"></span>
+    Create New maintenance
+</a>
+<br />
+<br />
+
+@if (Maintenances == null)
+{
+    <div class="alert alert-info">Loading Maintenances...</div>
+}
+else
+{
+    <table class="table table-responsive" id="maintenancesTable">
+        <thead>
+            <tr>
+                <th>Maintenance Id</th>
+                <th>Plate Number</th>
+                <th>Parts Affected</th>
+                <th>Service Provider</th>
+                <th>Cost</th>
+                <th>Assigned Staff</th>
+                <th>Sent Date</th>
+                <th>Return Date</th>
+                <th>Total Days</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var maintenance in Maintenances)
+            {
+                <tr>
+                    <td>@maintenance.Id</td>
+                    <td>@maintenance.Car.CarPlate</td>
+                    <td>@maintenance.PartsAffected</td>
+                    <td>@maintenance.ServiceProvider</td>
+                    <td>@maintenance.Cost.ToString("C")</td>
+                    <td>@maintenance.Staff.Name</td>
+                    <td>@maintenance.SentDate.ToString("dd MMM yyyy")</td>
+                    <td>@maintenance.ReturnDate?.ToString("dd MMM yyyy")</td>
+                    <td>@GetTotalDays(maintenance.SentDate, maintenance.ReturnDate)</td>
+                    <td>
+                        <a href="/maintenances/view/@maintenance.Id" class="btn btn-primary">
+                            <span class="oi oi-book"></span>
+                        </a>
+                        <a href="/maintenances/edit/@maintenance.Id" class="btn btn-warning">
+                            <span class="oi oi-pencil"></span>
+                        </a>
+                        <button class="btn btn-danger" @onclick="@(()=>Delete(maintenance.Id))">
+                            <span class="oi oi-delete"></span>
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+}
+
+@code {
+    private string GetTotalDays(DateTime? sentDate, DateTime? returnDate)
+    {
+        if (sentDate.HasValue && returnDate.HasValue)
+        {
+            var totalDays = (returnDate.Value - sentDate.Value).TotalDays;
+            return totalDays.ToString("N0"); // N0 format for no decimal places
+        }
+        return "To Be Determined";
+    }
+
+
+    private List<Maintenance>? Maintenances;
+    
+
+    protected async override Task OnInitializedAsync()
+    {
+        Maintenances = await _client.GetFromJsonAsync<List<Maintenance>>($"{Endpoints.MaintenancesEndpoint}");
+    }
+
+    async Task Delete(int maintenanceId)
+    {
+        if (Maintenances != null)
+        {
+            var maintenance = Maintenances.First(q => q.Id == maintenanceId);
+            var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete {maintenance.Id}?");
+            if (confirm)
+            {
+                await _client.DeleteAsync($"{Endpoints.MaintenancesEndpoint}/{maintenanceId}");
+                await OnInitializedAsync();
+            }
+        }
+    }
+
+    protected async override Task OnAfterRenderAsync(bool firstRender)
+    {
+        await js.InvokeVoidAsync("AddDataTable", "#maintenancesTable");
+    }
+
+    public void Dispose()
+    {
+        js.InvokeVoidAsync("DataTableDispose", "#maintenancesTable");
+    }
+}

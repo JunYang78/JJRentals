@@ -1,0 +1,80 @@
+﻿@page "/outlets/"
+@inject HttpClient _client
+@inject IJSRuntime js
+@attribute [Authorize]
+
+<h3 class="card-title">Car Outlets</h3>
+<br />
+
+<a href="/outlets/create" class="btn btn-secondary">
+    <span class="oi oi-plus"></span>
+    Create New Outlets
+</a>
+<br />
+<br />
+
+@if (Outlets == null)
+{
+    <div class="alert alert-info">Loading Outlets...</div>
+}
+else
+{
+    <table class="table table-responsive">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Contact Number</th>
+                <th>Email Address</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var outlet in Outlets)
+            {
+                <tr>
+                    <td>@outlet.Name</td>
+                    <td>@outlet.Location</td>
+                    <td>@outlet.ContactNo</td>
+                    <td>@outlet.Email</td>
+                    <td>
+                        <a href="/outlets/view/@outlet.Id" class="btn btn-primary">
+                            <span class="oi oi-book"></span>
+                        </a>
+                        <a href="/outlets/edit/@outlet.Id" class="btn btn-warning">
+                            <span class="oi oi-pencil"></span>
+                        </a>
+                        <button class="btn btn-danger" @onclick="@(()=>Delete(outlet.Id))">
+                            <span class="oi oi-delete"></span>
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+}
+
+@code {
+    private List<Outlet>? Outlets;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Outlets = await _client.GetFromJsonAsync<List<Outlet>>($"{Endpoints.OutletsEndpoint}");
+    }
+
+    async Task Delete(int outletId)
+    {
+        if (Outlets != null)
+        {
+            var outlet = Outlets.First(q => q.Id == outletId);
+            var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete {outlet.Name}?");
+            if (confirm)
+            {
+                await _client.DeleteAsync($"{Endpoints.OutletsEndpoint}/{outletId}");
+                await OnInitializedAsync();
+            }
+        }
+    }
+
+}

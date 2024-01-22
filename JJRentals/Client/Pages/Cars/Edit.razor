@@ -12,12 +12,12 @@
 
     protected async override Task OnParametersSetAsync()
     {
-        Car = await _client.GetFromJsonAsync<Car>($"{Endpoints.carsEndpoint}/{id}");
+        Car = await _client.GetFromJsonAsync<Car>($"{Endpoints.CarsEndpoint}/{id}");
     }
 
     async Task EditCar()
     {
-        await _client.PutAsJsonAsync($"{Endpoints.carsEndpoint}/{id}", Car);
+        await _client.PutAsJsonAsync($"{Endpoints.CarsEndpoint}/{id}", Car);
         _navManager.NavigateTo("/cars/");
     }
 
