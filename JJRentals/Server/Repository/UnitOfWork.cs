@@ -1,4 +1,4 @@
-﻿using CarRentalManagement.Server.Repository;
+﻿using JJRentals.Server.Repository;
 using JJRentals.Server.Data;
 using JJRentals.Server.IRepository;
 using JJRentals.Server.Models;
@@ -11,7 +11,7 @@ namespace JJRentals.Server.Repository
 	public class UnitOfWork : IUnitOfWork
 	{
 		private readonly ApplicationDbContext _context;
-		private IGenericRepository<Manufacturer> _makes;
+		private IGenericRepository<Manufacturer> _manus;
 		private IGenericRepository<Model> _models;
 		private IGenericRepository<Booking> _bookings;
 		private IGenericRepository<Customer> _customers;
@@ -31,7 +31,7 @@ namespace JJRentals.Server.Repository
 		}
 
 		public IGenericRepository<Manufacturer> Manufacturers
-			=> _makes ??= new GenericRepository<Manufacturer>(_context);
+			=> _manus ??= new GenericRepository<Manufacturer>(_context);
 		public IGenericRepository<Model> Models
 			=> _models ??= new GenericRepository<Model>(_context);
 		public IGenericRepository<Car> Cars

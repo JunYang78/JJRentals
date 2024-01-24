@@ -4,23 +4,8 @@
     <DataAnnotationsValidator />
     <ValidationSummary />
 
-    <fieldset disabled = "@Disabled">
-        <div class="form-group">
-            <label>Manufacturer: </label>
-            <div>
-                <InputSelect @bind-Value="Car.ModelId" class="form-control">
-                    <option value="">-- Select Manufacturer --</option>
-                    @if (Manufacturers != null)
-                    {
-                        foreach (var manu in Manufacturers)
-                        {
-                            <option value="@manu.Id">@manu.Name</option>
-                        }
-                    }
-                </InputSelect>
-                <ValidationMessage For="@(() => Car.ModelId)" />
-            </div>
-        </div>
+
+    <fieldset disabled="@Disabled">
 
         <div class="form-group">
             <label>Model: </label>
@@ -89,7 +74,7 @@
 
     protected async override Task OnInitializedAsync()
     {
-        Manufacturers = await _client.GetFromJsonAsync<List<Manufacturer>>($"{Endpoints.MakesEndpoint}");
+        Manufacturers = await _client.GetFromJsonAsync<List<Manufacturer>>($"{Endpoints.ManufacturersEndpoint}");
         Models = await _client.GetFromJsonAsync<List<Model>>($"{Endpoints.ModelsEndpoint}");
     }
 }

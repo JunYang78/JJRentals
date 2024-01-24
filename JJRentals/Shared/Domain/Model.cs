@@ -12,6 +12,7 @@ namespace JJRentals.Shared.Domain
         [Required]
         public string Name { get; set; }
         [Required]
+        [DataType(DataType.Date)]
         public DateTime DateCreated { get; set; }
         [Required]
         public int SeatCapacity { get; set; }
@@ -21,6 +22,6 @@ namespace JJRentals.Shared.Domain
         public string TransmissionType { get; set; }
         [Required]
         public int ManufacturerId { get; set; }
-        public virtual Manufacturer Manufacturer { get; set; }
+        public virtual Manufacturer? Manufacturer { get; set; }
     }
 }

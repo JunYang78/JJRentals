@@ -31,15 +31,15 @@ namespace JJRentals.Shared.Domain
 
         [Required]
         public int StaffId { get; set; }
-        public virtual Staff Staff { get; set; }
+        public virtual Staff? Staff { get; set; }
 
         [Required]
         public int CustomerId { get; set; }
-        public virtual Customer Customer { get; set; }
+        public virtual Customer? Customer { get; set; }
 
         [Required]
         public int CarId { get; set; }
-        public virtual Car Car { get; set; }
+        public virtual Car? Car { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {

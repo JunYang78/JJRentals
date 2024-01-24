@@ -23,6 +23,11 @@ else
         <thead>
             <tr>
                 <th>Name</th>
+                <th>Date Created</th>
+                <th>Seat Capacity</th>
+                <th>Fuel Type</th>
+                <th>Transmission Type</th>
+                <th>Manufacturer</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -31,6 +36,12 @@ else
             {
                 <tr>
                     <td>@model.Name</td>
+                    <td>@model.DateCreated.Date.ToString("dd MM yyyy")</td>
+                    <td>@model.SeatCapacity</td>
+                    <td>@model.FuelType</td>
+                    <td>@model.TransmissionType</td>
+                    <td>@model.Manufacturer.Name</td>
+
                     <td>
                         <a href="/models/view/@model.Id" class="btn btn-primary">
                             <span class="oi oi-book"></span>

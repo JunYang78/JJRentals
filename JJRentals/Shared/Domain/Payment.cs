@@ -23,7 +23,7 @@ namespace JJRentals.Shared.Domain
         public string PaymentStatus { get; set; }
         [Required]
         public int BookingID { get; set; }
-        public virtual Booking Booking { get; set; }
+        public virtual Booking? Booking { get; set; }
         
     }
 }

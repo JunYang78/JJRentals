@@ -6,10 +6,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using JJRentals.Server.IRepository;
 using JJRentals.Server.Repository;
-using JJRentals.Server.Data;
-using JJRentals.Server.IRepository;
-using JJRentals.Server.Models;
-using JJRentals.Server.Repository;
 
 
 var builder = WebApplication.CreateBuilder(args);

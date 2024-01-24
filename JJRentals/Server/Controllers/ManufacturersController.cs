@@ -7,15 +7,15 @@ namespace JJRentals.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ManufacturerController : ControllerBase
+    public class ManufacturersController : ControllerBase
     {
         //Refactored
         //private readonly ApplicationDbContext _context;
         private readonly IUnitOfWork _unitOfWork;
 
         //Refactored
-        //public MakesController(ApplicationDbContext context)
-        public ManufacturerController(IUnitOfWork unitOfWork)
+        //public ManufacturersController(ApplicationDbContext context)
+        public ManufacturersController(IUnitOfWork unitOfWork)
         {
             //Refactored
             //_context = context;
@@ -24,8 +24,8 @@ namespace JJRentals.Server.Controllers
 
         // GET: api/Manufacturers
         [HttpGet]
-        //public async Task<ActionResult<IEnumerable<Manufacturer>>> GetMakes()
-        public async Task<IActionResult> GetMakes()
+        //public async Task<ActionResult<IEnumerable<Manufacturer>>> GetManufacturers()
+        public async Task<IActionResult> GetManufacturers()
         {
             //Refactored
             if (_unitOfWork.Manufacturers == null)
@@ -34,43 +34,43 @@ namespace JJRentals.Server.Controllers
             }
 
             //return await _context.Manufacturers.ToListAsync();
-            var manus = await _unitOfWork.Manufacturers.GetAll();
-            return Ok(manus);
+            var manufacturers = await _unitOfWork.Manufacturers.GetAll();
+            return Ok(manufacturers);
         }
 
         // GET: api/Manufacturers/5
         [HttpGet("{id}")]
-        //public async Task<ActionResult<Manufacturer>> GetMake(int id)
-        public async Task<IActionResult> GetMakes(int id)
+        //public async Task<ActionResult<Manufacturer>> GetManufacturer(int id)
+        public async Task<IActionResult> GetManufacturers(int id)
         {
             if (_unitOfWork.Manufacturers == null)
             {
                 return NotFound();
             }
-            //var manu = await _context.Manufacturers.FindAsync(id);
-            var manu = await _unitOfWork.Manufacturers.Get(q => q.Id == id); /* lamda expression: find instance of q, where q is of "Manufacturers" type, so finding a instance of q with a specific Id that is equals to the id parsed*/
+            //var manufacturer = await _context.Manufacturers.FindAsync(id);
+            var manufacturer = await _unitOfWork.Manufacturers.Get(q => q.Id == id); /* lamda expression: find instance of q, where q is of "Manufacturers" type, so finding a instance of q with a specific Id that is equals to the id parsed*/
 
-            if (manu == null)
+            if (manufacturer == null)
             {
                 return NotFound();
             }
 
-            return Ok(manu);
+            return Ok(manufacturer);
         }
 
         // PUT: api/Manufacturers/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutMake(int id, Manufacturer manu)
+        public async Task<IActionResult> PutManufacturer(int id, Manufacturer manufacturer)
         {
-            if (id != manu.Id)
+            if (id != manufacturer.Id)
             {
                 return BadRequest();
             }
 
             //Refactored
-            //_context.Entry(manu).State = EntityState.Modified;
-            _unitOfWork.Manufacturers.Update(manu);
+            //_context.Entry(manufacturer).State = EntityState.Modified;
+            _unitOfWork.Manufacturers.Update(manufacturer);
 
             try
             {
@@ -81,8 +81,8 @@ namespace JJRentals.Server.Controllers
             catch (DbUpdateConcurrencyException)
             {
                 //Refactored
-                //if (!MakeExists(id))
-                if (!await MakeExists(id))
+                //if (!ManufacturerExists(id))
+                if (!await ManufacturerExists(id))
                 {
                     return NotFound();
                 }
@@ -98,37 +98,37 @@ namespace JJRentals.Server.Controllers
         // POST: api/Manufacturers
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Manufacturer>> PostMake(Manufacturer manu)
+        public async Task<ActionResult<Manufacturer>> PostManufacturer(Manufacturer manufacturer)
         {
             if (_unitOfWork.Manufacturers == null)
             {
                 return Problem("Entity set 'ApplicationDbContext.Manufacturers'  is null.");
             }
-            await _unitOfWork.Manufacturers.Insert(manu);
+            await _unitOfWork.Manufacturers.Insert(manufacturer);
             await _unitOfWork.Save(HttpContext);
-            //_context.Manufacturers.Add(manu);
+            //_context.Manufacturers.Add(manufacturer);
             //await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetMake", new { id = manu.Id }, manu);
+            return CreatedAtAction("GetManufacturer", new { id = manufacturer.Id }, manufacturer);
         }
 
         // DELETE: api/Manufacturers/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteMake(int id)
+        public async Task<IActionResult> DeleteManufacturer(int id)
         {
             //if (_context.Manufacturers == null)
             //{
             // return NotFound();
             // }
 
-            var manu = await _unitOfWork.Manufacturers.Get(q => q.Id == id);
-            //var manu = await _context.Manufacturers.FindAsync(id);
-            if (manu == null)
+            var manufacturer = await _unitOfWork.Manufacturers.Get(q => q.Id == id);
+            //var manufacturer = await _context.Manufacturers.FindAsync(id);
+            if (manufacturer == null)
             {
                 return NotFound();
             }
 
-            ///_context.Manufacturers.Remove(manu);
+            ///_context.Manufacturers.Remove(manufacturer);
             //await _context.SaveChangesAsync();
             await _unitOfWork.Manufacturers.Delete(id);
             await _unitOfWork.Save(HttpContext);
@@ -136,11 +136,11 @@ namespace JJRentals.Server.Controllers
             return NoContent();
         }
 
-        private async Task<bool> MakeExists(int id)
+        private async Task<bool> ManufacturerExists(int id)
         {
             //return (_context.Manufacturers?.Any(e => e.Id == id)).GetValueOrDefault();
-            var manu = await _unitOfWork.Manufacturers.Get(q => q.Id == id);
-            return manu != null;
+            var manufacturer = await _unitOfWork.Manufacturers.Get(q => q.Id == id);
+            return manufacturer != null;
         }
     }
 }

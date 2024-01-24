@@ -12,6 +12,13 @@
 @code {
     Model model = new Model();
 
+    private IList<Manufacturer>? Manufacturer;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Manufacturer = await _client.GetFromJsonAsync<List<Manufacturer>>($"{Endpoints.ManufacturersEndpoint}");
+    }
+
     private async Task CreateModel()
     {
         await _client.PostAsJsonAsync(Endpoints.ModelsEndpoint, model);

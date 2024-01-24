@@ -21,11 +21,11 @@ namespace JJRentals.Server.Data
         public DbSet<Car> Cars { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Shared.Domain.Image> Images { get; set; }
-        public DbSet<Maintenance > Maintenance { get; set; }
-        public DbSet<Manufacturer> Manufacturer { get; set; }
+        public DbSet<Maintenance> Maintenance { get; set; }
+        public DbSet<Manufacturer> Manufacturers { get; set; }
         public DbSet<Model> Models { get; set; }
         public DbSet<Outlet> Outlets { get; set; }
-        public DbSet<Payment> Payment { get; set; }
+        public DbSet<Payment> Payments { get; set; }
         public DbSet<Staff> Staff { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

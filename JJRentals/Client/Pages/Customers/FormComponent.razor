@@ -12,10 +12,10 @@
         </div>
 
         <div class="form-group">
-            <label>Driving License: </label>
+            <label>Password: </label>
             <div>
-                <InputText @bind-Value="@customer.DriverLicenseNo" class="form-control" />
-                <ValidationMessage For="@(() => customer.DriverLicenseNo)" />
+                <InputText @bind-Value="@customer.Password" class="form-control" />
+                <ValidationMessage For="@(() => customer.Password)" />
             </div>
         </div>
 
@@ -28,7 +28,24 @@
         </div>
 
         <div class="form-group">
-            <label>Contact Number: </label>
+            <label>Date of Birth: </label>
+            <div>
+                <InputDate @bind-Value="@customer.DateOfBirth" class="form-control" />
+                <ValidationMessage For="@(() => customer.DateOfBirth)" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Email: </label>
+            <div>
+                <InputText @bind-Value="@customer.Email" class="form-control" />
+                <ValidationMessage For="@(() => customer.Email)" />
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label>Contact No: </label>
             <div>
                 <InputText @bind-Value="@customer.ContactNo" class="form-control" />
                 <ValidationMessage For="@(() => customer.ContactNo)" />
@@ -36,10 +53,26 @@
         </div>
 
         <div class="form-group">
-            <label>Email Address: </label>
+            <label>Driving License: </label>
             <div>
-                <InputText @bind-Value="@customer.Email" class="form-control" />
-                <ValidationMessage For="@(() => customer.Email)" />
+                <InputText @bind-Value="@customer.DriverLicenseNo" class="form-control" />
+                <ValidationMessage For="@(() => customer.DriverLicenseNo)" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>License Issue date: </label>
+            <div>
+                <InputDate @bind-Value="@customer.LicenseIssueDate" class="form-control" />
+                <ValidationMessage For="@(() => customer.LicenseIssueDate)" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>License Exp date: </label>
+            <div>
+                <InputDate @bind-Value="@customer.LicenseExpDate" class="form-control" />
+                <ValidationMessage For="@(() => customer.LicenseExpDate)" />
             </div>
         </div>
 

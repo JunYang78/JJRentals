@@ -22,9 +22,14 @@ else
     <table class="table table-responsive">
         <thead>
             <tr>
-                <th>Driving License</th>
-                <th>Contact Number</th>
-                <th>Email Address</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Date of Birth</th>
+                <th>Email</th>
+                <th>Contact No</th>
+                <th>Driver License No</th>
+                <th>License Issue Date</th>
+                <th>License End Date</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -32,9 +37,14 @@ else
             @foreach (var customer in Customers)
             {
                 <tr>
-                    <td>@customer.DriverLicenseNo</td>
-                    <td>@customer.ContactNo</td>
+                    <td>@customer.Name</td>
+                    <td>@customer.Address</td>
+                    <td>@customer.DateOfBirth.Date.ToString("dd MM yyyy")</td>
                     <td>@customer.Email</td>
+                    <td>@customer.ContactNo</td>
+                    <td>@customer.DriverLicenseNo</td>
+                    <td>@customer.LicenseIssueDate.Date.ToString("dd MM yyyy")</td>
+                    <td>@customer.LicenseExpDate.Date.ToString("dd MM yyyy")</td>
 
                     <td>
                         <a href="/customers/view/@customer.Id" class="btn btn-primary">

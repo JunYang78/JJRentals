@@ -1,24 +1,24 @@
-﻿@page "/manus/edit/{id:int}"
+﻿@page "/manufacturers/edit/{id:int}"
 @inject HttpClient _client
 @inject NavigationManager _navManager
 
 <h3>Edit Manufacturer</h3>
 
-<FormComponent ButtonText="Update" OnValidSubmit="EditMake" manu="manu" />
+<FormComponent ButtonText="Update" OnValidSubmit="EditMake" manufacturer="manufacturer" />
 
 @code {
     [Parameter] public int id { get; set; }
-    Manufacturer? manu = new Manufacturer();
+    Manufacturer? manufacturer = new Manufacturer();
 
     protected async override Task OnParametersSetAsync()
     {
-        manu = await _client.GetFromJsonAsync<Manufacturer>($"{Endpoints.MakesEndpoint}/{id}");
+        manufacturer = await _client.GetFromJsonAsync<Manufacturer>($"{Endpoints.ManufacturersEndpoint}/{id}");
     }
 
     async Task EditMake()
     {
-        await _client.PutAsJsonAsync($"{Endpoints.MakesEndpoint}/{id}", manu);
-        _navManager.NavigateTo("/manus/");
+        await _client.PutAsJsonAsync($"{Endpoints.ManufacturersEndpoint}/{id}", manufacturer);
+        _navManager.NavigateTo("/manufacturers/");
     }
 
 }

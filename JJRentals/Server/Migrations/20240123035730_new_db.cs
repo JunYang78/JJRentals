@@ -115,7 +115,7 @@ namespace JJRentals.Server.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Manufacturer",
+                name: "Manufacturers",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -130,7 +130,7 @@ namespace JJRentals.Server.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Manufacturer", x => x.Id);
+                    table.PrimaryKey("PK_Manufacturers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -299,9 +299,9 @@ namespace JJRentals.Server.Migrations
                 {
                     table.PrimaryKey("PK_Models", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Models_Manufacturer_ManufacturerId",
+                        name: "FK_Models_Manufacturers_ManufacturerId",
                         column: x => x.ManufacturerId,
-                        principalTable: "Manufacturer",
+                        principalTable: "Manufacturers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -470,7 +470,7 @@ namespace JJRentals.Server.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Payment",
+                name: "Payments",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -487,9 +487,9 @@ namespace JJRentals.Server.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Payment", x => x.Id);
+                    table.PrimaryKey("PK_Payments", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Payment_Bookings_BookingID",
+                        name: "FK_Payments_Bookings_BookingID",
                         column: x => x.BookingID,
                         principalTable: "Bookings",
                         principalColumn: "Id",
@@ -597,8 +597,8 @@ namespace JJRentals.Server.Migrations
                 column: "ManufacturerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Payment_BookingID",
-                table: "Payment",
+                name: "IX_Payments_BookingID",
+                table: "Payments",
                 column: "BookingID");
 
             migrationBuilder.CreateIndex(
@@ -658,7 +658,7 @@ namespace JJRentals.Server.Migrations
                 name: "Maintenance");
 
             migrationBuilder.DropTable(
-                name: "Payment");
+                name: "Payments");
 
             migrationBuilder.DropTable(
                 name: "PersistedGrants");
@@ -688,7 +688,7 @@ namespace JJRentals.Server.Migrations
                 name: "Outlets");
 
             migrationBuilder.DropTable(
-                name: "Manufacturer");
+                name: "Manufacturers");
         }
     }
 }

@@ -7,8 +7,10 @@ namespace JJRentals.Shared.Domain
         [Required]
         public string Name { get; set; }
         [Required]
-        public string Password { get; set; } 
+        public string Password { get; set; }
+        [Required]
         public string Address { get; set; }
+        [Required]
         [DataType(DataType.Date)]
         public DateTime DateOfBirth { get; set; }
         [Required]

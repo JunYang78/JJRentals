@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
 using System.Linq.Expressions;
 
-namespace CarRentalManagement.Server.Repository
+namespace JJRentals.Server.Repository
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {

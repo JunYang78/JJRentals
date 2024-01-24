@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JJRentals.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240120102847_new_db")]
+    [Migration("20240123035730_new_db")]
     partial class new_db
     {
         /// <inheritdoc />
@@ -20,7 +20,7 @@ namespace JJRentals.Server.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.14")
+                .HasAnnotation("ProductVersion", "7.0.15")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -527,7 +527,7 @@ namespace JJRentals.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Manufacturer");
+                    b.ToTable("Manufacturers");
                 });
 
             modelBuilder.Entity("JJRentals.Shared.Domain.Model", b =>
@@ -657,7 +657,7 @@ namespace JJRentals.Server.Migrations
 
                     b.HasIndex("BookingID");
 
-                    b.ToTable("Payment");
+                    b.ToTable("Payments");
                 });
 
             modelBuilder.Entity("JJRentals.Shared.Domain.Staff", b =>

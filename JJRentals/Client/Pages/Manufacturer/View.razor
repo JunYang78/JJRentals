@@ -8,6 +8,6 @@
 	Manufacturer? manu = new Manufacturer();
 	protected async override Task OnParametersSetAsync()
 	{
-		manu = await _client.GetFromJsonAsync<Manufacturer>($"{Endpoints.MakesEndpoint}/{id}");
+		manu = await _client.GetFromJsonAsync<Manufacturer>($"{Endpoints.ManufacturersEndpoint}/{id}");
 	}
 }

@@ -1,7 +1,28 @@
-﻿<EditForm Model="@model" OnValidSubmit="@OnValidSubmit">
+﻿@inject HttpClient _client
+
+<EditForm Model="@model" OnValidSubmit="@OnValidSubmit">
     <DataAnnotationsValidator />
     <ValidationSummary />
+
     <fieldset disabled = "@Disabled">
+
+        <div class="form-group">
+            <label>Manufacturer: </label>
+            <div>
+                <InputSelect @bind-Value="model.ManufacturerId" class="form-control">
+                    <option value="">-- Select Manufacturer --</option>
+                    @if (Manufacturers != null)
+                    {
+                        foreach (var manu in Manufacturers)
+                        {
+                            <option value="@manu.Id">@manu.Name</option>
+                        }
+                    }
+                </InputSelect>
+                <ValidationMessage For="@(() => model.ManufacturerId)" />
+            </div>
+        </div>
+
         <div class="form-group">
             <label>Name: </label>
             <div>
@@ -9,10 +30,42 @@
                 <ValidationMessage For="@(() => model.Name)" />
             </div>
         </div>
-    </fieldset>
 
-    <br />
-    <br />
+        <div class="form-group">
+            <label>Date Created: </label>
+            <div>
+                <InputDate @bind-Value="@model.DateCreated" class="form-control" />
+                <ValidationMessage For="@(() => model.DateCreated)" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Seat Capacity: </label>
+            <div>
+                <InputNumber @bind-Value="@model.SeatCapacity" class="form-control" />
+                <ValidationMessage For="@(() => model.SeatCapacity)" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Fuel Type: </label>
+            <div>
+                <InputText @bind-Value="@model.FuelType" class="form-control" />
+                <ValidationMessage For="@(() => model.FuelType)" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Transmission Type: </label>
+            <div>
+                <InputText @bind-Value="@model.TransmissionType" class="form-control" />
+                <ValidationMessage For="@(() => model.TransmissionType)" />
+            </div>
+        </div>
+
+        <br />
+        <br />
+    </fieldset>
 
     @if (!Disabled)
     {
@@ -30,4 +83,11 @@
     [Parameter] public Model model { get; set; }
     [Parameter] public string ButtonText { get; set; } = "Save";
     [Parameter] public EventCallback OnValidSubmit { get; set; }
+
+    private IList<Manufacturer>? Manufacturers;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Manufacturers = await _client.GetFromJsonAsync<List<Manufacturer>>($"{Endpoints.ManufacturersEndpoint}");
+    }
 }
