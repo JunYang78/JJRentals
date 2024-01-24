@@ -18,8 +18,7 @@
 
     protected async override Task OnInitializedAsync()
     {
-        Cars = await _client.GetFromJsonAsync<List<Car>>($"{Endpoints.carsEndpoint}");
-        Customers = await _client.GetFromJsonAsync<List<Customer>>($"{Endpoints.CustomersEndpoint}");
+        Bookings = await _client.GetFromJsonAsync<List<Booking>>($"{Endpoints.BookingsEndpoint}");
     }
 
     private async Task CreateBooking()

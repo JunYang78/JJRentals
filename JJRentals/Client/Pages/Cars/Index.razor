@@ -27,26 +27,31 @@ else
                 <th>Model</th>
                 <th>Year</th>
                 <th>License Plate Number</th>
+                <th>Rent Per Day</th>
+                <th>Color</th>
+                <th>Availability</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var Car in Cars)
+            @foreach (var car in Cars)
             {
                 <tr>
-                    <td>@Car.Model.Name</td>
-                    <td>@Car.Year</td>
-                    <td>@Car.CarPlate</td>
-
-
+                    <td>@car.Model.Manufacturer.Name</td>
+                    <td>@car.Model.Name</td>
+                    <td>@car.Year</td>
+                    <td>@car.CarPlate</td>
+                    <td>@car.CarRentPerDay</td>
+                    <td>@car.Colour</td>
+                    <td>@(car.Availability ? "Available" : "Not Available")</td>
                     <td>
-                        <a href="/cars/view/@Car.Id" class="btn btn-primary">
+                        <a href="/cars/view/@car.Id" class="btn btn-primary">
                             <span class="oi oi-book"></span>
                         </a>
-                        <a href="/cars/edit/@Car.Id" class="btn btn-warning">
+                        <a href="/cars/edit/@car.Id" class="btn btn-warning">
                             <span class="oi oi-pencil"></span>
                         </a>
-                        <button class="btn btn-danger" @onclick="@(()=>Delete(Car.Id))">
+                        <button class="btn btn-danger" @onclick="@(()=>Delete(car.Id))">
                             <span class="oi oi-delete"></span>
                         </button>
                     </td>
@@ -61,18 +66,18 @@ else
 
     protected async override Task OnInitializedAsync()
     {
-        Cars = await _client.GetFromJsonAsync<List<Car>>($"{Endpoints.carsEndpoint}");
+        Cars = await _client.GetFromJsonAsync<List<Car>>($"{Endpoints.CarsEndpoint}");
     }
 
-    async Task Delete(int CarId)
+    async Task Delete(int carId)
     {
         if (Cars != null)
         {
-            var Car = Cars.First(q => q.Id == CarId);
-            var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete {Car.CarPlate}?");
+            var car = Cars.First(q => q.Id == carId);
+            var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete {car.CarPlate}?");
             if (confirm)
             {
-                await _client.DeleteAsync($"{Endpoints.carsEndpoint}/{CarId}");
+                await _client.DeleteAsync($"{Endpoints.CarsEndpoint}/{carId}");
                 await OnInitializedAsync();
             }
         }

@@ -8,6 +8,6 @@
 	Car? Car = new Car();
 	protected async override Task OnParametersSetAsync()
 	{
-		Car = await _client.GetFromJsonAsync<Car>($"{Endpoints.carsEndpoint}/{id}");
+		Car = await _client.GetFromJsonAsync<Car>($"{Endpoints.CarsEndpoint}/{id}");
 	}
 }

@@ -1,0 +1,78 @@
+﻿@page "/images/"
+@inject HttpClient _client
+@inject IJSRuntime js
+@attribute [Authorize]
+
+<h3 class="card-title">Car Images</h3>
+<br />
+
+<a href="/images/create" class="btn btn-secondary">
+    <span class="oi oi-plus"></span>
+    Create New Images
+</a>
+<br />
+<br />
+
+@if (Images == null)
+{
+    <div class="alert alert-info">Loading Images...</div>
+}
+else
+{
+    <table class="table table-responsive">
+       <thead>
+    <tr>
+        <th>Image File URL</th>
+        <th>Car License Plate</th>
+        <th>Actions</th>
+    </tr>
+</thead>
+<tbody>
+    @foreach (var image in Images)
+    {
+        <tr>
+            <td>
+                <img src="@image.ImgFileURL" alt="Car Image" style="width: 100px; height: auto;" />
+            </td>
+            <td>@image.Car.CarPlate</td>
+            <td>
+                <a href="@image.ImgFileURL" target="_blank" class="btn btn-light">
+                    <span class="oi oi-eye"></span>
+                </a>
+                <a href="/images/edit/@image.Id" class="btn btn-warning">
+                    <span class="oi oi-pencil"></span>
+                </a>
+                <button class="btn btn-danger" @onclick="@(()=>Delete(image.Id))">
+                    <span class="oi oi-delete"></span>
+                </button>
+            </td>
+        </tr>
+    }
+</tbody>
+
+    </table>
+}
+
+@code {
+    private List<Image>? Images;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Images = await _client.GetFromJsonAsync<List<Image>>($"{Endpoints.ImagesEndpoint}");
+    }
+
+    async Task Delete(int imageId)
+    {
+        if (Images != null)
+        {
+            var image = Images.First(q => q.Id == imageId);
+            var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete {image.ImgFileURL}?");
+            if (confirm)
+            {
+                await _client.DeleteAsync($"{Endpoints.ImagesEndpoint}/{imageId}");
+                await OnInitializedAsync();
+            }
+        }
+    }
+
+}

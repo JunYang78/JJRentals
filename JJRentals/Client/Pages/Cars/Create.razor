@@ -23,7 +23,7 @@
 
     private async Task CreateCar()
     {
-        await _client.PostAsJsonAsync(Endpoints.carsEndpoint, Car);
+        await _client.PostAsJsonAsync(Endpoints.CarsEndpoint, Car);
         _navManager.NavigateTo("/cars/");
     }
 
