@@ -8,9 +8,15 @@
 
 <FormComponent ButtonText="Create staff" OnValidSubmit="Createstaff" staff="staff" />
 
-
 @code {
     Staff staff = new Staff();
+
+    private IList<Outlet>? Outlets;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Outlets = await _client.GetFromJsonAsync<List<Outlet>>($"{Endpoints.OutletsEndpoint}");
+    }
 
     private async Task Createstaff()
     {
