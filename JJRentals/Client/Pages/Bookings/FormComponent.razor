@@ -40,6 +40,31 @@
         </div>
 
         <div class="form-group">
+            <label>Staff: </label>
+            <div>
+                <InputSelect @bind-Value="booking.StaffId" class="form-control">
+                    <option value="">-- Select Staff --</option>
+                    @if (Staffs != null)
+                    {
+                        foreach (var staff in Staffs)
+                        {
+                            <option value="@staff.Id">@staff.Name</option>
+                        }
+                    }
+                </InputSelect>
+                <ValidationMessage For="@(() => booking.StaffId)" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Date In: </label>
+            <div>
+                <InputDate @bind-Value="@booking.RentalStartDate" class="form-control" />
+                <ValidationMessage For="@(() => booking.RentalStartDate)" />
+            </div>
+        </div>
+
+        <div class="form-group">
             <label>Date Out: </label>
             <div>
                 <InputDate @bind-Value="@booking.RentalEndDate" class="form-control" />
@@ -47,16 +72,21 @@
             </div>
         </div>
 
-        @if (booking.Id > 0)
-        {
-            <div class="form-group">
-                <label>Date In: </label>
-                <div>
-                    <InputDate @bind-Value="@booking.RentalStartDate" class="form-control" />
-                    <ValidationMessage For="@(() => booking.RentalStartDate)" />
-                </div>
+        <div class="form-group">
+            <label>Location: </label>
+            <div>
+                <InputText @bind-Value="@booking.Location" class="form-control" />
+                <ValidationMessage For="@(() => booking.Location)" />
             </div>
-        }
+        </div>
+
+        <div class="form-group">
+            <label>Pickup Option: </label>
+            <div>
+                <InputText @bind-Value="@booking.PickUpOption" class="form-control" />
+                <ValidationMessage For="@(() => booking.PickUpOption)" />
+            </div>
+        </div>
 
         <br />
         <br />
@@ -81,10 +111,12 @@
 
     private IList<Car>? Cars;
     private IList<Customer>? Customers;
+    private IList<Staff>? Staffs;
 
     protected async override Task OnInitializedAsync()
     {
         Cars = await _client.GetFromJsonAsync<List<Car>>($"{Endpoints.CarsEndpoint}");
         Customers = await _client.GetFromJsonAsync<List<Customer>>($"{Endpoints.CustomersEndpoint}");
+        Staffs = await _client.GetFromJsonAsync<List<Staff>>($"{Endpoints.StaffsEndpoint}");
     }
 }

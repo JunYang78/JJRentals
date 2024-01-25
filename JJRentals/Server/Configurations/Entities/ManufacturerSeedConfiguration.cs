@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace JJRentals.Server.Configurations.Entities
 {
-	public class MakeSeedConfiguration : IEntityTypeConfiguration<Manufacturer>
+	public class ManufacturerSeedConfiguration : IEntityTypeConfiguration<Manufacturer>
 	{
 		public void Configure(EntityTypeBuilder<Manufacturer> builder)
 		{
@@ -13,6 +13,8 @@ namespace JJRentals.Server.Configurations.Entities
 			 {
 				 Id = 1,
 				 Name = "BMW",
+				 ContactNo = "91234567",
+				 Email = "BMW@gmail.com",
 				 DateCreated = DateTime.Now,
 				 DateUpdated = DateTime.Now,
 				 CreatedBy = "System",
@@ -23,11 +25,26 @@ namespace JJRentals.Server.Configurations.Entities
 			 {
 				 Id = 2,
 				 Name = "Toyota",
+				 ContactNo = "81234567",
+				 Email = "Toyota@yahoo.com",
 				 DateCreated = DateTime.Now,
 				 DateUpdated = DateTime.Now,
 				 CreatedBy = "System",
 				 UpdatedBy = "System"
-			 }
+			 },
+
+			 new Manufacturer
+			 {
+                 Id = 3,
+                 Name = "Honda",
+                 ContactNo = "87654321",
+                 Email = "Honda@yahoo.com",
+                 DateCreated = DateTime.Now,
+                 DateUpdated = DateTime.Now,
+                 CreatedBy = "System",
+                 UpdatedBy = "System"
+
+             }
 			 );
 		}
 	}
