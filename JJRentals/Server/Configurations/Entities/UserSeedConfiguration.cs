@@ -22,7 +22,18 @@ namespace JJRentals.Server.Configurations.Entities
 					UserName = "admin@localhost.com",
 					NormalizedUserName = "ADMIN@LOCALHOST.COM",
 					PasswordHash = hasher.HashPassword(null, "P@ssword1")
-				}
+				},
+
+				new ApplicationUser
+				{
+					Id = "d925e8b3-4a17-4c69-bb0a-9f2e6a86f5d1",
+					Email = "user@localhost.com",
+					NormalizedEmail = "USER@LOCALHOST.COM",
+					FirstName = "User",
+					LastName = "Default",
+					UserName = "user@localhost.com",
+                    PasswordHash = hasher.HashPassword(null, "P@ssword1")
+                }
 				);
 		}
 	}

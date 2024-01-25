@@ -2,9 +2,8 @@
 @inject HttpClient _client
 @inject IJSRuntime js
 @attribute [Authorize]
-@implements IDisposable
 
-<h3 class="card-title">Car Bookings</h3>
+<h3 class="card-title">Bookings</h3>
 <br />
 
 <a href="/bookings/create" class="btn btn-secondary">
@@ -24,10 +23,14 @@ else
         <thead>
             <tr>
                 <th>Booking Id</th>
-                <th>Customer License</th>
-                <th>Date</th>
-                <th>Duration in days</th>
-                <th>Plate Number</th>
+                <th>Date & Time</th>
+                <th>RentalStartDate</th>
+                <th>Duration</th>
+                <th>Location</th>
+                <th>Pickup Option</th>
+                <th>Staff</th>
+                <th>Customer</th>
+                <th>Car</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -36,9 +39,13 @@ else
             {
                 <tr>
                     <td>@booking.Id</td>
-                    <td>@booking.Customer.DriverLicenseNo</td>
-                    <td>@booking.DateCreated.Date.ToString("dd MMMM yyyy")</td>
+                    <td>@booking.DateTime</td>
+                    <td>@booking.RentalStartDate</td>
                     <td>@(booking.RentalStartDate != null ? (booking.RentalStartDate - booking.RentalEndDate).TotalDays.ToString() : "To Be Determined")</td>
+                    <td>@booking.Location</td>
+                    <td>@booking.PickUpOption</td>
+                    <td>@booking.Staff.Name</td>
+                    <td>@booking.Customer.Name</td>
                     <td>@booking.Car.CarPlate</td>
 
                     <td>
@@ -60,7 +67,6 @@ else
 
 @code {
     private List<Booking>? Bookings;
-    private DateTime nullDT = new DateTime(1, 1, 1, 0, 0, 0);
 
     protected async override Task OnInitializedAsync()
     {
@@ -79,15 +85,5 @@ else
                 await OnInitializedAsync();
             }
         }
-    }
-
-    protected async override Task OnAfterRenderAsync(bool firstRender)
-    {
-        await js.InvokeVoidAsync("AddDataTable", "#bookingsTable");
-    }
-
-    public void Dispose()
-    {
-        js.InvokeVoidAsync("DataTableDispose", "#bookingsTable");
     }
 }

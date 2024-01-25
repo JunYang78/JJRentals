@@ -2,9 +2,8 @@
 @inject HttpClient _client
 @inject IJSRuntime js
 @attribute [Authorize]
-@implements IDisposable
 
-<h3 class="card-title">Car Payments</h3>
+<h3 class="card-title">Booking Payments</h3>
 <br />
 
 <a href="/payments/create" class="btn btn-secondary">
@@ -25,10 +24,10 @@ else
             <tr>
                 <th>Payment Id</th>
                 <th>Amount</th>
-                <th>Deposit</th>
                 <th>Payment Date</th>
                 <th>Payment Method</th>
                 <th>Payment Status</th>
+                <th>Booking</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -39,8 +38,9 @@ else
                     <td>@payment.Id</td>
                     <td>@payment.Amount</td>
                     <td>@payment.DateCreated.Date.ToString("dd MMMM yyyy")</td>
-                    <td>@payment.</td>
-                    <td>@payment.BookingID</td>
+                    <td>@payment.PaymentMethod</td>
+                    <td>@payment.PaymentStatus</td>
+                    <td>@payment.Booking.Id</td>
 
                     <td>
                         <a href="/payments/view/@payment.Id" class="btn btn-primary">
@@ -61,7 +61,6 @@ else
 
 @code {
     private List<Payment>? Payments;
-    private DateTime nullDT = new DateTime(1, 1, 1, 0, 0, 0);
 
     protected async override Task OnInitializedAsync()
     {
@@ -80,15 +79,5 @@ else
                 await OnInitializedAsync();
             }
         }
-    }
-
-    protected async override Task OnAfterRenderAsync(bool firstRender)
-    {
-        await js.InvokeVoidAsync("AddDataTable", "#paymentsTable");
-    }
-
-    public void Dispose()
-    {
-        js.InvokeVoidAsync("DataTableDispose", "#paymentsTable");
     }
 }

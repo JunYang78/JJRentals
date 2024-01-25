@@ -61,6 +61,13 @@ namespace JJRentals.Server.Data
                 .WithMany()
                 .HasForeignKey(c => c.OutletId)
                 .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.ApplyConfiguration(new CustomerSeedConfiguration());
+            modelBuilder.ApplyConfiguration(new ManufacturerSeedConfiguration());
+            modelBuilder.ApplyConfiguration(new ModelSeedConfiguration());
+            modelBuilder.ApplyConfiguration(new RoleSeedConfiguration());
+            modelBuilder.ApplyConfiguration(new UserRoleSeedConfiguration());
+            modelBuilder.ApplyConfiguration(new UserSeedConfiguration());
         }
     }
 }
