@@ -25,6 +25,23 @@
         </div>
 
         <div class="form-group">
+            <label>Outlets: </label>
+            <div>
+                <InputSelect @bind-Value="Car.OutletId" class="form-control">
+                    <option value="">-- Select Outlet --</option>
+                    @if (Outlets != null)
+                    {
+                        foreach (var outlet in Outlets)
+                        {
+                            <option value="@outlet.Id">@outlet.Name</option>
+                        }
+                    }
+                </InputSelect>
+                <ValidationMessage For="@(() => Car.OutletId)" />
+            </div>
+        </div>
+
+        <div class="form-group">
             <label>Year: </label>
             <div>
                 <InputNumber @bind-Value="@Car.Year" class="form-control" />
@@ -48,6 +65,20 @@
             </div>
         </div>
 
+        <div class="form-group">
+            <label>Car Colour: </label>
+            <div>
+                <InputText @bind-Value="@Car.Colour" class="form-control" />
+                <ValidationMessage For="@(() => Car.Colour)" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Availability: </label>
+            <InputCheckbox @bind-Value="@Car.Availability" class="form-check-input" />
+            <ValidationMessage For="@(() => Car.Availability)" />
+        </div>
+
         <br />
         <br />
     </fieldset>
@@ -69,12 +100,12 @@
     [Parameter] public string ButtonText { get; set; } = "Save";
     [Parameter] public EventCallback OnValidSubmit { get; set; }
 
-    private IList<Manufacturer>? Manufacturers;
+    private IList<Outlet>? Outlets;
     private IList<Model>? Models;
 
     protected async override Task OnInitializedAsync()
     {
-        Manufacturers = await _client.GetFromJsonAsync<List<Manufacturer>>($"{Endpoints.ManufacturersEndpoint}");
+        Outlets = await _client.GetFromJsonAsync<List<Outlet>>($"{Endpoints.OutletsEndpoint}");
         Models = await _client.GetFromJsonAsync<List<Model>>($"{Endpoints.ModelsEndpoint}");
     }
 }

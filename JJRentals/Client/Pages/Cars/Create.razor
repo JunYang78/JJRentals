@@ -12,12 +12,12 @@
 @code {
     Car Car = new Car();
 
-    private IList<Manufacturer>? Manufacturer;
+    private IList<Outlet>? Outlets;
     private IList<Model>? Models;
 
     protected async override Task OnInitializedAsync()
     {
-        Manufacturer = await _client.GetFromJsonAsync<List<Manufacturer>>($"{Endpoints.ManufacturersEndpoint}");
+        Outlets = await _client.GetFromJsonAsync<List<Outlet>>($"{Endpoints.OutletsEndpoint}");
         Models = await _client.GetFromJsonAsync<List<Model>>($"{Endpoints.ModelsEndpoint}");
     }
 

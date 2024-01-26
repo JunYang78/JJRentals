@@ -1,5 +1,27 @@
-﻿<h3>Create</h3>
+﻿@page "/staffs/create/"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
+<h3 class="card-title">Create New staff</h3>
+<hr />
+<br />
+
+<FormComponent ButtonText="Create staff" OnValidSubmit="Createstaff" staff="staff" />
 
 @code {
+    Staff staff = new Staff();
+
+    private IList<Outlet>? Outlets;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Outlets = await _client.GetFromJsonAsync<List<Outlet>>($"{Endpoints.OutletsEndpoint}");
+    }
+
+    private async Task Createstaff()
+    {
+        await _client.PostAsJsonAsync(Endpoints.StaffsEndpoint, staff);
+        _navManager.NavigateTo("/staffs/");
+    }
 
 }
