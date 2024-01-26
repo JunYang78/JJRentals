@@ -50,7 +50,13 @@
         <div class="form-group">
             <label>Fuel Type: </label>
             <div>
-                <InputText @bind-Value="@model.FuelType" class="form-control" />
+                <InputSelect @bind-Value="model.FuelType" class="form-control">
+                    <option value="">-- Select Fuel Type --</option>
+                    <option value="Petrol">Petrol</option>
+                    <option value="Diesel">Diesel</option>
+                    <option value="Electric">Electric</option>
+                    <option value="Hybrid">Hybrid</option>
+                </InputSelect>
                 <ValidationMessage For="@(() => model.FuelType)" />
             </div>
         </div>
@@ -58,7 +64,12 @@
         <div class="form-group">
             <label>Transmission Type: </label>
             <div>
-                <InputText @bind-Value="@model.TransmissionType" class="form-control" />
+                <InputSelect @bind-Value="model.TransmissionType" class="form-control">
+                    <option value="">-- Select Transmission Type --</option>
+                    <option value="Manual">Manual</option>
+A                    <option value="Auto">Auto</option>
+                    <option value="SemiAuto">SemiAuto</option>
+                </InputSelect>
                 <ValidationMessage For="@(() => model.TransmissionType)" />
             </div>
         </div>

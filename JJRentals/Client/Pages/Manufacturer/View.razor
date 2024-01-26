@@ -1,8 +1,8 @@
-﻿@page "/manus/view/{id:int}"
+﻿@page "/manufacturers/view/{id:int}"
 @inject HttpClient _client
 @inject NavigationManager _navManager
 <h3>View Manufacturer</h3>
-<FormComponent manu="manu" Disabled="true" />
+<FormComponent manufacturer="manu" Disabled="true" />
 @code {
 	[Parameter] public int id { get; set; }
 	Manufacturer? manu = new Manufacturer();

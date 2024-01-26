@@ -4,6 +4,7 @@ using JJRentals.Server.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JJRentals.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240126071019_validation")]
+    partial class validation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -238,7 +241,7 @@ namespace JJRentals.Server.Migrations
                         {
                             Id = "3781efa7-66dc-47f0-860f-e506d04102e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "db528f9e-9426-45fb-8061-b6827ab63ac6",
+                            ConcurrencyStamp = "f3326590-7e06-4505-99e0-19befb047b8d",
                             Email = "admin@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -246,9 +249,9 @@ namespace JJRentals.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAECymLc8gGOqDcjVYVd0TifR+mKLbeeQT5vfUPRzZ7nm3GYiMn77HpTA9t6j6C6PeuQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHGmAdxgbNDw4JSb5LHpBY+cLmqZ2OcKGjATaY9LU22IRQAIvLPxnMvRSYqXDjX2QA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "3be56ecc-42f4-4d57-a83e-dd86c7142f7d",
+                            SecurityStamp = "0a69aa91-92d1-45d1-90a7-dcb30682ae07",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost.com"
                         },
@@ -256,16 +259,16 @@ namespace JJRentals.Server.Migrations
                         {
                             Id = "d925e8b3-4a17-4c69-bb0a-9f2e6a86f5d1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0095039d-d2a3-42b8-93a6-b151728f1daa",
+                            ConcurrencyStamp = "816f63e6-d9f1-4eea-a09f-6ced18b13788",
                             Email = "user@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "User",
                             LastName = "Default",
                             LockoutEnabled = false,
                             NormalizedEmail = "USER@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEC4i4DC2FfSipmZ4EERaKdiiu7lTSicSrWl7sVCs+yW1rEcLtDONWFjl5Cx1PoYKhg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEG17tIbvQrWfF6Dczq6hmPsVh94xOuzsNS46Ux6YwJHqk7EGfaBPCb2XFSYYVzAFdw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "36fd4d0d-fdc9-4704-9c8a-999c5aa71eda",
+                            SecurityStamp = "bad2ca46-4a09-4f7d-8488-c5a7372249f9",
                             TwoFactorEnabled = false,
                             UserName = "user@localhost.com"
                         });

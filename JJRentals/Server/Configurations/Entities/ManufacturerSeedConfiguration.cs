@@ -14,11 +14,7 @@ namespace JJRentals.Server.Configurations.Entities
 				 Id = 1,
 				 Name = "BMW",
 				 ContactNo = "91234567",
-				 Email = "BMW@gmail.com",
-				 DateCreated = DateTime.Now,
-				 DateUpdated = DateTime.Now,
-				 CreatedBy = "System",
-				 UpdatedBy = "System"
+				 Email = "BMW@gmail.com"
 			 },
 
 			 new Manufacturer
@@ -26,11 +22,7 @@ namespace JJRentals.Server.Configurations.Entities
 				 Id = 2,
 				 Name = "Toyota",
 				 ContactNo = "81234567",
-				 Email = "Toyota@yahoo.com",
-				 DateCreated = DateTime.Now,
-				 DateUpdated = DateTime.Now,
-				 CreatedBy = "System",
-				 UpdatedBy = "System"
+				 Email = "Toyota@yahoo.com"
 			 },
 
 			 new Manufacturer
@@ -38,11 +30,7 @@ namespace JJRentals.Server.Configurations.Entities
                  Id = 3,
                  Name = "Honda",
                  ContactNo = "87654321",
-                 Email = "Honda@yahoo.com",
-                 DateCreated = DateTime.Now,
-                 DateUpdated = DateTime.Now,
-                 CreatedBy = "System",
-                 UpdatedBy = "System"
+                 Email = "Honda@yahoo.com"
 
              }
 			 );

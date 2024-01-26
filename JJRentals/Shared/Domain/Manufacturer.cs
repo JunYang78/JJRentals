@@ -1,19 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace JJRentals.Shared.Domain
 {
-	public class Manufacturer : BaseDomainModel
-	{
-		[Required]
+    public class Manufacturer : BaseDomainModel
+    {
+        [Required]
+        [StringLength(100, ErrorMessage = "The name must be less than 100 characters long.")]
         public string Name { get; set; }
+
         [Required]
+        [EmailAddress(ErrorMessage = "The email address is not in a valid format.")]
         public string Email { get; set; }
+
         [Required]
+        [Phone(ErrorMessage = "The contact number is not in a valid format.")]
+        [StringLength(20, ErrorMessage = "The contact number must be less than 20 digits long.")]
         public string ContactNo { get; set; }
     }
 }

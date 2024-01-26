@@ -1,4 +1,5 @@
 ﻿@inject NavigationManager Navigation
+@using System.Security.Claims
 
 <div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
@@ -24,6 +25,14 @@
                         <span class="oi oi-account-logout" aria-hidden="true"></span> Log out
                     </NavLink>
                 </div>
+                @if (context.User.Identity.IsAuthenticated)
+                {
+                    <p>Your role: @string.Join(", ", context.User.Claims.Where(c => c.Type == ClaimTypes.Role).Select(c => c.Value))</p>
+                }
+                else
+                {
+                    <p>You are not authenticated.</p>
+                }
             </Authorized>
 
             <NotAuthorized>
@@ -40,12 +49,12 @@
                 </div>
             </NotAuthorized>
         </AuthorizeView>
+
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
                 <span class="oi oi-home" aria-hidden="true"></span> Home
             </NavLink>
         </div>
-
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="manufacturers">
                 <span class="oi oi-list-rich" aria-hidden="true"></span> Manufacturers

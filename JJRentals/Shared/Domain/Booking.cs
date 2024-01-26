@@ -24,6 +24,7 @@ namespace JJRentals.Shared.Domain
         public DateTime RentalEndDate { get; set; }
 
         [Required]
+        [StringLength(100, ErrorMessage = "Location must be within 100 characters")]
         public string Location { get; set; }
 
         [Required]

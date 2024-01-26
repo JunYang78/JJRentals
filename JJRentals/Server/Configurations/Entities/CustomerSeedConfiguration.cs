@@ -20,11 +20,7 @@ namespace JJRentals.Server.Configurations.Entities
                  ContactNo = "98854760",
 				 DriverLicenseNo = "S7654321Z",
                  LicenseIssueDate = new DateTime(2018, 04, 01),
-				 LicenseExpDate = new DateTime(2099, 03, 31),
-                 DateCreated = DateTime.Now,
-				 DateUpdated = DateTime.Now,
-				 CreatedBy = "System",
-				 UpdatedBy = "System"
+				 LicenseExpDate = new DateTime(2099, 03, 31)
 			 },
 
 			 new Customer
@@ -38,11 +34,7 @@ namespace JJRentals.Server.Configurations.Entities
                  ContactNo = "96377946",
                  DriverLicenseNo = "S1234567A",
                  LicenseIssueDate = new DateTime(2010, 07, 03),
-                 LicenseExpDate = new DateTime(2099, 03, 31),
-                 DateCreated = DateTime.Now,
-                 DateUpdated = DateTime.Now,
-                 CreatedBy = "System",
-                 UpdatedBy = "System"
+                 LicenseExpDate = new DateTime(2099, 03, 31)
              }
 			 );
 		}

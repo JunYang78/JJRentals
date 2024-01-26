@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using JJRentals.Server.IRepository;
 using JJRentals.Shared.Domain;
+using Microsoft.AspNetCore.Authorization;
 
 namespace JJRentals.Server.Controllers
 {
@@ -113,6 +114,7 @@ namespace JJRentals.Server.Controllers
         }
 
         // DELETE: api/Manufacturers/5
+        [Authorize (Roles = "Administrator")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteManufacturer(int id)
         {
