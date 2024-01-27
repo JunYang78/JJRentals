@@ -238,7 +238,7 @@ namespace JJRentals.Server.Migrations
                         {
                             Id = "3781efa7-66dc-47f0-860f-e506d04102e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "db528f9e-9426-45fb-8061-b6827ab63ac6",
+                            ConcurrencyStamp = "4f9f4448-ad0c-45c7-ac85-cd679118e6cc",
                             Email = "admin@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -246,9 +246,9 @@ namespace JJRentals.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAECymLc8gGOqDcjVYVd0TifR+mKLbeeQT5vfUPRzZ7nm3GYiMn77HpTA9t6j6C6PeuQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEO06BZx4lJ9gV4VUZLm5CDJDMMbS29V70Uthv3mG4Ci0ClfJQtD66NSL3NCz5ZNzTw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "3be56ecc-42f4-4d57-a83e-dd86c7142f7d",
+                            SecurityStamp = "49708941-47da-4e3e-b852-eae0d21f7b81",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost.com"
                         },
@@ -256,16 +256,17 @@ namespace JJRentals.Server.Migrations
                         {
                             Id = "d925e8b3-4a17-4c69-bb0a-9f2e6a86f5d1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0095039d-d2a3-42b8-93a6-b151728f1daa",
+                            ConcurrencyStamp = "5db205cc-4ab1-4fa6-ae46-f3d794a46d6f",
                             Email = "user@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "User",
                             LastName = "Default",
                             LockoutEnabled = false,
                             NormalizedEmail = "USER@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEC4i4DC2FfSipmZ4EERaKdiiu7lTSicSrWl7sVCs+yW1rEcLtDONWFjl5Cx1PoYKhg==",
+                            NormalizedUserName = "USER@LOCALHOST.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAECDn8qQpdOMsjWCLHwkavvzm8hmK2GGRNT9s7oYBSOKfVkxWRNogzRyBn4I5ZVhgyQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "36fd4d0d-fdc9-4704-9c8a-999c5aa71eda",
+                            SecurityStamp = "2984906a-e287-4ecf-bba1-fa44609b7272",
                             TwoFactorEnabled = false,
                             UserName = "user@localhost.com"
                         });
@@ -382,6 +383,36 @@ namespace JJRentals.Server.Migrations
                     b.HasIndex("OutletId");
 
                     b.ToTable("Cars");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Availability = true,
+                            CarPlate = "S12345G",
+                            CarRentPerDay = 100m,
+                            CarRentPerHour = 20m,
+                            Colour = "Blue",
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ModelId = 2,
+                            OutletId = 1,
+                            Year = 2010
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Availability = true,
+                            CarPlate = "S67891Y",
+                            CarRentPerDay = 90m,
+                            CarRentPerHour = 10m,
+                            Colour = "Blue",
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ModelId = 6,
+                            OutletId = 1,
+                            Year = 2010
+                        });
                 });
 
             modelBuilder.Entity("JJRentals.Shared.Domain.Customer", b =>
@@ -819,6 +850,18 @@ namespace JJRentals.Server.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Outlets");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ContactNo = " 96357925",
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "jjbedok@gmail.com",
+                            Location = "Bedok",
+                            Name = "JJRentals Bedok"
+                        });
                 });
 
             modelBuilder.Entity("JJRentals.Shared.Domain.Payment", b =>
@@ -923,6 +966,23 @@ namespace JJRentals.Server.Migrations
                     b.HasIndex("OutletId");
 
                     b.ToTable("Staff");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Address = "81 Bedok Street 21",
+                            ContactNo = "98854760",
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateOfBirth = new DateTime(2000, 8, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "john@gmail.com",
+                            HireDate = new DateTime(2019, 8, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Peter Ng",
+                            OutletId = 1,
+                            Password = "peter123",
+                            Position = "Admin"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

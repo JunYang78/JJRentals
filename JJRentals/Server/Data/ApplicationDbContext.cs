@@ -68,6 +68,9 @@ namespace JJRentals.Server.Data
             modelBuilder.ApplyConfiguration(new RoleSeedConfiguration());
             modelBuilder.ApplyConfiguration(new UserRoleSeedConfiguration());
             modelBuilder.ApplyConfiguration(new UserSeedConfiguration());
+            modelBuilder.ApplyConfiguration(new StaffSeedConfiguration());
+            modelBuilder.ApplyConfiguration(new CarSeedConfiguration());
+            modelBuilder.ApplyConfiguration(new OutletSeedConfiguration());
         }
     }
 }

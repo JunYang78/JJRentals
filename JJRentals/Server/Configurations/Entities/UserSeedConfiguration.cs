@@ -32,6 +32,7 @@ namespace JJRentals.Server.Configurations.Entities
 					FirstName = "User",
 					LastName = "Default",
 					UserName = "user@localhost.com",
+                    NormalizedUserName = "USER@LOCALHOST.COM",
                     PasswordHash = hasher.HashPassword(null, "P@ssword1")
                 }
 				);
