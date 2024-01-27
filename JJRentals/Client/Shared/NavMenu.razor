@@ -27,12 +27,17 @@
                 </div>
                 @if (context.User.Identity.IsAuthenticated)
                 {
-                    <p>Your role: @string.Join(", ", context.User.Claims.Where(c => c.Type == ClaimTypes.Role).Select(c => c.Value))</p>
+                    <p>You are authenticated.</p>
+                    var roles = context.User.Claims
+                    .Where(c => c.Type == ClaimTypes.Role)
+                    .Select(c => c.Value);
+                    <p>Your roles: @string.Join(", ", roles)</p>
                 }
                 else
                 {
                     <p>You are not authenticated.</p>
                 }
+
             </Authorized>
 
             <NotAuthorized>

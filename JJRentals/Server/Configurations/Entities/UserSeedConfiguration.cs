@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
-using JJRentals.Server.Models;
 
 namespace JJRentals.Server.Configurations.Entities
 {
@@ -32,6 +31,7 @@ namespace JJRentals.Server.Configurations.Entities
 					FirstName = "User",
 					LastName = "Default",
 					UserName = "user@localhost.com",
+                    NormalizedUserName = "USER@LOCALHOST.COM",
                     PasswordHash = hasher.HashPassword(null, "P@ssword1")
                 }
 				);

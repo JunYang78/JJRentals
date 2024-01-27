@@ -27,7 +27,7 @@ else
                 <th>Payment Date</th>
                 <th>Payment Method</th>
                 <th>Payment Status</th>
-                <th>Booking</th>
+                <th>Booking Id</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -37,7 +37,7 @@ else
                 <tr>
                     <td>@payment.Id</td>
                     <td>@payment.Amount</td>
-                    <td>@payment.DateCreated.Date.ToString("dd MMMM yyyy")</td>
+                    <td>@payment.DateCreated.Date.ToString("dd/MM/yyyy")</td>
                     <td>@payment.PaymentMethod</td>
                     <td>@payment.PaymentStatus</td>
                     <td>@payment.Booking.Id</td>

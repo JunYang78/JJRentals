@@ -23,11 +23,11 @@ else
         <thead>
             <tr>
                 <th>Booking Id</th>
-                <th>Date & Time</th>
                 <th>RentalStartDate</th>
+                <th>RentalEndDate</th>
                 <th>Duration</th>
-                <th>Location</th>
                 <th>Pickup Option</th>
+                <th>Location</th>
                 <th>Staff</th>
                 <th>Customer</th>
                 <th>Car</th>
@@ -39,11 +39,21 @@ else
             {
                 <tr>
                     <td>@booking.Id</td>
-                    <td>@booking.DateTime</td>
-                    <td>@booking.RentalStartDate</td>
-                    <td>@(booking.RentalStartDate != null ? (booking.RentalStartDate - booking.RentalEndDate).TotalDays.ToString() : "To Be Determined")</td>
-                    <td>@booking.Location</td>
+                    <td>@booking.RentalStartDate.ToString("dd/MM/yyyy")</td>
+                    <td>@booking.RentalEndDate.ToString("dd/MM/yyyy")</td>
+                    <td>
+                        @if (booking.RentalStartDate != null && booking.RentalEndDate != null)
+                        {
+                            var totalDays = (booking.RentalEndDate - booking.RentalStartDate).TotalDays;
+                            @totalDays.ToString("0")
+                        }
+                        else
+                        {
+                            @:To Be Determined
+                        }
+                    </td>
                     <td>@booking.PickUpOption</td>
+                    <td>@booking.Location</td>
                     <td>@booking.Staff.Name</td>
                     <td>@booking.Customer.Name</td>
                     <td>@booking.Car.CarPlate</td>

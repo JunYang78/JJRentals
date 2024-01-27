@@ -73,20 +73,42 @@
         </div>
 
         <div class="form-group">
-            <label>Location: </label>
-            <div>
-                <InputText @bind-Value="@booking.Location" class="form-control" />
-                <ValidationMessage For="@(() => booking.Location)" />
-            </div>
-        </div>
-
-        <div class="form-group">
             <label>Pickup Option: </label>
             <div>
-                <InputText @bind-Value="@booking.PickUpOption" class="form-control" />
+                <InputSelect @bind-Value="@booking.PickUpOption" class="form-control">
+                    <option value="">-- Select Pickup Option --</option>
+                    <option value="Delivery">Delivery</option>
+                    <option value="Self Pickup">Self Pickup</option>
+                </InputSelect>
                 <ValidationMessage For="@(() => booking.PickUpOption)" />
             </div>
         </div>
+
+        @if (booking.PickUpOption == "Self Pickup")
+        {
+            <div class="form-group">
+                <label>Location: </label>
+                <div>
+                    <InputSelect @bind-Value="@booking.Location" class="form-control">
+                        <option value="">-- Select Outlet --</option>
+                        <option value="Tampines">Tampines</option>
+                        <option value="Bedok">Bedok</option>
+                        <option value="Jurong">Jurong</option>
+                    </InputSelect>
+                    <ValidationMessage For="@(() => booking.Location)" />
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="form-group">
+                <label>Location: </label>
+                <div>
+                    <InputText @bind-Value="@booking.Location" class="form-control" />
+                    <ValidationMessage For="@(() => booking.Location)" />
+                </div>
+            </div>
+        }
 
         <br />
         <br />

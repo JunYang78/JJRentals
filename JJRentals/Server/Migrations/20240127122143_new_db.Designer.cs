@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JJRentals.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240123035730_new_db")]
+    [Migration("20240127122143_new_db")]
     partial class new_db
     {
         /// <inheritdoc />
@@ -235,6 +235,44 @@ namespace JJRentals.Server.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "3781efa7-66dc-47f0-860f-e506d04102e4",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "4f9f4448-ad0c-45c7-ac85-cd679118e6cc",
+                            Email = "admin@localhost.com",
+                            EmailConfirmed = false,
+                            FirstName = "Admin",
+                            LastName = "User",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@LOCALHOST.COM",
+                            NormalizedUserName = "ADMIN@LOCALHOST.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEO06BZx4lJ9gV4VUZLm5CDJDMMbS29V70Uthv3mG4Ci0ClfJQtD66NSL3NCz5ZNzTw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "49708941-47da-4e3e-b852-eae0d21f7b81",
+                            TwoFactorEnabled = false,
+                            UserName = "admin@localhost.com"
+                        },
+                        new
+                        {
+                            Id = "d925e8b3-4a17-4c69-bb0a-9f2e6a86f5d1",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "5db205cc-4ab1-4fa6-ae46-f3d794a46d6f",
+                            Email = "user@localhost.com",
+                            EmailConfirmed = false,
+                            FirstName = "User",
+                            LastName = "Default",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "USER@LOCALHOST.COM",
+                            NormalizedUserName = "USER@LOCALHOST.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAECDn8qQpdOMsjWCLHwkavvzm8hmK2GGRNT9s7oYBSOKfVkxWRNogzRyBn4I5ZVhgyQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "2984906a-e287-4ecf-bba1-fa44609b7272",
+                            TwoFactorEnabled = false,
+                            UserName = "user@localhost.com"
+                        });
                 });
 
             modelBuilder.Entity("JJRentals.Shared.Domain.Booking", b =>
@@ -265,7 +303,8 @@ namespace JJRentals.Server.Migrations
 
                     b.Property<string>("Location")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("PickUpOption")
                         .IsRequired()
@@ -347,6 +386,36 @@ namespace JJRentals.Server.Migrations
                     b.HasIndex("OutletId");
 
                     b.ToTable("Cars");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Availability = true,
+                            CarPlate = "S12345G",
+                            CarRentPerDay = 100m,
+                            CarRentPerHour = 20m,
+                            Colour = "Blue",
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ModelId = 2,
+                            OutletId = 1,
+                            Year = 2010
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Availability = true,
+                            CarPlate = "S67891Y",
+                            CarRentPerDay = 90m,
+                            CarRentPerHour = 10m,
+                            Colour = "Blue",
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ModelId = 6,
+                            OutletId = 1,
+                            Year = 2010
+                        });
                 });
 
             modelBuilder.Entity("JJRentals.Shared.Domain.Customer", b =>
@@ -359,11 +428,13 @@ namespace JJRentals.Server.Migrations
 
                     b.Property<string>("Address")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("ContactNo")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(8)
+                        .HasColumnType("nvarchar(8)");
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
@@ -379,7 +450,8 @@ namespace JJRentals.Server.Migrations
 
                     b.Property<string>("DriverLicenseNo")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -393,11 +465,13 @@ namespace JJRentals.Server.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("UpdatedBy")
                         .HasColumnType("nvarchar(max)");
@@ -405,6 +479,38 @@ namespace JJRentals.Server.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Customers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Address = "81 Bedok Street 21",
+                            ContactNo = "98854760",
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateOfBirth = new DateTime(2000, 8, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DriverLicenseNo = "S7654321Z",
+                            Email = "john@gmail.com",
+                            LicenseExpDate = new DateTime(2099, 3, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            LicenseIssueDate = new DateTime(2018, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "John Tan",
+                            Password = "john123"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Address = "203 Tampines Street 24",
+                            ContactNo = "96377946",
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateOfBirth = new DateTime(1997, 6, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DriverLicenseNo = "S1234567A",
+                            Email = "mary@gmail.com",
+                            LicenseExpDate = new DateTime(2099, 3, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            LicenseIssueDate = new DateTime(2010, 7, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Mary Lim",
+                            Password = "mary123"
+                        });
                 });
 
             modelBuilder.Entity("JJRentals.Shared.Domain.Image", b =>
@@ -503,7 +609,8 @@ namespace JJRentals.Server.Migrations
 
                     b.Property<string>("ContactNo")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
@@ -520,7 +627,8 @@ namespace JJRentals.Server.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("UpdatedBy")
                         .HasColumnType("nvarchar(max)");
@@ -528,6 +636,35 @@ namespace JJRentals.Server.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Manufacturers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ContactNo = "91234567",
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "BMW@gmail.com",
+                            Name = "BMW"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ContactNo = "81234567",
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "Toyota@yahoo.com",
+                            Name = "Toyota"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ContactNo = "87654321",
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "Honda@yahoo.com",
+                            Name = "Honda"
+                        });
                 });
 
             modelBuilder.Entity("JJRentals.Shared.Domain.Model", b =>
@@ -556,7 +693,8 @@ namespace JJRentals.Server.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<int>("SeatCapacity")
                         .HasColumnType("int");
@@ -573,6 +711,107 @@ namespace JJRentals.Server.Migrations
                     b.HasIndex("ManufacturerId");
 
                     b.ToTable("Models");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            DateCreated = new DateTime(2018, 10, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FuelType = "Petrol",
+                            ManufacturerId = 1,
+                            Name = "BMW X7",
+                            SeatCapacity = 5,
+                            TransmissionType = "Automatic"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            DateCreated = new DateTime(2006, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FuelType = "Diesel",
+                            ManufacturerId = 1,
+                            Name = "BMW X5",
+                            SeatCapacity = 5,
+                            TransmissionType = "Automatic"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            DateCreated = new DateTime(2002, 3, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FuelType = "Petrol",
+                            ManufacturerId = 1,
+                            Name = "BMW Z4",
+                            SeatCapacity = 2,
+                            TransmissionType = "Manual"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            DateCreated = new DateTime(2013, 4, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FuelType = "Petrol",
+                            ManufacturerId = 3,
+                            Name = "Honda Civic",
+                            SeatCapacity = 5,
+                            TransmissionType = "Manual"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            DateCreated = new DateTime(2011, 11, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FuelType = "Hybrid",
+                            ManufacturerId = 3,
+                            Name = "Honda Accord",
+                            SeatCapacity = 5,
+                            TransmissionType = "Automatic"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            DateCreated = new DateTime(2015, 5, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FuelType = "Diesel",
+                            ManufacturerId = 3,
+                            Name = "Honda CR-V",
+                            SeatCapacity = 5,
+                            TransmissionType = "Automatic"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            DateCreated = new DateTime(2020, 6, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FuelType = "Petrol",
+                            ManufacturerId = 2,
+                            Name = "Toyota Corolla",
+                            SeatCapacity = 5,
+                            TransmissionType = "Automatic"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            DateCreated = new DateTime(2019, 8, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FuelType = "Hybrid",
+                            ManufacturerId = 2,
+                            Name = "Toyota Camry",
+                            SeatCapacity = 5,
+                            TransmissionType = "Automatic"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            DateCreated = new DateTime(2010, 2, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FuelType = "Petrol",
+                            ManufacturerId = 2,
+                            Name = "Toyota RAV4",
+                            SeatCapacity = 5,
+                            TransmissionType = "Manual"
+                        });
                 });
 
             modelBuilder.Entity("JJRentals.Shared.Domain.Outlet", b =>
@@ -614,6 +853,18 @@ namespace JJRentals.Server.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Outlets");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ContactNo = " 96357925",
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "jjbedok@gmail.com",
+                            Location = "Bedok",
+                            Name = "JJRentals Bedok"
+                        });
                 });
 
             modelBuilder.Entity("JJRentals.Shared.Domain.Payment", b =>
@@ -718,6 +969,23 @@ namespace JJRentals.Server.Migrations
                     b.HasIndex("OutletId");
 
                     b.ToTable("Staff");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Address = "81 Bedok Street 21",
+                            ContactNo = "98854760",
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateOfBirth = new DateTime(2000, 8, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "john@gmail.com",
+                            HireDate = new DateTime(2019, 8, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Peter Ng",
+                            OutletId = 1,
+                            Password = "peter123",
+                            Position = "Admin"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -745,6 +1013,20 @@ namespace JJRentals.Server.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "ad2bcf0c-20db-474f-8407-5a6b159518ba",
+                            Name = "Administrator",
+                            NormalizedName = "ADMINISTRATOR"
+                        },
+                        new
+                        {
+                            Id = "bd2bcf0c-20db-474f-8407-5a6b159518bb",
+                            Name = "User",
+                            NormalizedName = "USER"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -834,6 +1116,18 @@ namespace JJRentals.Server.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "3781efa7-66dc-47f0-860f-e506d04102e4",
+                            RoleId = "ad2bcf0c-20db-474f-8407-5a6b159518ba"
+                        },
+                        new
+                        {
+                            UserId = "d925e8b3-4a17-4c69-bb0a-9f2e6a86f5d1",
+                            RoleId = "bd2bcf0c-20db-474f-8407-5a6b159518bb"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
