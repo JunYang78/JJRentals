@@ -1,5 +1,21 @@
-﻿<h3>Create</h3>
+﻿@page "/outlets/create/"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
+<h3 class="card-title">Create New Outlet</h3>
+<hr />
+<br />
+
+<FormComponent ButtonText="Create Outlet" OnValidSubmit="CreateOutlet" outlet="outlet" />
+
 
 @code {
+    Outlet outlet = new Outlet();
+
+    private async Task CreateOutlet()
+    {
+        await _client.PostAsJsonAsync(Endpoints.OutletsEndpoint, outlet);
+        _navManager.NavigateTo("/outlets/");
+    }
 
 }

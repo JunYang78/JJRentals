@@ -8,7 +8,7 @@
 
 <a href="/cars/create" class="btn btn-secondary">
     <span class="oi oi-plus"></span>
-    Create New Car
+    Create New Cars
 </a>
 <br />
 <br />
@@ -16,14 +16,14 @@
 
 @if (Cars == null)
 {
-    <div class="alert alert-info">Loading Cars...</div>
+    <div class="alert alert-info">Loading Car...</div>
 }
 else
 {
     <table class="table table-responsive">
         <thead>
             <tr>
-                <th>Manufacturer</th>
+                <th>Outlet</th>
                 <th>Model</th>
                 <th>Year</th>
                 <th>License Plate Number</th>
@@ -37,13 +37,13 @@ else
             @foreach (var car in Cars)
             {
                 <tr>
-                    <td>@car.Model.Manufacturer.Name</td>
-                    <td>@car.Model.Name</td>
+                    <td>@(car.Outlet?.Name ?? "N/A")</td> <!-- Handle null outlet -->
+                    <td>@(car.Model?.Name ?? "N/A")</td> <!-- Handle null outlet -->
                     <td>@car.Year</td>
                     <td>@car.CarPlate</td>
                     <td>@car.CarRentPerDay</td>
                     <td>@car.Colour</td>
-                    <td>@(car.Availability ? "True" : "False")</td>
+                    <td>@car.Availability</td>
                     <td>
                         <a href="/cars/view/@car.Id" class="btn btn-primary">
                             <span class="oi oi-book"></span>
@@ -66,7 +66,16 @@ else
 
     protected async override Task OnInitializedAsync()
     {
-        Cars = await _client.GetFromJsonAsync<List<Car>>($"{Endpoints.CarsEndpoint}");
+        try
+        {
+            Cars = await _client.GetFromJsonAsync<List<Car>>($"{Endpoints.CarsEndpoint}");
+            StateHasChanged(); // Refresh the UI after data is loaded
+        }
+        catch (Exception ex)
+        {
+            // Log or handle the exception
+            // For example, you can set an error message to be displayed
+        }
     }
 
     async Task Delete(int carId)

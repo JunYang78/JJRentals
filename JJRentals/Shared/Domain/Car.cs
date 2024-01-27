@@ -31,10 +31,10 @@ namespace JJRentals.Shared.Domain
 
         [Required]
         public int OutletId { get; set; }
-        public virtual Outlet Outlet { get; set; }
+        public virtual Outlet? Outlet { get; set; }
 
         [Required]
         public int ModelId { get; set; }
-        public virtual Model Model { get; set; }
+        public virtual Model? Model { get; set; }
     }
 }

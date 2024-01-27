@@ -1,0 +1,115 @@
+﻿@inject HttpClient _client
+
+<EditForm Model="@maintenance" OnValidSubmit="@OnValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <fieldset disabled="@Disabled">
+        <div class="form-group">
+            <label>Car Plate: </label>
+            <div>
+                <InputSelect @bind-Value="maintenance.CarId" class="form-control">
+                    <option value="">-- Select Car --</option>
+                    @if (Cars != null)
+                    {
+                        foreach (var car in Cars)
+                        {
+                            <option value="@car.Id">@car.CarPlate</option>
+                        }
+                    }
+                </InputSelect>
+                <ValidationMessage For="@(() => maintenance.CarId)" />
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label>Assigned Staff: </label>
+            <div>
+                <InputSelect @bind-Value="maintenance.StaffId" class="form-control">
+                    <option value="">-- Select Staff --</option>
+                    @if (Staffs != null)
+                    {
+                        foreach (var staff in Staffs)
+                        {
+                            <option value="@staff.Id">@staff.Name</option>
+                        }
+                    }
+                </InputSelect>
+                <ValidationMessage For="@(() => maintenance.StaffId)" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Start Date: </label>
+            <div>
+                <InputDate @bind-Value="@maintenance.SentDate" class="form-control" />
+                <ValidationMessage For="@(() => maintenance.SentDate)" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>End Date: </label>
+            <div>
+                <InputDate @bind-Value="@maintenance.ReturnDate" class="form-control" />
+                <ValidationMessage For="@(() => maintenance.ReturnDate)" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Service Provider: </label>
+            <div>
+                <InputSelect @bind-Value="maintenance.ServiceProvider" class="form-control">
+                    <option value="">-- Select Service Provider --</option>
+                    <option value="Best Maintenance Co">Best Maintenance Co</option>
+                    <option value="Quick Fix Mechanics">Quick Fix Mechanics</option>
+                </InputSelect>
+                <ValidationMessage For="@(() => maintenance.ServiceProvider)" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Parts affected: </label>
+            <div>
+                <InputText @bind-Value="@maintenance.PartsAffected" class="form-control" />
+                <ValidationMessage For="@(() => maintenance.PartsAffected)" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Cost: </label>
+            <div>
+                <InputNumber @bind-Value="@maintenance.Cost" class="form-control" />
+                <ValidationMessage For="@(() => maintenance.Cost)" />
+            </div>
+        </div>
+
+        <br />
+        <br />
+    </fieldset>
+
+    @if (!Disabled)
+    {
+        <button type="submit" class="btn btn-success btn-block">
+            @ButtonText
+        </button>
+    }
+    <BackToList Target="maintenances" />
+
+</EditForm>
+
+
+@code {
+    [Parameter] public bool Disabled { get; set; } = false;
+    [Parameter] public Maintenance maintenance { get; set; }
+    [Parameter] public string ButtonText { get; set; } = "Save";
+    [Parameter] public EventCallback OnValidSubmit { get; set; }
+
+    private IList<Car>? Cars;
+    private IList<Staff>? Staffs;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Cars = await _client.GetFromJsonAsync<List<Car>>($"{Endpoints.CarsEndpoint}");
+        Staffs = await _client.GetFromJsonAsync<List<Staff>>($"{Endpoints.StaffsEndpoint}");
+    }
+}

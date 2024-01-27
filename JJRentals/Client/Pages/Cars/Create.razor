@@ -6,11 +6,11 @@
 <hr />
 <br />
 
-<FormComponent ButtonText="Create Car" OnValidSubmit="CreateCar" Car="Car" />
+<FormComponent ButtonText="Create Car" OnValidSubmit="CreateCar" car="car" />
 
 
 @code {
-    Car Car = new Car();
+    Car car = new Car();
 
     private IList<Outlet>? Outlets;
     private IList<Model>? Models;
@@ -23,7 +23,7 @@
 
     private async Task CreateCar()
     {
-        await _client.PostAsJsonAsync(Endpoints.CarsEndpoint, Car);
+        await _client.PostAsJsonAsync(Endpoints.CarsEndpoint, car);
         _navManager.NavigateTo("/cars/");
     }
 

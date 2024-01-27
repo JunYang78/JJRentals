@@ -1,0 +1,13 @@
+﻿@page "/outlets/view/{id:int}"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+<h3>View outlet</h3>
+<FormComponent outlet="outlet" Disabled="true" />
+@code {
+	[Parameter] public int id { get; set; }
+	Outlet? outlet = new Outlet();
+	protected async override Task OnParametersSetAsync()
+	{
+		outlet = await _client.GetFromJsonAsync<Outlet>($"{Endpoints.OutletsEndpoint}/{id}");
+	}
+}

@@ -5,6 +5,26 @@
 
     <fieldset disabled="@Disabled">
         <div class="form-group">
+            <label>Outlets: </label>
+            <div>
+                <InputSelect @bind-Value="staff.OutletId" class="form-control">
+                    <option value="">-- Select Outlet --</option>
+                    @if (Outlets != null)
+                    {
+                        foreach (var outlet in Outlets)
+                        {
+                            <!-- Make sure the value is a string that can be converted to the type of staff.OutletId -->
+                            <option value="@outlet.Id">@outlet.Name</option>
+                        }
+                    }
+                </InputSelect>
+                <ValidationMessage For="@(() => staff.OutletId)" />
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
             <label>Name: </label>
             <div>
                 <InputText @bind-Value="@staff.Name" class="form-control" />
@@ -44,6 +64,7 @@
             </div>
         </div>
 
+
         <div class="form-group">
             <label>Contact No: </label>
             <div>
@@ -68,6 +89,8 @@
             </div>
         </div>
 
+
+
         <br />
         <br />
     </fieldset>
@@ -78,10 +101,23 @@
             @ButtonText
         </button>
     }
+    <BackToList Target="staffs" />
+
+</EditForm>
+
 
 @code {
     [Parameter] public bool Disabled { get; set; } = false;
     [Parameter] public Staff staff { get; set; }
     [Parameter] public string ButtonText { get; set; } = "Save";
     [Parameter] public EventCallback OnValidSubmit { get; set; }
+
+    private IList<Outlet>? Outlets;
+
+
+    protected async override Task OnInitializedAsync()
+    {
+        Outlets = await _client.GetFromJsonAsync<List<Outlet>>($"{Endpoints.OutletsEndpoint}");
+
+    }
 }

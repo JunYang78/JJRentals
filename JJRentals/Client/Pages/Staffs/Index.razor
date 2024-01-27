@@ -3,12 +3,12 @@
 @inject IJSRuntime js
 @attribute [Authorize]
 
-<h3 class="card-title">Car staffs</h3>
+<h3 class="card-title">Car Staffs</h3>
 <br />
 
 <a href="/staffs/create" class="btn btn-secondary">
     <span class="oi oi-plus"></span>
-    Create New staffs
+    Create New Staff
 </a>
 <br />
 <br />
@@ -16,6 +16,10 @@
 @if (Staffs == null)
 {
     <div class="alert alert-info">Loading staffs...</div>
+}
+else if (!Staffs.Any())
+{
+    <div class="alert alert-info">No staffs found.</div>
 }
 else
 {
@@ -42,7 +46,7 @@ else
                     <td>@staff.ContactNo</td>
                     <td>@staff.Email</td>
                     <td>@staff.Address</td>
-                    <td>@staff.Outlet.Name</td>
+                    <td>@(staff.Outlet?.Name ?? "N/A")</td> <!-- Handle null outlet -->
                     <td>
                         <a href="/staffs/view/@staff.Id" class="btn btn-primary">
                             <span class="oi oi-book"></span>
@@ -50,37 +54,42 @@ else
                         <a href="/staffs/edit/@staff.Id" class="btn btn-warning">
                             <span class="oi oi-pencil"></span>
                         </a>
-                        <button class="btn btn-danger" @onclick="@(()=>Delete(staff.Id))">
+                        <button class="btn btn-danger" @onclick="@(()=> Delete(staff.Id))">
                             <span class="oi oi-delete"></span>
                         </button>
                     </td>
                 </tr>
             }
         </tbody>
-
     </table>
 }
 
 @code {
     private List<Staff>? Staffs;
 
-    protected async override Task OnInitializedAsync()
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadStaffsAsync();
+    }
+
+    private async Task LoadStaffsAsync()
     {
         Staffs = await _client.GetFromJsonAsync<List<Staff>>($"{Endpoints.StaffsEndpoint}");
     }
 
-    async Task Delete(int staffId)
+    private async Task Delete(int staffId)
     {
         if (Staffs != null)
         {
-            var staff = Staffs.First(q => q.Id == staffId);
-            var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete {staff.Position}?");
+            var staff = Staffs.FirstOrDefault(q => q.Id == staffId);
+            if (staff == null) return;
+
+            var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete {staff.Name} ({staff.Position})?");
             if (confirm)
             {
                 await _client.DeleteAsync($"{Endpoints.StaffsEndpoint}/{staffId}");
-                await OnInitializedAsync();
+                await LoadStaffsAsync(); // Refresh the list after deletion
             }
         }
     }
-
 }

@@ -1,0 +1,24 @@
+﻿@page "/outlets/edit/{id:int}"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
+<h3>Edit Outlet</h3>
+
+<FormComponent ButtonText="Update" OnValidSubmit="EditOutlet" outlet="outlet" />
+
+@code {
+    [Parameter] public int id { get; set; }
+    Outlet? outlet = new Outlet();
+
+    protected async override Task OnParametersSetAsync()
+    {
+        outlet = await _client.GetFromJsonAsync<Outlet>($"{Endpoints.OutletsEndpoint}/{id}");
+    }
+
+    async Task EditOutlet()
+    {
+        await _client.PutAsJsonAsync($"{Endpoints.OutletsEndpoint}/{id}", outlet);
+        _navManager.NavigateTo("/outlets/");
+    }
+
+}

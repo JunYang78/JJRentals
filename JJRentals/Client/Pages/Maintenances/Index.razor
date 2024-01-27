@@ -2,7 +2,7 @@
 @inject HttpClient _client
 @inject IJSRuntime js
 @attribute [Authorize]
-@implements IDisposable
+
 
 <h3 class="card-title">Car maintenances</h3>
 <br />
@@ -23,7 +23,6 @@ else
     <table class="table table-responsive" id="maintenancesTable">
         <thead>
             <tr>
-                <th>Maintenance Id</th>
                 <th>Plate Number</th>
                 <th>Parts Affected</th>
                 <th>Service Provider</th>
@@ -39,14 +38,13 @@ else
             @foreach (var maintenance in Maintenances)
             {
                 <tr>
-                    <td>@maintenance.Id</td>
-                    <td>@maintenance.Car.CarPlate</td>
+                    <td>@(maintenance.Car?.CarPlate ?? "N/A")</td> <!-- Handle null outlet -->
                     <td>@maintenance.PartsAffected</td>
                     <td>@maintenance.ServiceProvider</td>
                     <td>@maintenance.Cost.ToString("C")</td>
-                    <td>@maintenance.Staff.Name</td>
+                    <td>@(maintenance.Staff?.Name ?? "N/A")</td> <!-- Handle null outlet -->
                     <td>@maintenance.SentDate.ToString("dd MMM yyyy")</td>
-                    <td>@maintenance.ReturnDate?.ToString("dd MMM yyyy")</td>
+                    <td>@maintenance.ReturnDate.ToString("dd MMM yyyy")</td>
                     <td>@GetTotalDays(maintenance.SentDate, maintenance.ReturnDate)</td>
                     <td>
                         <a href="/maintenances/view/@maintenance.Id" class="btn btn-primary">
@@ -100,13 +98,5 @@ else
         }
     }
 
-    protected async override Task OnAfterRenderAsync(bool firstRender)
-    {
-        await js.InvokeVoidAsync("AddDataTable", "#maintenancesTable");
-    }
-
-    public void Dispose()
-    {
-        js.InvokeVoidAsync("DataTableDispose", "#maintenancesTable");
-    }
+   
 }

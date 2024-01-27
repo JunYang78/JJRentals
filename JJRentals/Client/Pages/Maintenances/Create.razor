@@ -1,5 +1,31 @@
-﻿<h3>Create</h3>
+﻿@page "/maintenances/create/"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
+<h3 class="card-title">Create New Maintenance</h3>
+<hr />
+<br />
+
+
+<FormComponent ButtonText="Create Maintenance" OnValidSubmit="CreateMaintenance" maintenance="maintenance" />
+
 
 @code {
+    Maintenance maintenance = new Maintenance();
+
+    private IList<Car>? Cars;
+    private IList<Staff>? Staffs;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Cars = await _client.GetFromJsonAsync<List<Car>>($"{Endpoints.CarsEndpoint}");
+        Staffs = await _client.GetFromJsonAsync<List<Staff>>($"{Endpoints.StaffsEndpoint}");
+    }
+
+    private async Task CreateMaintenance()
+    {
+        await _client.PostAsJsonAsync(Endpoints.MaintenancesEndpoint, maintenance);
+        _navManager.NavigateTo("/maintenances/");
+    }
 
 }

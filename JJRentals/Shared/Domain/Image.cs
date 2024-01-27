@@ -14,6 +14,6 @@ namespace JJRentals.Shared.Domain
 
         [Required]
         public int CarId { get; set; }
-        public virtual Car Car { get; set; }
+        public virtual Car? Car { get; set; }
     }
 }

@@ -34,6 +34,6 @@ namespace JJRentals.Shared.Domain
 
         [Required]
         public int OutletId { get; set; }
-        public virtual Outlet Outlet { get; set; }
+        public virtual Outlet? Outlet { get; set; }
     }
 }

@@ -4,20 +4,20 @@
 
 <h3>Edit Car</h3>
 
-<FormComponent ButtonText="Update" OnValidSubmit="EditCar" Car="Car" />
+<FormComponent ButtonText="Update" OnValidSubmit="EditCar" car="car" />
 
 @code {
     [Parameter] public int id { get; set; }
-    Car? Car = new Car();
+    Car? car = new Car();
 
     protected async override Task OnParametersSetAsync()
     {
-        Car = await _client.GetFromJsonAsync<Car>($"{Endpoints.CarsEndpoint}/{id}");
+        car = await _client.GetFromJsonAsync<Car>($"{Endpoints.CarsEndpoint}/{id}");
     }
 
     async Task EditCar()
     {
-        await _client.PutAsJsonAsync($"{Endpoints.CarsEndpoint}/{id}", Car);
+        await _client.PutAsJsonAsync($"{Endpoints.CarsEndpoint}/{id}", car);
         _navManager.NavigateTo("/cars/");
     }
 

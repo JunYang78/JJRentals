@@ -2,12 +2,12 @@
 @inject HttpClient _client
 @inject NavigationManager _navManager
 <h3>View Car</h3>
-<FormComponent Car="Car" Disabled="true" />
+<FormComponent car="car" Disabled="true" />
 @code {
 	[Parameter] public int id { get; set; }
-	Car? Car = new Car();
+	Car? car = new Car();
 	protected async override Task OnParametersSetAsync()
 	{
-		Car = await _client.GetFromJsonAsync<Car>($"{Endpoints.CarsEndpoint}/{id}");
+		car = await _client.GetFromJsonAsync<Car>($"{Endpoints.CarsEndpoint}/{id}");
 	}
 }

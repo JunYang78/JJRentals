@@ -13,7 +13,7 @@ namespace JJRentals.Shared.Domain
         [Required]
         public DateTime SentDate { get; set; }
 
-        public DateTime? ReturnDate { get; set; }
+        public DateTime ReturnDate { get; set; }
 
         public string ServiceProvider { get; set; }
 
@@ -25,10 +25,10 @@ namespace JJRentals.Shared.Domain
 
         [Required]
         public int StaffId { get; set; }
-        public virtual Staff Staff { get; set; }
+        public virtual Staff? Staff { get; set; }
 
         [Required]
         public int CarId { get; set; }
-        public virtual Car Car { get; set; }
+        public virtual Car? Car { get; set; }
     }
 }

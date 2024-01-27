@@ -4,6 +4,7 @@ using JJRentals.Server.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JJRentals.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240127043647_staff andoutlet")]
+    partial class staffandoutlet
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -238,7 +241,7 @@ namespace JJRentals.Server.Migrations
                         {
                             Id = "3781efa7-66dc-47f0-860f-e506d04102e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0695421f-f7e3-4225-876a-9c7f81dc6c5c",
+                            ConcurrencyStamp = "2ed7a87c-dc6d-464e-a95b-8ae80b828328",
                             Email = "admin@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -246,9 +249,9 @@ namespace JJRentals.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEG4JRq7a+nwcTvUnxh3u8d6rL/tK4MOhDXTEQl0AFn3HU2weTp6wjy9GqMrBf0FNdw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPAVv3Yw7KtQfu3Sulqs/efTe2GFRNueaFfl/DyStFmSiA5jHfCvDJu6iRSMNESlaA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7897194e-b2f0-4d27-b96d-9cdd6e2495fa",
+                            SecurityStamp = "c9c6eb8d-73d8-4105-bad4-ca0f32327d43",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost.com"
                         },
@@ -256,16 +259,16 @@ namespace JJRentals.Server.Migrations
                         {
                             Id = "d925e8b3-4a17-4c69-bb0a-9f2e6a86f5d1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1059e727-cc7e-465e-a299-2356fa9246b0",
+                            ConcurrencyStamp = "f78735fc-6d1c-4269-ae56-0240f61447eb",
                             Email = "user@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "User",
                             LastName = "Default",
                             LockoutEnabled = false,
                             NormalizedEmail = "USER@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEBT+PT67zotf/Zl2v+W34l7BpJvHIfnIL7VFDD0x+s3HWxPQvboXL6QnAGBFhaxLmQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAENoLIWyer190OHo0/RyosAGXN4nnxfDnoI6/tR11LOkMIHofZJGs6NXYP9M2Msmdog==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ce4e42ee-7456-45f0-bb5a-3cfd7bb2ed33",
+                            SecurityStamp = "1e0fa7d6-5f70-4951-ae80-4746e1b6de13",
                             TwoFactorEnabled = false,
                             UserName = "user@localhost.com"
                         });
@@ -382,50 +385,6 @@ namespace JJRentals.Server.Migrations
                     b.HasIndex("OutletId");
 
                     b.ToTable("Cars");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Availability = true,
-                            CarPlate = "ABC123",
-                            CarRentPerDay = 79.99m,
-                            CarRentPerHour = 15.99m,
-                            Colour = "Blue",
-                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ModelId = 1,
-                            OutletId = 1,
-                            Year = 2020
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Availability = false,
-                            CarPlate = "XYZ789",
-                            CarRentPerDay = 69.99m,
-                            CarRentPerHour = 12.99m,
-                            Colour = "Red",
-                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ModelId = 2,
-                            OutletId = 2,
-                            Year = 2019
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Availability = true,
-                            CarPlate = "DEF456",
-                            CarRentPerDay = 89.99m,
-                            CarRentPerHour = 18.99m,
-                            Colour = "Green",
-                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ModelId = 3,
-                            OutletId = 3,
-                            Year = 2021
-                        });
                 });
 
             modelBuilder.Entity("JJRentals.Shared.Domain.Customer", b =>
@@ -555,24 +514,6 @@ namespace JJRentals.Server.Migrations
                     b.HasIndex("CarId");
 
                     b.ToTable("Images");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CarId = 1,
-                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ImgFileURL = "https://example.com/images/car1.jpg"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CarId = 2,
-                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ImgFileURL = "https://example.com/images/car2.jpg"
-                        });
                 });
 
             modelBuilder.Entity("JJRentals.Shared.Domain.Maintenance", b =>
@@ -602,7 +543,7 @@ namespace JJRentals.Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("ReturnDate")
+                    b.Property<DateTime?>("ReturnDate")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("SentDate")
@@ -625,34 +566,6 @@ namespace JJRentals.Server.Migrations
                     b.HasIndex("StaffId");
 
                     b.ToTable("Maintenance");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CarId = 1,
-                            Cost = 200.00m,
-                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PartsAffected = "Brakes, Oil filter",
-                            ReturnDate = new DateTime(2024, 1, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            SentDate = new DateTime(2024, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ServiceProvider = "Best Maintenance Co",
-                            StaffId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CarId = 2,
-                            Cost = 150.00m,
-                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PartsAffected = "Air filter, Headlights",
-                            ReturnDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            SentDate = new DateTime(2024, 2, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ServiceProvider = "Quick Fix Mechanics",
-                            StaffId = 2
-                        });
                 });
 
             modelBuilder.Entity("JJRentals.Shared.Domain.Manufacturer", b =>

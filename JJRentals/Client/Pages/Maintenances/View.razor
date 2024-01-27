@@ -1,0 +1,13 @@
+﻿@page "/maintenances/view/{id:int}"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+<h3>View Maintenance</h3>
+<FormComponent maintenance="maintenance" Disabled="true" />
+@code {
+	[Parameter] public int id { get; set; }
+	Maintenance? maintenance = new Maintenance();
+	protected async override Task OnParametersSetAsync()
+	{
+		maintenance = await _client.GetFromJsonAsync<Maintenance>($"{Endpoints.MaintenancesEndpoint}/{id}");
+	}
+}
