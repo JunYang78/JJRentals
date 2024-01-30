@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace JJRentals.Server.Configurations.Entities
 {
-	public class UserSeedConfiguration : IEntityTypeConfiguration<ApplicationUser>
+    public class UserSeedConfiguration : IEntityTypeConfiguration<ApplicationUser>
 	{
 		public void Configure(EntityTypeBuilder<ApplicationUser> builder)
 		{

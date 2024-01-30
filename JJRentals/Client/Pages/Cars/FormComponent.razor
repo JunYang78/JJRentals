@@ -66,6 +66,14 @@
         </div>
 
         <div class="form-group">
+            <label>Hourly Rate: </label>
+            <div>
+                <InputNumber @bind-Value="@car.CarRentPerHour" class="form-control" />
+                <ValidationMessage For="@(() => car.CarRentPerHour)" />
+            </div>
+        </div>
+
+        <div class="form-group">
             <label>Colour: </label>
             <div>
                 <InputText @bind-Value="car.Colour" class="form-control" />
