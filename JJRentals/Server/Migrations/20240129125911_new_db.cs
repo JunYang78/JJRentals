@@ -443,7 +443,7 @@ namespace JJRentals.Server.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     SentDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ReturnDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ReturnDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ServiceProvider = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PartsAffected = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Cost = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
@@ -503,6 +503,7 @@ namespace JJRentals.Server.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
+                    { "3895a3c6-c0b1-4dd2-b518-2d0f861896e9", null, "Customer", "CUSTOMER" },
                     { "ad2bcf0c-20db-474f-8407-5a6b159518ba", null, "Administrator", "ADMINISTRATOR" },
                     { "bd2bcf0c-20db-474f-8407-5a6b159518bb", null, "User", "USER" }
                 });
@@ -512,8 +513,10 @@ namespace JJRentals.Server.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "4f9f4448-ad0c-45c7-ac85-cd679118e6cc", "admin@localhost.com", false, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAIAAYagAAAAEO06BZx4lJ9gV4VUZLm5CDJDMMbS29V70Uthv3mG4Ci0ClfJQtD66NSL3NCz5ZNzTw==", null, false, "49708941-47da-4e3e-b852-eae0d21f7b81", false, "admin@localhost.com" },
-                    { "d925e8b3-4a17-4c69-bb0a-9f2e6a86f5d1", 0, "5db205cc-4ab1-4fa6-ae46-f3d794a46d6f", "user@localhost.com", false, "User", "Default", false, null, "USER@LOCALHOST.COM", "USER@LOCALHOST.COM", "AQAAAAIAAYagAAAAECDn8qQpdOMsjWCLHwkavvzm8hmK2GGRNT9s7oYBSOKfVkxWRNogzRyBn4I5ZVhgyQ==", null, false, "2984906a-e287-4ecf-bba1-fa44609b7272", false, "user@localhost.com" }
+                    { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "fc04ffd7-b30a-45c5-904c-425aed591761", "admin@localhost.com", false, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAIAAYagAAAAEJUHDcKP9YKkIrVMPRGTZvSwhMTHoeUv8a3EvvSMabt0gLLDjH309PPblUt9L/TQ7g==", null, false, "d6ff08c3-7084-4c9a-b27c-ad58eecbd2ff", false, "admin@localhost.com" },
+                    { "d5bf368d-7d24-4858-b325-526b288c8f1a", 0, "95bcd394-b4ce-48f0-b40a-305cc4ecbc41", "john@gmail.com", false, "John", "Tan", false, null, "JOHN@GMAIL.COM", "JOHN@GMAIL.COM", "AQAAAAIAAYagAAAAELE50z2JILOqdGCSk6gwmJHwPW0CZHhFO0FTDfK+ct/z7nSiPGEesrNik6pHtKWyxA==", null, false, "388ac10d-16d4-42a8-bbbd-d456ddcf6012", false, "john@gmail.com" },
+                    { "d925e8b3-4a17-4c69-bb0a-9f2e6a86f5d1", 0, "6e64d016-d1a6-455a-baa2-622e29148a44", "user@localhost.com", false, "User", "Default", false, null, "USER@LOCALHOST.COM", "USER@LOCALHOST.COM", "AQAAAAIAAYagAAAAEOqPlAZQz5/OW9un9JQxuXv7CKkiRcF0YmMnY8HfOr7b4T14JeyvmG3Z879IrYhR3Q==", null, false, "fd77d945-e5a2-42d3-8aab-d8cebfcc0fb5", false, "user@localhost.com" },
+                    { "edb50467-a003-40aa-9ead-c34777f6f63e", 0, "10d1fa92-8381-4496-bf42-b73c0914c1fd", "mary@gmail.com", false, "Mary", "Lim", false, null, "MARY@GMAIL.COM", "MARY@GMAIL.COM", "AQAAAAIAAYagAAAAEG97ZwQ+s97STiLJcvDna+B0jSWeaLoCg7xmtO35lIQwCOek+hpJeP5gorzteI2big==", null, false, "fbd62791-24cd-4c3d-8e3d-f73193c3f3f5", false, "mary@gmail.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -538,7 +541,12 @@ namespace JJRentals.Server.Migrations
             migrationBuilder.InsertData(
                 table: "Outlets",
                 columns: new[] { "Id", "ContactNo", "CreatedBy", "DateCreated", "DateUpdated", "Email", "Location", "Name", "UpdatedBy" },
-                values: new object[] { 1, " 96357925", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "jjbedok@gmail.com", "Bedok", "JJRentals Bedok", null });
+                values: new object[,]
+                {
+                    { 1, "63234590", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "JJRentalHorizon@gmail.com", "SengKang", "JJRentalHorizon", null },
+                    { 2, "67885643", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "JJRentalMirage@yahoo.com", "BoonLay", "JJRentalMirage", null },
+                    { 3, "64523474", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "JJRentalDestiny@yahoo.com", "Tampinies", "JJRentalDestiny", null }
+                });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
@@ -546,7 +554,9 @@ namespace JJRentals.Server.Migrations
                 values: new object[,]
                 {
                     { "ad2bcf0c-20db-474f-8407-5a6b159518ba", "3781efa7-66dc-47f0-860f-e506d04102e4" },
-                    { "bd2bcf0c-20db-474f-8407-5a6b159518bb", "d925e8b3-4a17-4c69-bb0a-9f2e6a86f5d1" }
+                    { "3895a3c6-c0b1-4dd2-b518-2d0f861896e9", "d5bf368d-7d24-4858-b325-526b288c8f1a" },
+                    { "bd2bcf0c-20db-474f-8407-5a6b159518bb", "d925e8b3-4a17-4c69-bb0a-9f2e6a86f5d1" },
+                    { "3895a3c6-c0b1-4dd2-b518-2d0f861896e9", "edb50467-a003-40aa-9ead-c34777f6f63e" }
                 });
 
             migrationBuilder.InsertData(
@@ -568,15 +578,38 @@ namespace JJRentals.Server.Migrations
             migrationBuilder.InsertData(
                 table: "Staff",
                 columns: new[] { "Id", "Address", "ContactNo", "CreatedBy", "DateCreated", "DateOfBirth", "DateUpdated", "Email", "HireDate", "Name", "OutletId", "Password", "Position", "UpdatedBy" },
-                values: new object[] { 1, "81 Bedok Street 21", "98854760", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2000, 8, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "john@gmail.com", new DateTime(2019, 8, 13, 0, 0, 0, 0, DateTimeKind.Unspecified), "Peter Ng", 1, "peter123", "Admin", null });
+                values: new object[,]
+                {
+                    { 1, "42 Punggol Street 62", "92554760", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1989, 6, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "jackson@gmail.com", new DateTime(2007, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Jackson Lee", 1, "jacky123", "Fleet Manager", null },
+                    { 2, "82 Tampinies Street 23", "96374434", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1993, 8, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "jave@gmail.com", new DateTime(2008, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "Jave Lau", 2, "jave123", "Reservation Agent", null }
+                });
 
             migrationBuilder.InsertData(
                 table: "Cars",
                 columns: new[] { "Id", "Availability", "CarPlate", "CarRentPerDay", "CarRentPerHour", "Colour", "CreatedBy", "DateCreated", "DateUpdated", "ModelId", "OutletId", "UpdatedBy", "Year" },
                 values: new object[,]
                 {
-                    { 1, true, "S12345G", 100m, 20m, "Blue", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 1, null, 2010 },
-                    { 2, true, "S67891Y", 90m, 10m, "Blue", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 6, 1, null, 2010 }
+                    { 1, true, "ABC123", 79.99m, 15.99m, "Blue", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 1, null, 2020 },
+                    { 2, false, "XYZ789", 69.99m, 12.99m, "Red", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 2, null, 2019 },
+                    { 3, true, "DEF456", 89.99m, 18.99m, "Green", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 3, null, 2021 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Images",
+                columns: new[] { "Id", "CarId", "CreatedBy", "DateCreated", "DateUpdated", "ImgFileURL", "UpdatedBy" },
+                values: new object[,]
+                {
+                    { 1, 1, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "https://example.com/images/car1.jpg", null },
+                    { 2, 2, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "https://example.com/images/car2.jpg", null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Maintenance",
+                columns: new[] { "Id", "CarId", "Cost", "CreatedBy", "DateCreated", "DateUpdated", "PartsAffected", "ReturnDate", "SentDate", "ServiceProvider", "StaffId", "UpdatedBy" },
+                values: new object[,]
+                {
+                    { 1, 1, 200.00m, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Brakes, Oil filter", new DateTime(2024, 1, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "Best Maintenance Co", 1, null },
+                    { 2, 2, 150.00m, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Air filter, Headlights", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 2, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Quick Fix Mechanics", 2, null }
                 });
 
             migrationBuilder.CreateIndex(

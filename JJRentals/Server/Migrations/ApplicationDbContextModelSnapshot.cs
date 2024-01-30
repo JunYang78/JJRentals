@@ -238,7 +238,7 @@ namespace JJRentals.Server.Migrations
                         {
                             Id = "3781efa7-66dc-47f0-860f-e506d04102e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0695421f-f7e3-4225-876a-9c7f81dc6c5c",
+                            ConcurrencyStamp = "fc04ffd7-b30a-45c5-904c-425aed591761",
                             Email = "admin@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -246,9 +246,9 @@ namespace JJRentals.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEG4JRq7a+nwcTvUnxh3u8d6rL/tK4MOhDXTEQl0AFn3HU2weTp6wjy9GqMrBf0FNdw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJUHDcKP9YKkIrVMPRGTZvSwhMTHoeUv8a3EvvSMabt0gLLDjH309PPblUt9L/TQ7g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7897194e-b2f0-4d27-b96d-9cdd6e2495fa",
+                            SecurityStamp = "d6ff08c3-7084-4c9a-b27c-ad58eecbd2ff",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost.com"
                         },
@@ -256,18 +256,55 @@ namespace JJRentals.Server.Migrations
                         {
                             Id = "d925e8b3-4a17-4c69-bb0a-9f2e6a86f5d1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1059e727-cc7e-465e-a299-2356fa9246b0",
+                            ConcurrencyStamp = "6e64d016-d1a6-455a-baa2-622e29148a44",
                             Email = "user@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "User",
                             LastName = "Default",
                             LockoutEnabled = false,
                             NormalizedEmail = "USER@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEBT+PT67zotf/Zl2v+W34l7BpJvHIfnIL7VFDD0x+s3HWxPQvboXL6QnAGBFhaxLmQ==",
+                            NormalizedUserName = "USER@LOCALHOST.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEOqPlAZQz5/OW9un9JQxuXv7CKkiRcF0YmMnY8HfOr7b4T14JeyvmG3Z879IrYhR3Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ce4e42ee-7456-45f0-bb5a-3cfd7bb2ed33",
+                            SecurityStamp = "fd77d945-e5a2-42d3-8aab-d8cebfcc0fb5",
                             TwoFactorEnabled = false,
                             UserName = "user@localhost.com"
+                        },
+                        new
+                        {
+                            Id = "d5bf368d-7d24-4858-b325-526b288c8f1a",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "95bcd394-b4ce-48f0-b40a-305cc4ecbc41",
+                            Email = "john@gmail.com",
+                            EmailConfirmed = false,
+                            FirstName = "John",
+                            LastName = "Tan",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "JOHN@GMAIL.COM",
+                            NormalizedUserName = "JOHN@GMAIL.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAELE50z2JILOqdGCSk6gwmJHwPW0CZHhFO0FTDfK+ct/z7nSiPGEesrNik6pHtKWyxA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "388ac10d-16d4-42a8-bbbd-d456ddcf6012",
+                            TwoFactorEnabled = false,
+                            UserName = "john@gmail.com"
+                        },
+                        new
+                        {
+                            Id = "edb50467-a003-40aa-9ead-c34777f6f63e",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "10d1fa92-8381-4496-bf42-b73c0914c1fd",
+                            Email = "mary@gmail.com",
+                            EmailConfirmed = false,
+                            FirstName = "Mary",
+                            LastName = "Lim",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "MARY@GMAIL.COM",
+                            NormalizedUserName = "MARY@GMAIL.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEG97ZwQ+s97STiLJcvDna+B0jSWeaLoCg7xmtO35lIQwCOek+hpJeP5gorzteI2big==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "fbd62791-24cd-4c3d-8e3d-f73193c3f3f5",
+                            TwoFactorEnabled = false,
+                            UserName = "mary@gmail.com"
                         });
                 });
 
@@ -1117,6 +1154,12 @@ namespace JJRentals.Server.Migrations
                             Id = "bd2bcf0c-20db-474f-8407-5a6b159518bb",
                             Name = "User",
                             NormalizedName = "USER"
+                        },
+                        new
+                        {
+                            Id = "3895a3c6-c0b1-4dd2-b518-2d0f861896e9",
+                            Name = "Customer",
+                            NormalizedName = "CUSTOMER"
                         });
                 });
 
@@ -1218,6 +1261,16 @@ namespace JJRentals.Server.Migrations
                         {
                             UserId = "d925e8b3-4a17-4c69-bb0a-9f2e6a86f5d1",
                             RoleId = "bd2bcf0c-20db-474f-8407-5a6b159518bb"
+                        },
+                        new
+                        {
+                            UserId = "d5bf368d-7d24-4858-b325-526b288c8f1a",
+                            RoleId = "3895a3c6-c0b1-4dd2-b518-2d0f861896e9"
+                        },
+                        new
+                        {
+                            UserId = "edb50467-a003-40aa-9ead-c34777f6f63e",
+                            RoleId = "3895a3c6-c0b1-4dd2-b518-2d0f861896e9"
                         });
                 });
 

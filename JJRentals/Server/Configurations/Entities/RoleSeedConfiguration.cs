@@ -20,7 +20,13 @@ namespace JJRentals.Server.Configurations.Entities
 				Id = "bd2bcf0c-20db-474f-8407-5a6b159518bb",
 				Name = "User",
 				NormalizedName = "USER"
-			}
+			},
+			new IdentityRole
+			{
+				Id = "3895a3c6-c0b1-4dd2-b518-2d0f861896e9",
+				Name = "Customer",
+				NormalizedName = "CUSTOMER"
+            }
 			);
 		}
 	}

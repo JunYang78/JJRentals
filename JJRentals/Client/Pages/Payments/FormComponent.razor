@@ -43,7 +43,12 @@
         <div class="form-group">
             <label>Payment Method: </label>
             <div>
-                <InputText @bind-Value="@payment.PaymentMethod" class="form-control" />
+                <InputSelect @bind-Value="@payment.PaymentMethod" class="form-control">
+                    <option value="">-- Select Payment method --</option>
+                    <option value="Cash">Cash</option>
+                    <option value="Credit Card">Credit Card</option>
+                    <option value="Bank Transfer">Bank Transfer</option>
+                </InputSelect>
                 <ValidationMessage For="@(() => payment.PaymentMethod)" />
             </div>
         </div>

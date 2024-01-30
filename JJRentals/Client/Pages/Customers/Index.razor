@@ -2,16 +2,7 @@
 @inject HttpClient _client
 @inject IJSRuntime js
 @attribute [Authorize]
-
-<h3 class="card-title">Customers</h3>
-<br />
-
-<a href="/customers/create" class="btn btn-secondary">
-    <span class="oi oi-plus"></span>
-    Create New Customers
-</a>
-<br />
-<br />
+@inject AuthenticationStateProvider AuthenticationStateProvider
 
 @if (Customers == null)
 {
@@ -19,56 +10,91 @@
 }
 else
 {
-    <table class="table table-responsive">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Address</th>
-                <th>Date of Birth</th>
-                <th>Email</th>
-                <th>Contact No</th>
-                <th>Driver License No</th>
-                <th>License Issue Date</th>
-                <th>License End Date</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var customer in Customers)
-            {
-                <tr>
-                    <td>@customer.Name</td>
-                    <td>@customer.Address</td>
-                    <td>@customer.DateOfBirth.Date.ToString("dd/MM/yyyy")</td>
-                    <td>@customer.Email</td>
-                    <td>@customer.ContactNo</td>
-                    <td>@customer.DriverLicenseNo</td>
-                    <td>@customer.LicenseIssueDate.Date.ToString("dd/MM/yyyy")</td>
-                    <td>@customer.LicenseExpDate.Date.ToString("dd/MM/yyyy")</td>
+    <AuthorizeView Roles="Administrator, User">
+        <Authorized>
+            <h3 class="card-title">Customers</h3>
 
-                    <td>
-                        <a href="/customers/view/@customer.Id" class="btn btn-primary">
-                            <span class="oi oi-book"></span>
-                        </a>
-                        <a href="/customers/edit/@customer.Id" class="btn btn-warning">
-                            <span class="oi oi-pencil"></span>
-                        </a>
-                        <button class="btn btn-danger" @onclick="@(()=>Delete(customer.Id))">
-                            <span class="oi oi-delete"></span>
-                        </button>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+            <input type="text" @bind="searchTerm" placeholder="Search by name" class="form-control mb-3" />
+
+            <a href="/customers/create" class="btn btn-secondary">
+                <span class="oi oi-plus"></span>
+                Create New Customers
+            </a>
+            <br />
+            <br />
+
+            <div class="customer-card-container">
+                @foreach (var customer in Customers.Where(c => string.IsNullOrEmpty(searchTerm) || c.Name.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)))
+                {
+                    <div class="customer-card">
+                        <div class="customer-header">
+                            <h3>@customer.Name</h3>
+                        </div>
+                        <div class="customer-body">
+                            <p><strong>Address:</strong> @customer.Address</p>
+                            <p><strong>Date of Birth:</strong> @customer.DateOfBirth.Date.ToString("dd MMM yyyy")</p>
+                            <p><strong>Email:</strong> @customer.Email</p>
+                            <p><strong>Contact No:</strong> @customer.ContactNo</p>
+                            <p><strong>Driver License No:</strong> @customer.DriverLicenseNo</p>
+                            <p><strong>License Issue Date:</strong> @customer.LicenseIssueDate.Date.ToString("dd MMM yyyy")</p>
+                            <p><strong>License End Date:</strong> @customer.LicenseExpDate.Date.ToString("dd MMM yyyy")</p>
+                        </div>
+                        <div class="customer-actions">
+                            <a href="/customers/view/@customer.Id" class="btn btn-primary">
+                                <span class="oi oi-eye"></span>
+                            </a>
+                            <a href="/customers/edit/@customer.Id" class="btn btn-warning">
+                                <span class="oi oi-pencil"></span> 
+                            </a>
+                            <button class="btn btn-danger" @onclick="@(()=>Delete(customer.Id))">
+                                <span class="oi oi-delete"></span>
+                            </button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </Authorized>
+        <NotAuthorized>
+            <h3 class="card-title">Personal Info</h3>
+
+            <div class="customer-card-container">
+                @foreach (var customer in Customers.Where(c => c.Email == CurrentUserName))
+                {
+                    <div class="customer-card">
+                        <div class="customer-body">
+                            <p><strong>Name:</strong> @customer.Name</p>
+                            <p><strong>Address:</strong> @customer.Address</p>
+                            <p><strong>Date of Birth:</strong> @customer.DateOfBirth.Date.ToString("dd MMM yyyy")</p>
+                            <p><strong>Email:</strong> @customer.Email</p>
+                            <p><strong>Contact No:</strong> @customer.ContactNo</p>
+                            <p><strong>Driver License No:</strong> @customer.DriverLicenseNo</p>
+                            <p><strong>License Issue Date:</strong> @customer.LicenseIssueDate.Date.ToString("dd MMM yyyy")</p>
+                            <p><strong>License End Date:</strong> @customer.LicenseExpDate.Date.ToString("dd MMM yyyy")</p>
+                        </div>
+                        <div class="customer-actions">
+                            <a href="/customers/edit/@customer.Id" class="btn btn-warning">
+                                <span class="oi oi-pencil"></span> Edit
+                            </a>
+                        </div>
+                    </div>
+                }
+            </div>
+
+        </NotAuthorized>
+    </AuthorizeView>
 }
 
 @code {
     private List<Customer>? Customers;
+    private string CurrentUserName;
+    private string searchTerm;
+
 
     protected async override Task OnInitializedAsync()
     {
         Customers = await _client.GetFromJsonAsync<List<Customer>>($"{Endpoints.CustomersEndpoint}");
+        var authenticationState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        CurrentUserName = authenticationState.User.Identity?.Name;
     }
 
     async Task Delete(int customerId)

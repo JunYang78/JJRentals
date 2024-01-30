@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JJRentals.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240127092804_l")]
-    partial class l
+    [Migration("20240129125911_new_db")]
+    partial class new_db
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -241,7 +241,7 @@ namespace JJRentals.Server.Migrations
                         {
                             Id = "3781efa7-66dc-47f0-860f-e506d04102e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e428f758-2f40-4ca4-8d1c-a071b3a0c0d4",
+                            ConcurrencyStamp = "fc04ffd7-b30a-45c5-904c-425aed591761",
                             Email = "admin@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -249,9 +249,9 @@ namespace JJRentals.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEOgrTkMBr25d5XG7ER/3kzk1D6gBxxs2vxGQzxkp3O0HaJfaWmghOTmJfNKUG6iWJg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJUHDcKP9YKkIrVMPRGTZvSwhMTHoeUv8a3EvvSMabt0gLLDjH309PPblUt9L/TQ7g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e38d5523-40a9-432d-a93b-d355f4afb01a",
+                            SecurityStamp = "d6ff08c3-7084-4c9a-b27c-ad58eecbd2ff",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost.com"
                         },
@@ -259,18 +259,55 @@ namespace JJRentals.Server.Migrations
                         {
                             Id = "d925e8b3-4a17-4c69-bb0a-9f2e6a86f5d1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "13619883-14bb-42c4-bd4c-e45004383763",
+                            ConcurrencyStamp = "6e64d016-d1a6-455a-baa2-622e29148a44",
                             Email = "user@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "User",
                             LastName = "Default",
                             LockoutEnabled = false,
                             NormalizedEmail = "USER@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEDQbkNk4/AkBoS9qMZ7Z6YBg+VeYzHo+UwEqiy2yEi3AxP1T8NRhomEisfdslx1SBw==",
+                            NormalizedUserName = "USER@LOCALHOST.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEOqPlAZQz5/OW9un9JQxuXv7CKkiRcF0YmMnY8HfOr7b4T14JeyvmG3Z879IrYhR3Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a83d4b50-9ad3-44d5-b4e7-0e1a555368ca",
+                            SecurityStamp = "fd77d945-e5a2-42d3-8aab-d8cebfcc0fb5",
                             TwoFactorEnabled = false,
                             UserName = "user@localhost.com"
+                        },
+                        new
+                        {
+                            Id = "d5bf368d-7d24-4858-b325-526b288c8f1a",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "95bcd394-b4ce-48f0-b40a-305cc4ecbc41",
+                            Email = "john@gmail.com",
+                            EmailConfirmed = false,
+                            FirstName = "John",
+                            LastName = "Tan",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "JOHN@GMAIL.COM",
+                            NormalizedUserName = "JOHN@GMAIL.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAELE50z2JILOqdGCSk6gwmJHwPW0CZHhFO0FTDfK+ct/z7nSiPGEesrNik6pHtKWyxA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "388ac10d-16d4-42a8-bbbd-d456ddcf6012",
+                            TwoFactorEnabled = false,
+                            UserName = "john@gmail.com"
+                        },
+                        new
+                        {
+                            Id = "edb50467-a003-40aa-9ead-c34777f6f63e",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "10d1fa92-8381-4496-bf42-b73c0914c1fd",
+                            Email = "mary@gmail.com",
+                            EmailConfirmed = false,
+                            FirstName = "Mary",
+                            LastName = "Lim",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "MARY@GMAIL.COM",
+                            NormalizedUserName = "MARY@GMAIL.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEG97ZwQ+s97STiLJcvDna+B0jSWeaLoCg7xmtO35lIQwCOek+hpJeP5gorzteI2big==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "fbd62791-24cd-4c3d-8e3d-f73193c3f3f5",
+                            TwoFactorEnabled = false,
+                            UserName = "mary@gmail.com"
                         });
                 });
 
@@ -558,6 +595,24 @@ namespace JJRentals.Server.Migrations
                     b.HasIndex("CarId");
 
                     b.ToTable("Images");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CarId = 1,
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ImgFileURL = "https://example.com/images/car1.jpg"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CarId = 2,
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ImgFileURL = "https://example.com/images/car2.jpg"
+                        });
                 });
 
             modelBuilder.Entity("JJRentals.Shared.Domain.Maintenance", b =>
@@ -587,7 +642,7 @@ namespace JJRentals.Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("ReturnDate")
+                    b.Property<DateTime>("ReturnDate")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("SentDate")
@@ -610,6 +665,34 @@ namespace JJRentals.Server.Migrations
                     b.HasIndex("StaffId");
 
                     b.ToTable("Maintenance");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CarId = 1,
+                            Cost = 200.00m,
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PartsAffected = "Brakes, Oil filter",
+                            ReturnDate = new DateTime(2024, 1, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            SentDate = new DateTime(2024, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ServiceProvider = "Best Maintenance Co",
+                            StaffId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CarId = 2,
+                            Cost = 150.00m,
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PartsAffected = "Air filter, Headlights",
+                            ReturnDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            SentDate = new DateTime(2024, 2, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ServiceProvider = "Quick Fix Mechanics",
+                            StaffId = 2
+                        });
                 });
 
             modelBuilder.Entity("JJRentals.Shared.Domain.Manufacturer", b =>
@@ -1074,6 +1157,12 @@ namespace JJRentals.Server.Migrations
                             Id = "bd2bcf0c-20db-474f-8407-5a6b159518bb",
                             Name = "User",
                             NormalizedName = "USER"
+                        },
+                        new
+                        {
+                            Id = "3895a3c6-c0b1-4dd2-b518-2d0f861896e9",
+                            Name = "Customer",
+                            NormalizedName = "CUSTOMER"
                         });
                 });
 
@@ -1175,6 +1264,16 @@ namespace JJRentals.Server.Migrations
                         {
                             UserId = "d925e8b3-4a17-4c69-bb0a-9f2e6a86f5d1",
                             RoleId = "bd2bcf0c-20db-474f-8407-5a6b159518bb"
+                        },
+                        new
+                        {
+                            UserId = "d5bf368d-7d24-4858-b325-526b288c8f1a",
+                            RoleId = "3895a3c6-c0b1-4dd2-b518-2d0f861896e9"
+                        },
+                        new
+                        {
+                            UserId = "edb50467-a003-40aa-9ead-c34777f6f63e",
+                            RoleId = "3895a3c6-c0b1-4dd2-b518-2d0f861896e9"
                         });
                 });
 

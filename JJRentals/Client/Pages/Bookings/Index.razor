@@ -2,16 +2,7 @@
 @inject HttpClient _client
 @inject IJSRuntime js
 @attribute [Authorize]
-
-<h3 class="card-title">Bookings</h3>
-<br />
-
-<a href="/bookings/create" class="btn btn-secondary">
-    <span class="oi oi-plus"></span>
-    Create New Booking
-</a>
-<br />
-<br />
+@inject AuthenticationStateProvider AuthenticationStateProvider
 
 @if (Bookings == null)
 {
@@ -19,68 +10,142 @@
 }
 else
 {
-    <table class="table table-responsive" id="bookingsTable">
-        <thead>
-            <tr>
-                <th>Booking Id</th>
-                <th>RentalStartDate</th>
-                <th>RentalEndDate</th>
-                <th>Duration</th>
-                <th>Pickup Option</th>
-                <th>Location</th>
-                <th>Staff</th>
-                <th>Customer</th>
-                <th>Car</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var booking in Bookings)
-            {
-                <tr>
-                    <td>@booking.Id</td>
-                    <td>@booking.RentalStartDate.ToString("dd/MM/yyyy")</td>
-                    <td>@booking.RentalEndDate.ToString("dd/MM/yyyy")</td>
-                    <td>
-                        @if (booking.RentalStartDate != null && booking.RentalEndDate != null)
-                        {
-                            var totalDays = (booking.RentalEndDate - booking.RentalStartDate).TotalDays;
-                            @totalDays.ToString("0")
-                        }
-                        else
-                        {
-                            @:To Be Determined
-                        }
-                    </td>
-                    <td>@booking.PickUpOption</td>
-                    <td>@booking.Location</td>
-                    <td>@booking.Staff.Name</td>
-                    <td>@booking.Customer.Name</td>
-                    <td>@booking.Car.CarPlate</td>
+<AuthorizeView Roles="Administrator, User">
+    <Authorized>
+        <h3 class="card-title">Bookings</h3>
 
-                    <td>
-                        <a href="/bookings/view/@booking.Id" class="btn btn-primary">
-                            <span class="oi oi-book"></span>
-                        </a>
-                        <a href="/bookings/edit/@booking.Id" class="btn btn-warning">
-                            <span class="oi oi-pencil"></span>
-                        </a>
-                        <button class="btn btn-danger" @onclick="@(()=>Delete(booking.Id))">
-                            <span class="oi oi-delete"></span>
-                        </button>
-                    </td>
+        <input type="text" @bind="searchTerm" placeholder="Search by Car Plate" class="form-control mb-3" />
+
+        <a href="/bookings/create" class="btn btn-secondary">
+            <span class="oi oi-plus"></span>
+            Create New Booking
+        </a>
+        <br />
+        <br />
+
+            <a href="payments" class="btn btn-secondary">
+                Booking Payments
+            </a>
+            <br />
+            <br />
+
+        <table class="table table-responsive" id="bookingsTable">
+            <thead>
+                <tr>
+                    <th>Booking Id</th>
+                    <th>RentalStartDate</th>
+                    <th>RentalEndDate</th>
+                    <th>Duration</th>
+                    <th>Pickup Option</th>
+                    <th>Location</th>
+                    <th>Staff</th>
+                    <th>Customer</th>
+                    <th>Car</th>
+                    <th>Actions</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var booking in Bookings.Where(b => string.IsNullOrEmpty(searchTerm) || b.Car.CarPlate.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)))
+                {
+                    <tr>
+                        <td>@booking.Id</td>
+                        <td>@booking.RentalStartDate.ToString("dd MMM yyyy")</td>
+                        <td>@booking.RentalEndDate.ToString("dd MMM yyyy")</td>
+                        <td>
+                            @if (booking.RentalStartDate != null && booking.RentalEndDate != null)
+                            {
+                                var totalDays = (booking.RentalEndDate - booking.RentalStartDate).TotalDays;
+                                @(totalDays.ToString("0") + " Days")
+                            }
+                            else
+                            {
+                                @:To Be Determined
+                            }
+                        </td>
+                        <td>@booking.PickUpOption</td>
+                        <td>@booking.Location</td>
+                        <td>@booking.Staff.Name</td>
+                        <td>@booking.Customer.Name</td>
+                        <td>@booking.Car.CarPlate</td>
+
+                        <td>
+                            <a href="/bookings/view/@booking.Id" class="btn btn-primary">
+                                <span class="oi oi-eye"></span>
+                            </a>
+                            <a href="/bookings/edit/@booking.Id" class="btn btn-warning">
+                                <span class="oi oi-pencil"></span>
+                            </a>
+                            <button class="btn btn-danger" @onclick="@(()=>Delete(booking.Id))">
+                                <span class="oi oi-delete"></span>
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </Authorized>
+    <NotAuthorized>
+            <h3 class="card-title">Your Bookings</h3>
+            <br />
+
+            <table class="table table-responsive" id="bookingsTable">
+                <thead>
+                    <tr>
+                        <th>Booking Id</th>
+                        <th>RentalStartDate</th>
+                        <th>RentalEndDate</th>
+                        <th>Duration</th>
+                        <th>Pickup Option</th>
+                        <th>Location</th>
+                        <th>Car</th>
+                        <th>Payment Info</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var booking in Bookings.Where(b => b.Customer.Email == CurrentUserName))
+                    {
+                        <tr>
+                            <td>@booking.Id</td>
+                            <td>@booking.RentalStartDate.ToString("dd MMM yyyy")</td>
+                            <td>@booking.RentalEndDate.ToString("dd MMM yyyy")</td>
+                            <td>
+                                @if (booking.RentalStartDate != null && booking.RentalEndDate != null)
+                                {
+                                    var totalDays = (booking.RentalEndDate - booking.RentalStartDate).TotalDays;
+                                    @(totalDays.ToString("0") + " Days")
+                                }
+                                else
+                                {
+                                    @:To Be Determined
+                                }
+                            </td>
+                            <td>@booking.PickUpOption</td>
+                            <td>@booking.Location</td>
+                            <td>@booking.Car.CarPlate</td>
+                            <td>
+                                <a href="/bookings/view/@booking.Id" class="btn btn-primary">
+                                    <span class="oi oi-book"></span>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+    </NotAuthorized>
+</AuthorizeView>
 }
 
 @code {
     private List<Booking>? Bookings;
+    private string CurrentUserName;
+    private string searchTerm;
 
     protected async override Task OnInitializedAsync()
     {
         Bookings = await _client.GetFromJsonAsync<List<Booking>>($"{Endpoints.BookingsEndpoint}");
+
+        var authenticationState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        CurrentUserName = authenticationState.User.Identity?.Name;
     }
 
     async Task Delete(int bookingId)

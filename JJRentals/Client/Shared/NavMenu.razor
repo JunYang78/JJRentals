@@ -3,15 +3,13 @@
 
 <div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="">JJRentals</a>
+        <a class="navbar-brand" href="">
+            <img src="Images/logo.png" alt="Logo"> JJRentals
+        </a>
+
         <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
             <span class="navbar-toggler-icon"></span>
         </button>
-    </div>
-</div>
-
-<div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu">
-    <nav class="flex-column">
         <AuthorizeView>
             <Authorized>
                 <div class="nav-item px-3">
@@ -25,102 +23,119 @@
                         <span class="oi oi-account-logout" aria-hidden="true"></span> Log out
                     </NavLink>
                 </div>
-                @if (context.User.Identity.IsAuthenticated)
-                {
-                    <p>You are authenticated.</p>
-                    var roles = context.User.Claims
-                    .Where(c => c.Type == ClaimTypes.Role)
-                    .Select(c => c.Value);
-                    <p>Your roles: @string.Join(", ", roles)</p>
-                }
-                else
-                {
-                    <p>You are not authenticated.</p>
-                }
-
             </Authorized>
 
             <NotAuthorized>
-                <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="authentication/register" Match="NavLinkMatch.All">
-                        <span class="oi oi-person" aria-hidden="true"></span> Register
-                    </NavLink>
-                </div>
-
                 <div class="nav-item px-3">
                     <NavLink class="nav-link" href="authentication/login" Match="NavLinkMatch.All">
                         <span class="oi oi-account-login" aria-hidden="true"></span> Log in
                     </NavLink>
                 </div>
+
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="authentication/register" Match="NavLinkMatch.All">
+                        <span class="oi oi-person" aria-hidden="true"></span> Register
+                    </NavLink>
+                </div>
             </NotAuthorized>
         </AuthorizeView>
+    </div>
+</div>
 
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="oi oi-home" aria-hidden="true"></span> Home
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="manufacturers">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Manufacturers
-            </NavLink>
-        </div>
+<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
+    <nav class="flex-row">
+        <AuthorizeView Roles="Administrator, User">
+            <Authorized>
+                <div class="nav-item px-2">
+                    <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                        <span class="oi oi-home" aria-hidden="true"></span> Home
+                    </NavLink>
+                </div>
 
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="models">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Models
-            </NavLink>
-        </div>
+                <div class="nav-item px-2">
+                    <NavLink class="nav-link" href="manufacturers">
+                        <span class="oi oi-list-rich" aria-hidden="true"></span> Manufacturers
+                    </NavLink>
+                </div>
 
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="customers">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Customers
-            </NavLink>
-        </div>
+                <div class="nav-item px-2">
+                    <NavLink class="nav-link" href="models">
+                        <span class="oi oi-list-rich" aria-hidden="true"></span> Models
+                    </NavLink>
+                </div>
 
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="bookings">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Bookings
-            </NavLink>
-        </div>
+                <div class="nav-item px-2">
+                    <NavLink class="nav-link" href="customers">
+                        <span class="oi oi-person" aria-hidden="true"></span> Customers
+                    </NavLink>
+                </div>
 
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="payments">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Payments
-            </NavLink>
-        </div>
+                <div class="nav-item px-2">
+                    <NavLink class="nav-link" href="bookings">
+                        <span class="oi oi-book" aria-hidden="true"></span> Bookings
+                    </NavLink>
+                </div>
 
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="cars">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Cars
-            </NavLink>
-        </div>
+                <div class="nav-item px-2">
+                    <NavLink class="nav-link" href="cars">
+                        <span class="oi oi-list-rich" aria-hidden="true"></span> Cars
+                    </NavLink>
+                </div>
 
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="staffs">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Staffs
-            </NavLink>
-        </div>
+                @if (context.User.IsInRole("Administrator"))
+                {
+                    <div class="nav-item px-2">
+                        <NavLink class="nav-link" href="staffs">
+                            <span class="oi oi-list-rich" aria-hidden="true"></span> Staffs
+                        </NavLink>
+                    </div>
+                }
 
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="outlets">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Outlets
-            </NavLink>
-        </div>
+                <div class="nav-item px-2">
+                    <NavLink class="nav-link" href="outlets">
+                        <span class="oi oi-list-rich" aria-hidden="true"></span> Outlets
+                    </NavLink>
+                </div>
 
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="maintenances">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Maintenances
-            </NavLink>
-        </div>
+                <div class="nav-item px-2">
+                    <NavLink class="nav-link" href="maintenances">
+                        <span class="oi oi-list-rich" aria-hidden="true"></span> Maintenances
+                    </NavLink>
+                </div>
 
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="images">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Images
-            </NavLink>
-        </div>
+                <div class="nav-item px-2">
+                    <NavLink class="nav-link" href="images">
+                        <span class="oi oi-list-rich" aria-hidden="true"></span> Images
+                    </NavLink>
+                </div>
+            </Authorized>
+            <NotAuthorized>
+                <div class="nav-item px-2">
+                    <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                        <span class="oi oi-home" aria-hidden="true"></span> Home
+                    </NavLink>
+                </div>
+
+                <div class="nav-item px-2">
+                    <NavLink class="nav-link" href="cars">
+                        <span class="oi oi-list-rich" aria-hidden="true"></span> Our Cars
+                    </NavLink>
+                </div>
+                <div class="nav-item px-2">
+                    <NavLink class="nav-link" href="bookings">
+                        <span class="oi oi-list-rich" aria-hidden="true"></span> Your Bookings
+                    </NavLink>
+                </div>
+                <div class="nav-item px-2">
+                    <NavLink class="nav-link" href="customers">
+                        <span class="oi oi-person" aria-hidden="true"></span> Your Personal Info
+                    </NavLink>
+                </div>
+            </NotAuthorized>
+        </AuthorizeView>
     </nav>
 </div>
+
 
 @code {
     private bool collapseNavMenu = true;

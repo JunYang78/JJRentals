@@ -91,9 +91,13 @@
                 <div>
                     <InputSelect @bind-Value="@booking.Location" class="form-control">
                         <option value="">-- Select Outlet --</option>
-                        <option value="Tampines">Tampines</option>
-                        <option value="Bedok">Bedok</option>
-                        <option value="Jurong">Jurong</option>
+                        @if (Outlets != null)
+                        {
+                            foreach (var outlet in Outlets)
+                            {
+                                <option value="@outlet.Name">@outlet.Name</option>
+                            }
+                        }
                     </InputSelect>
                     <ValidationMessage For="@(() => booking.Location)" />
                 </div>
@@ -134,11 +138,13 @@
     private IList<Car>? Cars;
     private IList<Customer>? Customers;
     private IList<Staff>? Staffs;
+    private IList<Outlet>? Outlets;
 
     protected async override Task OnInitializedAsync()
     {
         Cars = await _client.GetFromJsonAsync<List<Car>>($"{Endpoints.CarsEndpoint}");
         Customers = await _client.GetFromJsonAsync<List<Customer>>($"{Endpoints.CustomersEndpoint}");
         Staffs = await _client.GetFromJsonAsync<List<Staff>>($"{Endpoints.StaffsEndpoint}");
+        Outlets = await _client.GetFromJsonAsync<List<Outlet>>($"{Endpoints.OutletsEndpoint}");
     }
 }

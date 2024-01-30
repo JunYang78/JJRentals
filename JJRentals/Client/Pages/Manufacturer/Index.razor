@@ -4,7 +4,8 @@
 @attribute [Authorize]
 
 <h3 class="card-title">Car Manufacturers</h3>
-<br />
+
+<input type="text" @bind="searchTerm" placeholder="Search by name" class="form-control mb-3" />
 
 <a href="/manufacturers/create" class="btn btn-secondary">
     <span class="oi oi-plus"></span>
@@ -29,7 +30,7 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var manu in Manufacturers)
+            @foreach (var manu in Manufacturers.Where(m => string.IsNullOrEmpty(searchTerm) || m.Name.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)))
             {
                 <tr>
                     <td>@manu.Name</td>
@@ -38,7 +39,7 @@ else
 
                     <td>
                         <a href="/manufacturers/view/@manu.Id" class="btn btn-primary">
-                            <span class="oi oi-book"></span>
+                            <span class="oi oi-eye"></span>
                         </a>
                         <a href="/manufacturers/edit/@manu.Id" class="btn btn-warning">
                             <span class="oi oi-pencil"></span>
@@ -55,6 +56,7 @@ else
 
 @code {
     private List<Manufacturer>? Manufacturers;
+    private string searchTerm;
 
     protected async override Task OnInitializedAsync()
     {

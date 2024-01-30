@@ -6,13 +6,6 @@
 <h3 class="card-title">Booking Payments</h3>
 <br />
 
-<a href="/payments/create" class="btn btn-secondary">
-    <span class="oi oi-plus"></span>
-    Create New Payment
-</a>
-<br />
-<br />
-
 @if (Payments == null)
 {
     <div class="alert alert-info">Loading Payments...</div>
@@ -28,7 +21,6 @@ else
                 <th>Payment Method</th>
                 <th>Payment Status</th>
                 <th>Booking Id</th>
-                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -36,28 +28,23 @@ else
             {
                 <tr>
                     <td>@payment.Id</td>
-                    <td>@payment.Amount</td>
-                    <td>@payment.DateCreated.Date.ToString("dd/MM/yyyy")</td>
+                    <td>@("$" + payment.Amount)</td>
+                    <td>@payment.DateCreated.Date.ToString("dd MMM yyyy")</td>
                     <td>@payment.PaymentMethod</td>
                     <td>@payment.PaymentStatus</td>
                     <td>@payment.Booking.Id</td>
 
-                    <td>
-                        <a href="/payments/view/@payment.Id" class="btn btn-primary">
-                            <span class="oi oi-book"></span>
-                        </a>
-                        <a href="/payments/edit/@payment.Id" class="btn btn-warning">
-                            <span class="oi oi-pencil"></span>
-                        </a>
-                        <button class="btn btn-danger" @onclick="@(()=>Delete(payment.Id))">
-                            <span class="oi oi-delete"></span>
-                        </button>
-                    </td>
+
                 </tr>
             }
         </tbody>
     </table>
 }
+
+<a href="bookings" class="btn btn-secondary">
+    Back
+</a>
+
 
 @code {
     private List<Payment>? Payments;

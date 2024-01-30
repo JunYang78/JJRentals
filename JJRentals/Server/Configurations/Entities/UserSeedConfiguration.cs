@@ -33,6 +33,30 @@ namespace JJRentals.Server.Configurations.Entities
 					UserName = "user@localhost.com",
                     NormalizedUserName = "USER@LOCALHOST.COM",
                     PasswordHash = hasher.HashPassword(null, "P@ssword1")
+                },
+
+				new ApplicationUser
+				{
+					Id = "d5bf368d-7d24-4858-b325-526b288c8f1a",
+                    Email = "john@gmail.com",
+                    NormalizedEmail = "JOHN@GMAIL.COM",
+                    FirstName = "John",
+                    LastName = "Tan",
+                    UserName = "john@gmail.com",
+                    NormalizedUserName = "JOHN@GMAIL.COM",
+                    PasswordHash = hasher.HashPassword(null, "P@ssword1")
+                },
+
+				new ApplicationUser
+				{
+                    Id = "edb50467-a003-40aa-9ead-c34777f6f63e",
+                    Email = "mary@gmail.com",
+                    NormalizedEmail = "MARY@GMAIL.COM",
+                    FirstName = "Mary",
+                    LastName = "Lim",
+                    UserName = "mary@gmail.com",
+                    NormalizedUserName = "MARY@GMAIL.COM",
+                    PasswordHash = hasher.HashPassword(null, "P@ssword1")
                 }
 				);
 		}

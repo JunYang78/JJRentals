@@ -16,12 +16,14 @@
     private IList<Car>? Cars;
     private IList<Customer>? Customers;
     private IList<Staff>? Staffs;
+    private IList<Outlet>? Outlets;
 
     protected async override Task OnInitializedAsync()
     {
         Cars = await _client.GetFromJsonAsync<List<Car>>($"{Endpoints.CarsEndpoint}");
         Customers = await _client.GetFromJsonAsync<List<Customer>>($"{Endpoints.CustomersEndpoint}");
         Staffs = await _client.GetFromJsonAsync<List<Staff>>($"{Endpoints.StaffsEndpoint}");
+        Outlets = await _client.GetFromJsonAsync<List<Outlet>>($"{Endpoints.OutletsEndpoint}");
     }
 
     private async Task CreateBooking()
