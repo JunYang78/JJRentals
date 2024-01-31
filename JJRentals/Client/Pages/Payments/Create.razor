@@ -1,4 +1,4 @@
-﻿@page "/payments/create/"
+﻿@page "/payments/create/{id:int}"
 @inject HttpClient _client
 @inject NavigationManager _navManager
 
@@ -12,12 +12,13 @@
 
 @code {
     Payment payment = new Payment();
-
+    [Parameter] public int id { get; set; }
     private IList<Booking>? Bookings;
 
     protected async override Task OnInitializedAsync()
     {
         Bookings = await _client.GetFromJsonAsync<List<Booking>>($"{Endpoints.BookingsEndpoint}");
+        payment.BookingID = id;
     }
 
     private async Task CreatePayment()

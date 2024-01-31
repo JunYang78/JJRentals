@@ -15,24 +15,28 @@ else
     <table class="table table-responsive" id="paymentsTable">
         <thead>
             <tr>
-                <th>Payment Id</th>
+                <th>Booking Id</th>
                 <th>Amount</th>
                 <th>Payment Date</th>
                 <th>Payment Method</th>
                 <th>Payment Status</th>
-                <th>Booking Id</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var payment in Payments)
             {
                 <tr>
-                    <td>@payment.Id</td>
+                    <td>@payment.Booking.Id</td>
                     <td>@("$" + payment.Amount)</td>
                     <td>@payment.DateCreated.Date.ToString("dd MMM yyyy")</td>
                     <td>@payment.PaymentMethod</td>
                     <td>@payment.PaymentStatus</td>
-                    <td>@payment.Booking.Id</td>
+                    <td>
+                        <a href="/payments/edit/@payment.Id" class="btn btn-warning">
+                            <span class="oi oi-pencil"></span> Edit
+                        </a>
+                    </td>
 
 
                 </tr>

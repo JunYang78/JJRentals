@@ -5,22 +5,11 @@
     <ValidationSummary />
 
     <fieldset disabled="@Disabled">
+
         <div class="form-group">
-
-
             <label>Booking: </label>
             <div>
-                <InputSelect @bind-Value="payment.BookingID" class="form-control">
-                    <option value="">-- Select Booking --</option>
-                    @if (Bookings != null)
-                    {
-                        foreach (var Booking in Bookings)
-                        {
-                            <option value="@Booking.Id">@Booking.Id</option>
-                        }
-                    }
-                </InputSelect>
-                <ValidationMessage For="@(() => payment.BookingID)" />
+                <InputNumber @bind-Value="payment.BookingID" class="form-control" readonly="True"/>
             </div>
         </div>
 
@@ -71,8 +60,6 @@
             @ButtonText
         </button>
     }
-    <BackToList Target="bookings" />
-
 </EditForm>
 
 

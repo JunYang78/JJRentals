@@ -41,6 +41,7 @@ else
                     <th>Staff</th>
                     <th>Customer</th>
                     <th>Car</th>
+                    <th>Payment Info</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -69,9 +70,12 @@ else
                         <td>@booking.Car.CarPlate</td>
 
                         <td>
-                            <a href="/bookings/view/@booking.Id" class="btn btn-primary">
-                                <span class="oi oi-eye"></span>
+                            <a href="/payments/edit/@booking.Id" class="btn btn-primary">
+                                <span class="oi oi-dollar"></span> Payment
                             </a>
+                        </td>
+
+                        <td>
                             <a href="/bookings/edit/@booking.Id" class="btn btn-warning">
                                 <span class="oi oi-pencil"></span>
                             </a>
@@ -123,8 +127,8 @@ else
                             <td>@booking.Location</td>
                             <td>@booking.Car.CarPlate</td>
                             <td>
-                                <a href="/bookings/view/@booking.Id" class="btn btn-primary">
-                                    <span class="oi oi-book"></span>
+                                <a href="/payments/edit/@booking.Id" class="btn btn-primary">
+                                    <span class="oi oi-dollar"></span> Payment
                                 </a>
                             </td>
                         </tr>
