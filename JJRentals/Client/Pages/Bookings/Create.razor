@@ -32,10 +32,8 @@
 
         if (response.IsSuccessStatusCode)
         {
-            // Assuming the server returns the created booking object with its ID
             var createdBooking = await response.Content.ReadFromJsonAsync<Booking>();
 
-            // Navigate to the payment creation page with the new booking's ID
             _navManager.NavigateTo($"/payments/create/{createdBooking.Id}");
         }
     }

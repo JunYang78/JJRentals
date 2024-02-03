@@ -24,7 +24,7 @@
     private async Task CreatePayment()
     {
         await _client.PostAsJsonAsync(Endpoints.PaymentsEndpoint, payment);
-        _navManager.NavigateTo("/payments/");
+        _navManager.NavigateTo("/bookings/");
     }
 
 }

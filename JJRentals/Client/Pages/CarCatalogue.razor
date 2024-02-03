@@ -1,0 +1,93 @@
+﻿@page "/carcat"
+@inject HttpClient _client
+@inject IJSRuntime js
+@attribute [Authorize]
+
+<style>
+    .image-box
+    {
+        background-color: #eee; 
+        width: 100%; 
+        height: 180px;
+    }
+</style>
+
+@if (Cars == null)
+{
+    <div class="alert alert-info">Loading Car...</div>
+}
+else
+{
+    <div class="row">
+        @foreach (var car in Cars)
+        {
+            <div class="col-md-4 mb-3">
+                @if (car.Availability)
+                {
+                    <a href="/bookings/create" style="text-decoration: none; color: inherit;">
+                        <div class="card mb-3" style="max-width: 540px;">
+                            <div class="row g-0">
+                                <div class="col-md-4">
+                                    <div class="image-box">
+                                        <img src="" alt="Car Image">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card-body">
+                                        <h5 class="card-title">@car.Model?.Name</h5>
+                                        <h6 class="card-subtitle mb-2 text-muted">@car.CarPlate</h6>
+                                        <p class="card-text">
+                                            <strong>Outlet:</strong> @(car.Outlet?.Name)<br>
+                                            <strong>Year:</strong> @car.Year<br>
+                                            <strong>Rent Per Day:</strong> @car.CarRentPerDay<br>
+                                            <strong>Color:</strong> @car.Colour<br>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted">Availability: @car.Availability</small>
+                            </div>
+                        </div>
+                    </a>
+                }
+                else
+                {
+                    <div class="card mb-3" style="max-width: 540px;">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <div class="image-box">
+                                    <img src="" alt="Car Image">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card-body">
+                                    <h5 class="card-title">@car.Model?.Name</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">@car.CarPlate</h6>
+                                    <p class="card-text">
+                                        <strong>Outlet:</strong> @(car.Outlet?.Name)<br>
+                                        <strong>Year:</strong> @car.Year<br>
+                                        <strong>Rent Per Day:</strong> @car.CarRentPerDay<br>
+                                        <strong>Color:</strong> @car.Colour<br>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">Availability: @car.Availability</small>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+}
+
+@code {
+    private List<Car>? Cars;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Cars = await _client.GetFromJsonAsync<List<Car>>($"{Endpoints.CarsEndpoint}");
+    }
+}
