@@ -9,10 +9,11 @@ namespace JJRentals.Shared.Domain
 {
     public class Image : BaseDomainModel
     {
-        [Required]
+        [Required(ErrorMessage = "Image file URL is required.")]
+        [Url(ErrorMessage = "The ImgFileURL must be a valid URL.")]
         public string ImgFileURL { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Car ID is required.")]
         public int CarId { get; set; }
         public virtual Car? Car { get; set; }
     }

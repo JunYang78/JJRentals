@@ -4,7 +4,7 @@
 @attribute [Authorize]
 
 <h3 class="card-title">Car Images</h3>
-<br />
+<input type="text" @bind="searchTerm" placeholder="Search by Car Plate" class="form-control mb-3" />
 
 <a href="/images/create" class="btn btn-secondary">
     <span class="oi oi-plus"></span>
@@ -28,7 +28,7 @@ else
     </tr>
 </thead>
 <tbody>
-    @foreach (var image in Images)
+            @foreach (var image in Images.Where(i => string.IsNullOrEmpty(searchTerm) || i.Car.CarPlate.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)))
     {
         <tr>
             <td>
@@ -55,6 +55,7 @@ else
 
 @code {
     private List<Image>? Images;
+    private string searchTerm;
 
     protected async override Task OnInitializedAsync()
     {

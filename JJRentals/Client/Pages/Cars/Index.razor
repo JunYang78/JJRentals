@@ -3,8 +3,8 @@
 @inject IJSRuntime js
 @attribute [Authorize]
 
-<h3 class="card-title">Car Cars</h3>
-<br />
+<h3 class="card-title">Cars</h3>
+<input type="text" @bind="searchTerm" placeholder="Search by Car Model" class="form-control mb-3" />
 
 <a href="/cars/create" class="btn btn-secondary">
     <span class="oi oi-plus"></span>
@@ -35,15 +35,15 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var car in Cars)
+            @foreach (var car in Cars.Where(c => string.IsNullOrEmpty(searchTerm) || c.Model.Name.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)))
             {
                 <tr>
                     <td>@(car.Outlet?.Name ?? "N/A")</td> <!-- Handle null outlet -->
                     <td>@(car.Model?.Name ?? "N/A")</td> <!-- Handle null outlet -->
                     <td>@car.Year</td>
                     <td>@car.CarPlate</td>
-                    <td>@car.CarRentPerDay</td>
-                    <td>@car.CarRentPerHour</td>
+                    <td>@car.CarRentPerDay.ToString("C")</td>
+                    <td>@car.CarRentPerHour.ToString("C")</td>
                     <td>@car.Colour</td>
                     <td>@car.Availability</td>
                     <td>
@@ -65,6 +65,7 @@ else
 
 @code {
     private List<Car>? Cars;
+    private string searchTerm;
 
     protected async override Task OnInitializedAsync()
     {

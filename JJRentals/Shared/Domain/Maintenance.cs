@@ -8,15 +8,22 @@ using System.Threading.Tasks;
 
 namespace JJRentals.Shared.Domain
 {
-    public class Maintenance : BaseDomainModel
+    public class Maintenance : BaseDomainModel, IValidatableObject
     {
         [Required]
+        [DataType(DataType.DateTime)]
         public DateTime SentDate { get; set; }
 
+        [Required]
+        [DataType(DataType.DateTime)]
         public DateTime ReturnDate { get; set; }
 
+        [Required]
+        [StringLength(100, ErrorMessage = "Service provider name must be less than 100 characters long.")]
         public string ServiceProvider { get; set; }
 
+        [Required]
+        [StringLength(200, ErrorMessage = "Parts affected description must be less than 200 characters long.")]
         public string PartsAffected { get; set; }
 
         [Required]
@@ -30,5 +37,18 @@ namespace JJRentals.Shared.Domain
         [Required]
         public int CarId { get; set; }
         public virtual Car? Car { get; set; }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            //throw new NotImplementedException();
+
+            if (SentDate != null)
+            {
+                if (ReturnDate < SentDate)
+                {
+                    yield return new ValidationResult("Return date must be greater than Sent date", new[] { "ReturnDate" });
+                }
+            }
+        }
     }
 }
