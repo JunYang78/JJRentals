@@ -26,7 +26,7 @@ namespace JJRentals.Server.Controllers
 		[HttpGet]
 		public async Task<IActionResult> GetCustomers()
 		{
-            if (!User.IsInRole("Administrator"))
+            if (!User.IsInRole("Administrator") && !User.IsInRole("Customer"))
             {
                 return Unauthorized();
             }

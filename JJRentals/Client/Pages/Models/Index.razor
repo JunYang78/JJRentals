@@ -7,7 +7,7 @@
 
 <h3 class="card-title">Car Models</h3>
 
-<input type="text" @bind="searchTerm" placeholder="Search by name" class="form-control mb-3" />
+<input type="text" @bind="searchTerm" @bind:event="oninput" placeholder="Search by name" class="form-control mb-3" />
 
 <a href="/models/create" class="btn btn-secondary">
     <span class="oi oi-plus"></span>

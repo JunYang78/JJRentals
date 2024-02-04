@@ -8,6 +8,8 @@
 <h3 class="card-title">Booking Payments</h3>
 <br />
 
+<input type="text" @bind="searchTerm" @bind:event="oninput" placeholder="Search by status" class="form-control mb-3" />
+
 @if (Payments == null)
 {
     <div class="alert alert-info">Loading Payments...</div>
@@ -26,7 +28,7 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var payment in Payments)
+            @foreach (var payment in Payments.Where(p => string.IsNullOrEmpty(searchTerm) || p.PaymentStatus.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)))
             {
                 <tr>
                     <td>@payment.Booking.Id</td>
@@ -54,6 +56,7 @@ else
 
 @code {
     private List<Payment>? Payments;
+    private string searchTerm;
 
     protected async override Task OnInitializedAsync()
     {
