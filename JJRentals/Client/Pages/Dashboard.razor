@@ -1,1 +1,59 @@
 ﻿@page "/dashboard"
+@inject HttpClient _client
+@inject IJSRuntime js
+@attribute [Authorize]
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+<h3 class="card-title">Dashboard</h3>
+
+@if (Bookings == null)
+{
+    <div class="alert alert-info">Loading Bookings...</div>
+}
+else
+{
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-header">
+                    Total Bookings
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">@Bookings.Count()</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-header">
+                    Average Booking Duration (Days)
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">@GetAverageBookingDays().ToString("0.00")</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+@code {
+    private List<Booking>? Bookings;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Bookings = await _client.GetFromJsonAsync<List<Booking>>($"{Endpoints.BookingsEndpoint}");
+    }
+
+    private double GetAverageBookingDays()
+    {
+        if (Bookings == null || !Bookings.Any())
+        {
+            return 0;
+        }
+
+        return Bookings.Average(booking =>
+            ((booking.RentalEndDate - booking.RentalStartDate).TotalDays)
+        );
+    }
+}

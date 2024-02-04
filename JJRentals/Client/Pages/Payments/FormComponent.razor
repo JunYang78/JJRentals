@@ -45,7 +45,12 @@
         <div class="form-group">
             <label>Payment Status: </label>
             <div>
-                <InputText @bind-Value="@payment.PaymentStatus" class="form-control" />
+                <InputSelect @bind-Value="@payment.PaymentStatus" class="form-control">
+                    <option value="">-- Select Payment status --</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Failed">Failed</option>
+                    <option value="Completed">Completed</option>
+                </InputSelect>
                 <ValidationMessage For="@(() => payment.PaymentStatus)" />
             </div>
         </div>
