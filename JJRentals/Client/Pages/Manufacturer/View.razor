@@ -1,6 +1,9 @@
 ﻿@page "/manufacturers/view/{id:int}"
 @inject HttpClient _client
 @inject NavigationManager _navManager
+@inject HttpInterceptorService _interceptor
+@implements IDisposable
+
 <h3>View Manufacturer</h3>
 <FormComponent manufacturer="manu" Disabled="true" />
 @code {
@@ -8,6 +11,19 @@
 	Manufacturer? manu = new Manufacturer();
 	protected async override Task OnParametersSetAsync()
 	{
-		manu = await _client.GetFromJsonAsync<Manufacturer>($"{Endpoints.ManufacturersEndpoint}/{id}");
+		_interceptor.MonitorEvent();
+		try
+		{
+			manu = await _client.GetFromJsonAsync<Manufacturer>($"{Endpoints.ManufacturersEndpoint}/{id}");
+		}
+		catch
+		{
+			Dispose();
+		}
+	}
+
+	public void Dispose()
+	{
+		_interceptor.DisposeEvent();
 	}
 }

@@ -3,6 +3,8 @@
 @inject IJSRuntime js
 @attribute [Authorize]
 @inject AuthenticationStateProvider AuthenticationStateProvider
+@inject HttpInterceptorService _interceptor
+@implements IDisposable
 
 @if (Customers == null)
 {
@@ -92,9 +94,17 @@ else
 
     protected async override Task OnInitializedAsync()
     {
-        Customers = await _client.GetFromJsonAsync<List<Customer>>($"{Endpoints.CustomersEndpoint}");
-        var authenticationState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-        CurrentUserName = authenticationState.User.Identity?.Name;
+        _interceptor.MonitorEvent();
+        try
+        {
+            Customers = await _client.GetFromJsonAsync<List<Customer>>($"{Endpoints.CustomersEndpoint}");
+            var authenticationState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+            CurrentUserName = authenticationState.User.Identity?.Name;
+        }
+        catch
+        {
+            Dispose();
+        }
     }
 
     async Task Delete(int customerId)
@@ -111,4 +121,8 @@ else
         }
     }
 
+    public void Dispose()
+    {
+        _interceptor.DisposeEvent();
+    }
 }

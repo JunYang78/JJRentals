@@ -1,6 +1,8 @@
 ﻿@page "/manufacturers/edit/{id:int}"
 @inject HttpClient _client
 @inject NavigationManager _navManager
+@inject HttpInterceptorService _interceptor
+@implements IDisposable
 
 <h3>Edit Manufacturer</h3>
 
@@ -12,13 +14,26 @@
 
     protected async override Task OnParametersSetAsync()
     {
-        manufacturer = await _client.GetFromJsonAsync<Manufacturer>($"{Endpoints.ManufacturersEndpoint}/{id}");
+        _interceptor.MonitorEvent();
+        try
+        {
+            manufacturer = await _client.GetFromJsonAsync<Manufacturer>($"{Endpoints.ManufacturersEndpoint}/{id}");
+        }
+        catch
+        {
+            Dispose();
+        }
     }
 
     async Task EditMake()
     {
         await _client.PutAsJsonAsync($"{Endpoints.ManufacturersEndpoint}/{id}", manufacturer);
         _navManager.NavigateTo("/manufacturers/");
+    }
+
+    public void Dispose()
+    {
+        _interceptor.DisposeEvent();
     }
 
 }

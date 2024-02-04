@@ -26,7 +26,11 @@ namespace JJRentals.Server.Controllers
 		[HttpGet]
 		public async Task<IActionResult> GetCustomers()
 		{
-			var customers = await _unitOfWork.Customers.GetAll();
+            if (!User.IsInRole("Administrator"))
+            {
+                return Unauthorized();
+            }
+            var customers = await _unitOfWork.Customers.GetAll();
 			return Ok(customers);
 		}
 

@@ -1,6 +1,9 @@
 ﻿@page "/models/view/{id:int}"
 @inject HttpClient _client
 @inject NavigationManager _navManager
+@inject HttpInterceptorService _interceptor
+@implements IDisposable
+
 <h3>View Model</h3>
 <FormComponent model="model" Disabled="true" />
 @code {
@@ -8,6 +11,19 @@
 	Model? model = new Model();
 	protected async override Task OnParametersSetAsync()
 	{
-		model = await _client.GetFromJsonAsync<Model>($"{Endpoints.ModelsEndpoint}/{id}");
+		_interceptor.MonitorEvent();
+		try
+		{
+			model = await _client.GetFromJsonAsync<Model>($"{Endpoints.ModelsEndpoint}/{id}");
+		}
+		catch
+		{
+			Dispose();
+		}
+	}
+
+	public void Dispose()
+	{
+		_interceptor.DisposeEvent();
 	}
 }

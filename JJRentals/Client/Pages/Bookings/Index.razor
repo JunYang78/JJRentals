@@ -3,6 +3,8 @@
 @inject IJSRuntime js
 @attribute [Authorize]
 @inject AuthenticationStateProvider AuthenticationStateProvider
+@inject HttpInterceptorService _interceptor
+@implements IDisposable
 
 @if (Bookings == null)
 {
@@ -76,6 +78,9 @@ else
                         </td>
 
                         <td>
+                            <a href="/bookings/view/@booking.Id" class="btn btn-primary">
+                                <span class="oi oi-eye"></span>
+                            </a>
                             <a href="/bookings/edit/@booking.Id" class="btn btn-warning">
                                 <span class="oi oi-pencil"></span>
                             </a>
@@ -146,10 +151,17 @@ else
 
     protected async override Task OnInitializedAsync()
     {
-        Bookings = await _client.GetFromJsonAsync<List<Booking>>($"{Endpoints.BookingsEndpoint}");
-
-        var authenticationState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-        CurrentUserName = authenticationState.User.Identity?.Name;
+        _interceptor.MonitorEvent();
+        try
+        {
+            Bookings = await _client.GetFromJsonAsync<List<Booking>>($"{Endpoints.BookingsEndpoint}");
+            var authenticationState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+            CurrentUserName = authenticationState.User.Identity?.Name;
+        }
+        catch
+        {
+            Dispose();
+        }
     }
 
     async Task Delete(int bookingId)
@@ -164,5 +176,10 @@ else
                 await OnInitializedAsync();
             }
         }
+    }
+
+    public void Dispose()
+    {
+        _interceptor.DisposeEvent();
     }
 }

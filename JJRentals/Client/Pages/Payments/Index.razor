@@ -2,6 +2,8 @@
 @inject HttpClient _client
 @inject IJSRuntime js
 @attribute [Authorize]
+@inject HttpInterceptorService _interceptor
+@implements IDisposable
 
 <h3 class="card-title">Booking Payments</h3>
 <br />
@@ -55,7 +57,15 @@ else
 
     protected async override Task OnInitializedAsync()
     {
-        Payments = await _client.GetFromJsonAsync<List<Payment>>($"{Endpoints.PaymentsEndpoint}");
+        _interceptor.MonitorEvent();
+        try
+        {
+            Payments = await _client.GetFromJsonAsync<List<Payment>>($"{Endpoints.PaymentsEndpoint}");
+        }
+        catch
+        {
+            Dispose();
+        }
     }
 
     async Task Delete(int paymentId)
@@ -70,5 +80,10 @@ else
                 await OnInitializedAsync();
             }
         }
+    }
+
+    public void Dispose()
+    {
+        _interceptor.DisposeEvent();
     }
 }

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JJRentals.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240204064019_car")]
-    partial class car
+    [Migration("20240204084542_new_db")]
+    partial class new_db
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -241,7 +241,7 @@ namespace JJRentals.Server.Migrations
                         {
                             Id = "3781efa7-66dc-47f0-860f-e506d04102e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "fba5170e-f53e-4ebf-9876-794c0f1b0ac9",
+                            ConcurrencyStamp = "35d712b0-3d5b-49a9-a20e-ed493d0f73ef",
                             Email = "admin@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -249,9 +249,9 @@ namespace JJRentals.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHU+BMKtBQo5FBFHJ83Qnlj6zI+97FMmnvshNl4h92Qjqo6LubwDUr2rBk2440y+GA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEN1snrFjN3tPAsstwr5jwePA4kdhmVdNOOuIbkDn1hXc32Ete2BGNLlFFkDTY668Dg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "dd3724d3-0437-4ac4-bec6-02cc96795730",
+                            SecurityStamp = "ea08361a-4138-434b-9132-c5b550f4b0b9",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost.com"
                         },
@@ -259,7 +259,7 @@ namespace JJRentals.Server.Migrations
                         {
                             Id = "d925e8b3-4a17-4c69-bb0a-9f2e6a86f5d1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "65e341a5-40b6-4e4e-9cd9-8c210f43a6ac",
+                            ConcurrencyStamp = "9ea5dc7c-047f-4ad2-976a-b74e41b6b1dc",
                             Email = "user@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "User",
@@ -267,9 +267,9 @@ namespace JJRentals.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "USER@LOCALHOST.COM",
                             NormalizedUserName = "USER@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKLw7+JMzULUfNNhRRN/WzaUnFrUV1slJKdhergH1+hQnSdIuniDarHmIBuJIUrHXw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELWpa2t9tJ+LxrfulJv0Reay7StKus5cBEWu+hz6/N8kg94eT1fnxSgsRqdQDgSlCg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1e8e8450-aa52-48e0-9b6b-1eefa4a52465",
+                            SecurityStamp = "c6722ce4-6c2b-4a47-ad3f-fb7a4a54a540",
                             TwoFactorEnabled = false,
                             UserName = "user@localhost.com"
                         },
@@ -277,7 +277,7 @@ namespace JJRentals.Server.Migrations
                         {
                             Id = "d5bf368d-7d24-4858-b325-526b288c8f1a",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "160b738d-47d4-404e-9b59-3e2070e17226",
+                            ConcurrencyStamp = "4f2a0111-bddb-4dc7-b14f-bedb0c77c1bc",
                             Email = "john@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "John",
@@ -285,9 +285,9 @@ namespace JJRentals.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "JOHN@GMAIL.COM",
                             NormalizedUserName = "JOHN@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEEk7exVcStFbldK9KaU13vVkNrNGb0cz3Cldma/2BtM2Le9MMYbcPWi33i9iCP909g==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEClP65ZmWlhTsUKorDGuP3/+LApZ1D/OjpqvtgNB80FpRVCNkU89wpvsieDqOOlW/A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ee0cc82f-27e9-41be-b9e2-d158dd3a339d",
+                            SecurityStamp = "0963c5d5-f139-4737-b260-bc9caf0fa640",
                             TwoFactorEnabled = false,
                             UserName = "john@gmail.com"
                         },
@@ -295,7 +295,7 @@ namespace JJRentals.Server.Migrations
                         {
                             Id = "edb50467-a003-40aa-9ead-c34777f6f63e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "112d0547-e41a-489b-9c22-ab92b495d21f",
+                            ConcurrencyStamp = "c2a9c248-f827-49c9-bb3c-4730c94b0603",
                             Email = "mary@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Mary",
@@ -303,9 +303,9 @@ namespace JJRentals.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "MARY@GMAIL.COM",
                             NormalizedUserName = "MARY@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEN9Yj4SMu+TU5sXsagAuP8kjvbiOWq+kLpMrCl30IeqOKhOyTQ2KHmSYRd80/aU2dw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAENUMwH+R5xuOWyA2gpk05kYHr9UtQjcGmuoS0dWYDPzsU3SkN9wsp+hodN9/TUb3yw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "f39a48ca-4bad-4871-aec0-bb5f29c6e5e5",
+                            SecurityStamp = "d61b973a-0371-4150-b582-97500a972797",
                             TwoFactorEnabled = false,
                             UserName = "mary@gmail.com"
                         });

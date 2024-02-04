@@ -1,6 +1,8 @@
 ﻿@page "/payments/edit/{id:int}"
 @inject HttpClient _client
 @inject NavigationManager _navManager
+@inject HttpInterceptorService _interceptor
+@implements IDisposable
 
 <h3>Edit Payment</h3>
 
@@ -12,13 +14,26 @@
 
     protected async override Task OnParametersSetAsync()
     {
-        payment = await _client.GetFromJsonAsync<Payment>($"{Endpoints.PaymentsEndpoint}/{id}");
+        _interceptor.MonitorEvent();
+        try
+        {
+            payment = await _client.GetFromJsonAsync<Payment>($"{Endpoints.PaymentsEndpoint}/{id}");
+        }
+        catch
+        {
+            Dispose();
+        }
     }
 
     async Task EditPayment()
     {
         await _client.PutAsJsonAsync($"{Endpoints.PaymentsEndpoint}/{id}", payment);
         _navManager.NavigateTo("/payments/");
+    }
+
+    public void Dispose()
+    {
+        _interceptor.DisposeEvent();
     }
 
 }

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace JJRentals.Server.Migrations
 {
     /// <inheritdoc />
-    public partial class car : Migration
+    public partial class new_db : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -512,10 +512,10 @@ namespace JJRentals.Server.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "fba5170e-f53e-4ebf-9876-794c0f1b0ac9", "admin@localhost.com", false, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAIAAYagAAAAEHU+BMKtBQo5FBFHJ83Qnlj6zI+97FMmnvshNl4h92Qjqo6LubwDUr2rBk2440y+GA==", null, false, "dd3724d3-0437-4ac4-bec6-02cc96795730", false, "admin@localhost.com" },
-                    { "d5bf368d-7d24-4858-b325-526b288c8f1a", 0, "160b738d-47d4-404e-9b59-3e2070e17226", "john@gmail.com", false, "John", "Tan", false, null, "JOHN@GMAIL.COM", "JOHN@GMAIL.COM", "AQAAAAIAAYagAAAAEEk7exVcStFbldK9KaU13vVkNrNGb0cz3Cldma/2BtM2Le9MMYbcPWi33i9iCP909g==", null, false, "ee0cc82f-27e9-41be-b9e2-d158dd3a339d", false, "john@gmail.com" },
-                    { "d925e8b3-4a17-4c69-bb0a-9f2e6a86f5d1", 0, "65e341a5-40b6-4e4e-9cd9-8c210f43a6ac", "user@localhost.com", false, "User", "Default", false, null, "USER@LOCALHOST.COM", "USER@LOCALHOST.COM", "AQAAAAIAAYagAAAAEKLw7+JMzULUfNNhRRN/WzaUnFrUV1slJKdhergH1+hQnSdIuniDarHmIBuJIUrHXw==", null, false, "1e8e8450-aa52-48e0-9b6b-1eefa4a52465", false, "user@localhost.com" },
-                    { "edb50467-a003-40aa-9ead-c34777f6f63e", 0, "112d0547-e41a-489b-9c22-ab92b495d21f", "mary@gmail.com", false, "Mary", "Lim", false, null, "MARY@GMAIL.COM", "MARY@GMAIL.COM", "AQAAAAIAAYagAAAAEN9Yj4SMu+TU5sXsagAuP8kjvbiOWq+kLpMrCl30IeqOKhOyTQ2KHmSYRd80/aU2dw==", null, false, "f39a48ca-4bad-4871-aec0-bb5f29c6e5e5", false, "mary@gmail.com" }
+                    { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "35d712b0-3d5b-49a9-a20e-ed493d0f73ef", "admin@localhost.com", false, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAIAAYagAAAAEN1snrFjN3tPAsstwr5jwePA4kdhmVdNOOuIbkDn1hXc32Ete2BGNLlFFkDTY668Dg==", null, false, "ea08361a-4138-434b-9132-c5b550f4b0b9", false, "admin@localhost.com" },
+                    { "d5bf368d-7d24-4858-b325-526b288c8f1a", 0, "4f2a0111-bddb-4dc7-b14f-bedb0c77c1bc", "john@gmail.com", false, "John", "Tan", false, null, "JOHN@GMAIL.COM", "JOHN@GMAIL.COM", "AQAAAAIAAYagAAAAEClP65ZmWlhTsUKorDGuP3/+LApZ1D/OjpqvtgNB80FpRVCNkU89wpvsieDqOOlW/A==", null, false, "0963c5d5-f139-4737-b260-bc9caf0fa640", false, "john@gmail.com" },
+                    { "d925e8b3-4a17-4c69-bb0a-9f2e6a86f5d1", 0, "9ea5dc7c-047f-4ad2-976a-b74e41b6b1dc", "user@localhost.com", false, "User", "Default", false, null, "USER@LOCALHOST.COM", "USER@LOCALHOST.COM", "AQAAAAIAAYagAAAAELWpa2t9tJ+LxrfulJv0Reay7StKus5cBEWu+hz6/N8kg94eT1fnxSgsRqdQDgSlCg==", null, false, "c6722ce4-6c2b-4a47-ad3f-fb7a4a54a540", false, "user@localhost.com" },
+                    { "edb50467-a003-40aa-9ead-c34777f6f63e", 0, "c2a9c248-f827-49c9-bb3c-4730c94b0603", "mary@gmail.com", false, "Mary", "Lim", false, null, "MARY@GMAIL.COM", "MARY@GMAIL.COM", "AQAAAAIAAYagAAAAENUMwH+R5xuOWyA2gpk05kYHr9UtQjcGmuoS0dWYDPzsU3SkN9wsp+hodN9/TUb3yw==", null, false, "d61b973a-0371-4150-b582-97500a972797", false, "mary@gmail.com" }
                 });
 
             migrationBuilder.InsertData(

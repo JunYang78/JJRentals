@@ -1,6 +1,8 @@
 ﻿@page "/models/edit/{id:int}"
 @inject HttpClient _client
 @inject NavigationManager _navManager
+@inject HttpInterceptorService _interceptor
+@implements IDisposable
 
 <h3>Edit Model</h3>
 
@@ -12,13 +14,26 @@
 
     protected async override Task OnParametersSetAsync()
     {
-        model = await _client.GetFromJsonAsync<Model>($"{Endpoints.ModelsEndpoint}/{id}");
+        _interceptor.MonitorEvent();
+        try
+        {
+            model = await _client.GetFromJsonAsync<Model>($"{Endpoints.ModelsEndpoint}/{id}");
+        }
+        catch
+        {
+            Dispose();
+        }
     }
 
     async Task EditModel()
     {
         await _client.PutAsJsonAsync($"{Endpoints.ModelsEndpoint}/{id}", model);
         _navManager.NavigateTo("/models/");
+    }
+
+    public void Dispose()
+    {
+        _interceptor.DisposeEvent();
     }
 
 }
