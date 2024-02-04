@@ -4,7 +4,7 @@
 @attribute [Authorize]
 
 <h3 class="card-title">Car Images</h3>
-<input type="text" @bind="searchTerm" placeholder="Search by Car Plate" class="form-control mb-3" />
+<input type="text" @bind-value="searchTerm" @bind-value:event="oninput" placeholder="Search by Car Plate" class="form-control mb-3" />
 
 <a href="/images/create" class="btn btn-secondary">
     <span class="oi oi-plus"></span>

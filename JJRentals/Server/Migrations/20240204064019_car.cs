@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace JJRentals.Server.Migrations
 {
     /// <inheritdoc />
-    public partial class new_db : Migration
+    public partial class car : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -141,9 +141,9 @@ namespace JJRentals.Server.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Location = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ContactNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Location = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    ContactNo = table.Column<string>(type: "nvarchar(8)", maxLength: 8, nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -314,14 +314,14 @@ namespace JJRentals.Server.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ContactNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ContactNo = table.Column<string>(type: "nvarchar(8)", maxLength: 8, nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     HireDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Position = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Position = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     OutletId = table.Column<int>(type: "int", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -345,9 +345,8 @@ namespace JJRentals.Server.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CarPlate = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CarPlate = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Year = table.Column<int>(type: "int", nullable: false),
-                    CarRentPerHour = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
                     CarRentPerDay = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
                     Colour = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Availability = table.Column<bool>(type: "bit", nullable: false),
@@ -444,8 +443,8 @@ namespace JJRentals.Server.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     SentDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ReturnDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ServiceProvider = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PartsAffected = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ServiceProvider = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    PartsAffected = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     Cost = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
                     StaffId = table.Column<int>(type: "int", nullable: false),
                     CarId = table.Column<int>(type: "int", nullable: false),
@@ -513,10 +512,10 @@ namespace JJRentals.Server.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "fc04ffd7-b30a-45c5-904c-425aed591761", "admin@localhost.com", false, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAIAAYagAAAAEJUHDcKP9YKkIrVMPRGTZvSwhMTHoeUv8a3EvvSMabt0gLLDjH309PPblUt9L/TQ7g==", null, false, "d6ff08c3-7084-4c9a-b27c-ad58eecbd2ff", false, "admin@localhost.com" },
-                    { "d5bf368d-7d24-4858-b325-526b288c8f1a", 0, "95bcd394-b4ce-48f0-b40a-305cc4ecbc41", "john@gmail.com", false, "John", "Tan", false, null, "JOHN@GMAIL.COM", "JOHN@GMAIL.COM", "AQAAAAIAAYagAAAAELE50z2JILOqdGCSk6gwmJHwPW0CZHhFO0FTDfK+ct/z7nSiPGEesrNik6pHtKWyxA==", null, false, "388ac10d-16d4-42a8-bbbd-d456ddcf6012", false, "john@gmail.com" },
-                    { "d925e8b3-4a17-4c69-bb0a-9f2e6a86f5d1", 0, "6e64d016-d1a6-455a-baa2-622e29148a44", "user@localhost.com", false, "User", "Default", false, null, "USER@LOCALHOST.COM", "USER@LOCALHOST.COM", "AQAAAAIAAYagAAAAEOqPlAZQz5/OW9un9JQxuXv7CKkiRcF0YmMnY8HfOr7b4T14JeyvmG3Z879IrYhR3Q==", null, false, "fd77d945-e5a2-42d3-8aab-d8cebfcc0fb5", false, "user@localhost.com" },
-                    { "edb50467-a003-40aa-9ead-c34777f6f63e", 0, "10d1fa92-8381-4496-bf42-b73c0914c1fd", "mary@gmail.com", false, "Mary", "Lim", false, null, "MARY@GMAIL.COM", "MARY@GMAIL.COM", "AQAAAAIAAYagAAAAEG97ZwQ+s97STiLJcvDna+B0jSWeaLoCg7xmtO35lIQwCOek+hpJeP5gorzteI2big==", null, false, "fbd62791-24cd-4c3d-8e3d-f73193c3f3f5", false, "mary@gmail.com" }
+                    { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "fba5170e-f53e-4ebf-9876-794c0f1b0ac9", "admin@localhost.com", false, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAIAAYagAAAAEHU+BMKtBQo5FBFHJ83Qnlj6zI+97FMmnvshNl4h92Qjqo6LubwDUr2rBk2440y+GA==", null, false, "dd3724d3-0437-4ac4-bec6-02cc96795730", false, "admin@localhost.com" },
+                    { "d5bf368d-7d24-4858-b325-526b288c8f1a", 0, "160b738d-47d4-404e-9b59-3e2070e17226", "john@gmail.com", false, "John", "Tan", false, null, "JOHN@GMAIL.COM", "JOHN@GMAIL.COM", "AQAAAAIAAYagAAAAEEk7exVcStFbldK9KaU13vVkNrNGb0cz3Cldma/2BtM2Le9MMYbcPWi33i9iCP909g==", null, false, "ee0cc82f-27e9-41be-b9e2-d158dd3a339d", false, "john@gmail.com" },
+                    { "d925e8b3-4a17-4c69-bb0a-9f2e6a86f5d1", 0, "65e341a5-40b6-4e4e-9cd9-8c210f43a6ac", "user@localhost.com", false, "User", "Default", false, null, "USER@LOCALHOST.COM", "USER@LOCALHOST.COM", "AQAAAAIAAYagAAAAEKLw7+JMzULUfNNhRRN/WzaUnFrUV1slJKdhergH1+hQnSdIuniDarHmIBuJIUrHXw==", null, false, "1e8e8450-aa52-48e0-9b6b-1eefa4a52465", false, "user@localhost.com" },
+                    { "edb50467-a003-40aa-9ead-c34777f6f63e", 0, "112d0547-e41a-489b-9c22-ab92b495d21f", "mary@gmail.com", false, "Mary", "Lim", false, null, "MARY@GMAIL.COM", "MARY@GMAIL.COM", "AQAAAAIAAYagAAAAEN9Yj4SMu+TU5sXsagAuP8kjvbiOWq+kLpMrCl30IeqOKhOyTQ2KHmSYRd80/aU2dw==", null, false, "f39a48ca-4bad-4871-aec0-bb5f29c6e5e5", false, "mary@gmail.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -586,12 +585,12 @@ namespace JJRentals.Server.Migrations
 
             migrationBuilder.InsertData(
                 table: "Cars",
-                columns: new[] { "Id", "Availability", "CarPlate", "CarRentPerDay", "CarRentPerHour", "Colour", "CreatedBy", "DateCreated", "DateUpdated", "ModelId", "OutletId", "UpdatedBy", "Year" },
+                columns: new[] { "Id", "Availability", "CarPlate", "CarRentPerDay", "Colour", "CreatedBy", "DateCreated", "DateUpdated", "ModelId", "OutletId", "UpdatedBy", "Year" },
                 values: new object[,]
                 {
-                    { 1, true, "ABC123", 79.99m, 15.99m, "Blue", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 1, null, 2020 },
-                    { 2, false, "XYZ789", 69.99m, 12.99m, "Red", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 2, null, 2019 },
-                    { 3, true, "DEF456", 89.99m, 18.99m, "Green", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 3, null, 2021 }
+                    { 1, true, "ABC123", 79.99m, "Blue", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 1, null, 2020 },
+                    { 2, false, "XYZ789", 69.99m, "Red", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 2, null, 2019 },
+                    { 3, true, "DEF456", 89.99m, "Green", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 3, null, 2021 }
                 });
 
             migrationBuilder.InsertData(

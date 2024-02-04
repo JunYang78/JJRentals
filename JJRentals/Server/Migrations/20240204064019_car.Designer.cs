@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JJRentals.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240129125911_new_db")]
-    partial class new_db
+    [Migration("20240204064019_car")]
+    partial class car
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -241,7 +241,7 @@ namespace JJRentals.Server.Migrations
                         {
                             Id = "3781efa7-66dc-47f0-860f-e506d04102e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "fc04ffd7-b30a-45c5-904c-425aed591761",
+                            ConcurrencyStamp = "fba5170e-f53e-4ebf-9876-794c0f1b0ac9",
                             Email = "admin@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -249,9 +249,9 @@ namespace JJRentals.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEJUHDcKP9YKkIrVMPRGTZvSwhMTHoeUv8a3EvvSMabt0gLLDjH309PPblUt9L/TQ7g==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHU+BMKtBQo5FBFHJ83Qnlj6zI+97FMmnvshNl4h92Qjqo6LubwDUr2rBk2440y+GA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d6ff08c3-7084-4c9a-b27c-ad58eecbd2ff",
+                            SecurityStamp = "dd3724d3-0437-4ac4-bec6-02cc96795730",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost.com"
                         },
@@ -259,7 +259,7 @@ namespace JJRentals.Server.Migrations
                         {
                             Id = "d925e8b3-4a17-4c69-bb0a-9f2e6a86f5d1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6e64d016-d1a6-455a-baa2-622e29148a44",
+                            ConcurrencyStamp = "65e341a5-40b6-4e4e-9cd9-8c210f43a6ac",
                             Email = "user@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "User",
@@ -267,9 +267,9 @@ namespace JJRentals.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "USER@LOCALHOST.COM",
                             NormalizedUserName = "USER@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEOqPlAZQz5/OW9un9JQxuXv7CKkiRcF0YmMnY8HfOr7b4T14JeyvmG3Z879IrYhR3Q==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKLw7+JMzULUfNNhRRN/WzaUnFrUV1slJKdhergH1+hQnSdIuniDarHmIBuJIUrHXw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "fd77d945-e5a2-42d3-8aab-d8cebfcc0fb5",
+                            SecurityStamp = "1e8e8450-aa52-48e0-9b6b-1eefa4a52465",
                             TwoFactorEnabled = false,
                             UserName = "user@localhost.com"
                         },
@@ -277,7 +277,7 @@ namespace JJRentals.Server.Migrations
                         {
                             Id = "d5bf368d-7d24-4858-b325-526b288c8f1a",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "95bcd394-b4ce-48f0-b40a-305cc4ecbc41",
+                            ConcurrencyStamp = "160b738d-47d4-404e-9b59-3e2070e17226",
                             Email = "john@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "John",
@@ -285,9 +285,9 @@ namespace JJRentals.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "JOHN@GMAIL.COM",
                             NormalizedUserName = "JOHN@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAELE50z2JILOqdGCSk6gwmJHwPW0CZHhFO0FTDfK+ct/z7nSiPGEesrNik6pHtKWyxA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEEk7exVcStFbldK9KaU13vVkNrNGb0cz3Cldma/2BtM2Le9MMYbcPWi33i9iCP909g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "388ac10d-16d4-42a8-bbbd-d456ddcf6012",
+                            SecurityStamp = "ee0cc82f-27e9-41be-b9e2-d158dd3a339d",
                             TwoFactorEnabled = false,
                             UserName = "john@gmail.com"
                         },
@@ -295,7 +295,7 @@ namespace JJRentals.Server.Migrations
                         {
                             Id = "edb50467-a003-40aa-9ead-c34777f6f63e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "10d1fa92-8381-4496-bf42-b73c0914c1fd",
+                            ConcurrencyStamp = "112d0547-e41a-489b-9c22-ab92b495d21f",
                             Email = "mary@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Mary",
@@ -303,9 +303,9 @@ namespace JJRentals.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "MARY@GMAIL.COM",
                             NormalizedUserName = "MARY@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEG97ZwQ+s97STiLJcvDna+B0jSWeaLoCg7xmtO35lIQwCOek+hpJeP5gorzteI2big==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEN9Yj4SMu+TU5sXsagAuP8kjvbiOWq+kLpMrCl30IeqOKhOyTQ2KHmSYRd80/aU2dw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "fbd62791-24cd-4c3d-8e3d-f73193c3f3f5",
+                            SecurityStamp = "f39a48ca-4bad-4871-aec0-bb5f29c6e5e5",
                             TwoFactorEnabled = false,
                             UserName = "mary@gmail.com"
                         });
@@ -382,12 +382,10 @@ namespace JJRentals.Server.Migrations
 
                     b.Property<string>("CarPlate")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<decimal>("CarRentPerDay")
-                        .HasColumnType("decimal(10, 2)");
-
-                    b.Property<decimal>("CarRentPerHour")
                         .HasColumnType("decimal(10, 2)");
 
                     b.Property<string>("Colour")
@@ -430,7 +428,6 @@ namespace JJRentals.Server.Migrations
                             Availability = true,
                             CarPlate = "ABC123",
                             CarRentPerDay = 79.99m,
-                            CarRentPerHour = 15.99m,
                             Colour = "Blue",
                             DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -444,7 +441,6 @@ namespace JJRentals.Server.Migrations
                             Availability = false,
                             CarPlate = "XYZ789",
                             CarRentPerDay = 69.99m,
-                            CarRentPerHour = 12.99m,
                             Colour = "Red",
                             DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -458,7 +454,6 @@ namespace JJRentals.Server.Migrations
                             Availability = true,
                             CarPlate = "DEF456",
                             CarRentPerDay = 89.99m,
-                            CarRentPerHour = 18.99m,
                             Colour = "Green",
                             DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -640,7 +635,8 @@ namespace JJRentals.Server.Migrations
 
                     b.Property<string>("PartsAffected")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<DateTime>("ReturnDate")
                         .HasColumnType("datetime2");
@@ -650,7 +646,8 @@ namespace JJRentals.Server.Migrations
 
                     b.Property<string>("ServiceProvider")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<int>("StaffId")
                         .HasColumnType("int");
@@ -920,7 +917,8 @@ namespace JJRentals.Server.Migrations
 
                     b.Property<string>("ContactNo")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(8)
+                        .HasColumnType("nvarchar(8)");
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
@@ -937,11 +935,13 @@ namespace JJRentals.Server.Migrations
 
                     b.Property<string>("Location")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("UpdatedBy")
                         .HasColumnType("nvarchar(max)");
@@ -1037,11 +1037,13 @@ namespace JJRentals.Server.Migrations
 
                     b.Property<string>("Address")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("ContactNo")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(8)
+                        .HasColumnType("nvarchar(8)");
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
@@ -1064,18 +1066,21 @@ namespace JJRentals.Server.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<int>("OutletId")
                         .HasColumnType("int");
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Position")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("UpdatedBy")
                         .HasColumnType("nvarchar(max)");

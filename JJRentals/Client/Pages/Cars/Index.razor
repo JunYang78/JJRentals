@@ -4,8 +4,7 @@
 @attribute [Authorize]
 
 <h3 class="card-title">Cars</h3>
-<input type="text" @bind="searchTerm" placeholder="Search by Car Model" class="form-control mb-3" />
-
+<input type="text" @bind-value="searchTerm" @bind-value:event="oninput" placeholder="Search by Car Model" class="form-control mb-3" />
 <a href="/cars/create" class="btn btn-secondary">
     <span class="oi oi-plus"></span>
     Create New Cars
@@ -28,7 +27,6 @@ else
                 <th>Year</th>
                 <th>License Plate Number</th>
                 <th>Rent Per Day</th>
-                <th>Rent Per Hour</th>
                 <th>Color</th>
                 <th>Availability</th>
                 <th>Actions</th>
@@ -43,7 +41,6 @@ else
                     <td>@car.Year</td>
                     <td>@car.CarPlate</td>
                     <td>@car.CarRentPerDay.ToString("C")</td>
-                    <td>@car.CarRentPerHour.ToString("C")</td>
                     <td>@car.Colour</td>
                     <td>@car.Availability</td>
                     <td>

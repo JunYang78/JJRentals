@@ -5,7 +5,7 @@
 
 <h3 class="card-title">Car Staffs</h3>
 
-<input type="text" @bind="searchTerm" placeholder="Search by name" class="form-control mb-3" />
+<input type="text" @bind-value="searchTerm" @bind-value:event="oninput" placeholder="Search by Name" class="form-control mb-3" />
 
 <a href="/staffs/create" class="btn btn-secondary">
     <span class="oi oi-plus"></span>

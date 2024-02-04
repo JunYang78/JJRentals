@@ -18,9 +18,6 @@ namespace JJRentals.Shared.Domain
         [Range(1900, 2100, ErrorMessage = "Year must be between 1900 and 2100")]
         public int Year { get; set; }
 
-        [Required]
-        [Column(TypeName = "decimal(10, 2)")]
-        public decimal CarRentPerHour { get; set; }
 
         [Required]
         [Column(TypeName = "decimal(10, 2)")]
