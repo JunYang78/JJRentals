@@ -16,7 +16,7 @@ namespace JJRentals.Shared.Domain
 
         [Required]
         [Phone(ErrorMessage = "The contact number is not in a valid format.")]
-        [StringLength(20, ErrorMessage = "The contact number must be less than 20 digits long.")]
+        [StringLength(8, ErrorMessage = "Contact number must be 8 digits")]
         public string ContactNo { get; set; }
     }
 }
